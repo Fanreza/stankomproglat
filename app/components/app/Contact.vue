@@ -10,8 +10,8 @@
 
 					<!-- Content -->
 					<div>
-						<h3 class="mb-3 text-3xl font-bold text-gray-900">Alamat Kami</h3>
-						<div class="space-y-1 text-base leading-relaxed text-[#363636]">
+						<h3 class="mb-3 text-xl xl:text-3xl font-bold text-gray-900">Alamat Kami</h3>
+						<div class="space-y-1 text-sm xl:text-base leading-relaxed text-[#363636]">
 							<p>Jl. Merdeka Raya No. 123 Kelurahan Kemayoran</p>
 							<p>Kecamatan Jakarta Pusat</p>
 							<p>DKI Jakarta 10610</p>
@@ -27,8 +27,8 @@
 
 					<!-- Content -->
 					<div>
-						<h3 class="mb-3 text-3xl font-bold text-gray-900">Kontak Kami</h3>
-						<p class="text-base text-[#363636]">Call Center Senin - Jumat (Hari Kerja)</p>
+						<h3 class="mb-3 text-xl xl:text-3xl font-bold text-gray-900">Kontak Kami</h3>
+						<p class="text-sm xl:text-base text-[#363636]">Call Center Senin - Jumat (Hari Kerja)</p>
 					</div>
 				</div>
 			</div>

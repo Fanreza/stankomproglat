@@ -13,7 +13,7 @@
 
 					<!-- Organization Name -->
 					<div class="mb-4">
-						<p class="text-[#1A1A1A] text-2xl">Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan</p>
+						<p class="text-[#1A1A1A] text-xl xl:text-2xl">Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan</p>
 					</div>
 
 					<!-- Social Media Links -->
@@ -41,8 +41,8 @@
 					<div class="grid grid-cols-2 gap-8 md:grid-cols-4">
 						<!-- Profil -->
 						<div>
-							<h4 class="mb-4 text-2xl font-bold text-[#1A1A1A]">Profil</h4>
-							<ul class="space-y-2 text-base text-[#4E4E4E]">
+							<h4 class="mb-4 text-lg xl:text-2xl font-bold text-[#1A1A1A]">Profil</h4>
+							<ul class="space-y-2 text-sm md:text-base text-[#4E4E4E]">
 								<li><a href="#">Sejarah</a></li>
 								<li><a href="#">Visi Misi</a></li>
 								<li><a href="#">Struktur Organisasi</a></li>
@@ -52,8 +52,8 @@
 
 						<!-- Info -->
 						<div>
-							<h4 class="mb-4 text-2xl font-bold text-[#1A1A1A]">Info</h4>
-							<ul class="space-y-2 text-base text-[#4E4E4E]">
+							<h4 class="mb-4 text-lg xl:text-2xl font-bold text-[#1A1A1A]">Info</h4>
+							<ul class="space-y-2 text-sm md:text-base text-[#4E4E4E]">
 								<li><a href="#">Pengumuman</a></li>
 								<li><a href="#">Berita</a></li>
 							</ul>
@@ -61,8 +61,8 @@
 
 						<!-- Tautan -->
 						<div>
-							<h4 class="mb-4 text-2xl font-bold text-[#1A1A1A]">Tautan</h4>
-							<ul class="space-y-2 text-base text-[#4E4E4E]">
+							<h4 class="mb-4 text-lg xl:text-2xl font-bold text-[#1A1A1A]">Tautan</h4>
+							<ul class="space-y-2 text-sm md:text-base text-[#4E4E4E]">
 								<li><a href="#">SKKNI</a></li>
 								<li><a href="#">PROGLAT</a></li>
 								<li><a href="#">E-Trainnet</a></li>
@@ -72,8 +72,8 @@
 
 						<!-- Lainnya -->
 						<div>
-							<h4 class="mb-4 text-2xl font-bold text-[#1A1A1A]">Lainnya</h4>
-							<ul class="space-y-2 text-base text-[#4E4E4E]">
+							<h4 class="mb-4 text-lg xl:text-2xl font-bold text-[#1A1A1A]">Lainnya</h4>
+							<ul class="space-y-2 text-sm md:text-base text-[#4E4E4E]">
 								<li><a href="#">Galeri</a></li>
 							</ul>
 						</div>
