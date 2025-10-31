@@ -2,7 +2,7 @@
 	<section class="bg-gray-50 py-16 md:py-24">
 		<div class="container mx-auto px-4">
 			<!-- Section Title -->
-			<h2 class="mb-12 text-center text-3xl font-semibold text-gray-900 md:text-3xl lg:text-4xl">Layanan Tersedia</h2>
+			<h2 class="mb-12 text-center font-semibold text-gray-900 text-xl md:text-3xl lg:text-4xl">Layanan Tersedia</h2>
 
 			<div class="grid gap-5 xl:gap-12 md:grid-cols-3 xl:grid-cols-3 justify-items-center">
 				<div v-for="(card, i) in cards" :key="i" class="flex flex-col items-center rounded-2xl bg-white w-[80%] md:w-full py-12 px-5 xl:px-16 shadow-sm transition-shadow hover:shadow-md">
