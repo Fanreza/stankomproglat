@@ -7,7 +7,9 @@
 			<Carousel class="mx-auto w-full" :opts="{ align: 'start', loop: true }" ref="carouselRef" @init-api="(api) => (emblaApi = api)">
 				<CarouselContent class="-ml-4">
 					<CarouselItem v-for="(embed, index) in embeds" :key="index" class="basis-full pl-4 md:basis-1/2 lg:basis-1/3">
-						<AppUiInstagramEmbed :url="embed" />
+						<div :class="['relative', 'md:pointer-events-auto', 'pointer-events-none']">
+							<AppUiInstagramEmbed :url="embed" />
+						</div>
 					</CarouselItem>
 				</CarouselContent>
 
