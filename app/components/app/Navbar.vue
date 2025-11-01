@@ -15,7 +15,11 @@
 								<ChevronDown class="h-4 w-4" />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								<DropdownMenuItem v-for="(child, j) in item.children" :key="j">{{ child.label }}</DropdownMenuItem>
+								<DropdownMenuItem v-for="(child, j) in item.children" :key="j">
+									<NuxtLink :to="child.to || '#'">
+										{{ child.label }}
+									</NuxtLink>
+								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
 
@@ -89,18 +93,18 @@ const menuItems = [
 	{
 		label: "Info",
 		children: [
-			{ label: "Berita", to: "#" },
-			{ label: "Pengumuman", to: "#" },
+			{ label: "Berita", to: "/news" },
+			{ label: "Pengumuman", to: "/announcement" },
 		],
 	},
 	{
 		label: "Tautan",
 		children: [
-			{ label: "SKKNI", to: "#" },
-			{ label: "Proglat", to: "#" },
-			{ label: "InaSkill", to: "#" },
+			{ label: "SKKNI", to: "https://inaskills.kemnaker.go.id/" },
+			{ label: "Proglat", to: "https://proglat.kemnaker.go.id/" },
+			{ label: "InaSkill", to: "https://skkni.kemnaker.go.id/" },
 		],
 	},
-	{ label: "Galeri", to: "/galeri" },
+	{ label: "Galeri", to: "/gallery" },
 ];
 </script>

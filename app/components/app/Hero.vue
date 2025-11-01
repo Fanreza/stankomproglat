@@ -11,7 +11,7 @@
 		<div class="relative z-10 flex h-full items-center justify-center px-4">
 			<div class="text-center">
 				<!-- Main Heading -->
-				<h1 class="mb-6 text-2xl xl:text-4xl font-bold leading-tight text-white md:text-5xl lg:text-7xl">
+				<h1 class="mb-6 text-2xl xl:text-7xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
 					Direktorat Bina Standardisasi<br />
 					Kompetensi dan Program Pelatihan
 				</h1>

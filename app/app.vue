@@ -27,7 +27,7 @@ useHead({
 	<Html lang="en">
 		<div>
 			<NuxtLayout>
-				<NuxtLoadingIndicator color="#B68A62" />
+				<NuxtLoadingIndicator color="#0C2C71" />
 				<NuxtPage />
 			</NuxtLayout>
 		</div>

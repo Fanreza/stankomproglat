@@ -19,7 +19,7 @@
 					<h3 class="mb-3 text-xl font-bold text-gray-900">Siapkan SKK Khusus Badan Nasional Penanggulangan Terorisme</h3>
 
 					<!-- Description -->
-					<p class="mb-6 flex-grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
+					<p class="mb-6 grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
 
 					<!-- Link -->
 					<NuxtLink to="/kegiatan/1" class="group/link inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition-all hover:gap-3">
@@ -41,7 +41,7 @@
 					<h3 class="mb-3 text-xl font-bold text-gray-900">Program Pelatihan Agroforestri</h3>
 
 					<!-- Description -->
-					<p class="mb-6 flex-grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
+					<p class="mb-6 grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
 
 					<!-- Link -->
 					<NuxtLink to="/kegiatan/2" class="group/link inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition-all hover:gap-3">
@@ -63,7 +63,7 @@
 					<h3 class="mb-3 text-xl font-bold text-gray-900">Bimtek Penggunaan Aplikasi Open Broadcast Software (OBS)</h3>
 
 					<!-- Description -->
-					<p class="mb-6 flex-grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
+					<p class="mb-6 grow text-sm leading-relaxed text-gray-600">Assesment deteksi dini dalam rangka ekstremisme berbasis kekerasan yang mengarah pada terorisme berdasarkan rencana pengembangan standar kompetensi kerja.</p>
 
 					<!-- Link -->
 					<NuxtLink to="/kegiatan/3" class="group/link inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition-all hover:gap-3">

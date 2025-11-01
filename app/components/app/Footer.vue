@@ -13,7 +13,7 @@
 
 					<!-- Organization Name -->
 					<div class="mb-4">
-						<p class="text-[#1A1A1A] text-xl xl:text-2xl">Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan</p>
+						<p class="text-[#1A1A1A] text-xl">Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan</p>
 					</div>
 
 					<!-- Social Media Links -->

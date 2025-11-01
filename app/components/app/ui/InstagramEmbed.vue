@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-hidden rounded-2xl bg-white">
-		<iframe v-if="embedUrl" :src="embedUrl" class="w-full aspect-[3/4]" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+		<iframe v-if="embedUrl" :src="embedUrl" class="w-full aspect-3/4" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
 		<p v-else class="p-4 text-center text-sm text-gray-500">Invalid Instagram link</p>
 
 		<NuxtLink :to="url" target="_blank" class="absolute inset-0 z-10 block" aria-label="Open Instagram Post"></NuxtLink>
