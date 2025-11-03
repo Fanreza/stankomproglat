@@ -50,5 +50,11 @@ const cards = [
 		link: "https://inaskill.kemnaker.go.id",
 		icon: Award,
 	},
+	{
+		title: "E-Training",
+		description: "Platform resmi untuk pelatihan daring tenaga kerja Indonesia.",
+		link: "https://e-training.kemnaker.go.id/",
+		icon: Award,
+	},
 ];
 </script>

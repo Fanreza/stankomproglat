@@ -103,6 +103,7 @@ const menuItems = [
 			{ label: "SKKNI", to: "https://inaskills.kemnaker.go.id/" },
 			{ label: "Proglat", to: "https://proglat.kemnaker.go.id/" },
 			{ label: "InaSkill", to: "https://skkni.kemnaker.go.id/" },
+			{ label: "E-Training", to: "https://e-training.kemnaker.go.id/" },
 		],
 	},
 	{ label: "Galeri", to: "/gallery" },
