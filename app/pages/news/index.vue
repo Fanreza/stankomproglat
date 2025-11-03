@@ -21,6 +21,9 @@
 			<div v-if="filteredNews.length === 0" class="py-12 text-center">
 				<p class="text-gray-500">Tidak ada berita untuk kategori ini</p>
 			</div>
+
+			<!-- Pagination -->
+			<AppUiPagination v-if="totalPages > 1" :current-page="currentPage" :total-pages="totalPages" @update:current-page="currentPage = $event" />
 		</div>
 	</section>
 </template>
@@ -56,6 +59,51 @@ const newsItems = ref<NewsItem[]>([
 		title: "Peluncuran Program Sertifikasi Baru",
 		excerpt: "Organisasi meluncurkan program sertifikasi terbaru untuk meningkatkan kompetensi profesional...",
 		slug: "peluncuran-program-sertifikasi-baru",
+	},
+	{
+		id: 2,
+		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+		date: "23 Apr 2025",
+		category: "Proglat",
+		title: "Workshop Pelatihan Nasional 2025",
+		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
+		slug: "workshop-pelatihan-nasional-2025",
+	},
+	{
+		id: 2,
+		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+		date: "23 Apr 2025",
+		category: "Proglat",
+		title: "Workshop Pelatihan Nasional 2025",
+		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
+		slug: "workshop-pelatihan-nasional-2025",
+	},
+	{
+		id: 2,
+		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+		date: "23 Apr 2025",
+		category: "Proglat",
+		title: "Workshop Pelatihan Nasional 2025",
+		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
+		slug: "workshop-pelatihan-nasional-2025",
+	},
+	{
+		id: 2,
+		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+		date: "23 Apr 2025",
+		category: "Proglat",
+		title: "Workshop Pelatihan Nasional 2025",
+		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
+		slug: "workshop-pelatihan-nasional-2025",
+	},
+	{
+		id: 2,
+		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+		date: "23 Apr 2025",
+		category: "Proglat",
+		title: "Workshop Pelatihan Nasional 2025",
+		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
+		slug: "workshop-pelatihan-nasional-2025",
 	},
 	{
 		id: 2,

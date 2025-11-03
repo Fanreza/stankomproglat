@@ -126,7 +126,8 @@ const current = ref(0);
 
 const autoplay = Autoplay({
 	delay: 5000,
-	stopOnInteraction: false,
+	stopOnInteraction: true,
+	stopOnMouseEnter: true,
 });
 
 watch(emblaApi, (api) => {
