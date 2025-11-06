@@ -23,7 +23,7 @@
 				</p>
 
 				<!-- CTA Button -->
-				<Button size="lg" class="group px-8 xl:px-10 py-6 xl:py-7 text-sm md:text-base">
+				<Button size="lg" class="group px-8 xl:px-10 py-6 xl:py-7 text-sm md:text-base" @click="navigateToNews">
 					<Icon name="iconamoon:send-fill" class="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
 					Telusuri yang Terbaru
 				</Button>
@@ -31,6 +31,12 @@
 		</div>
 	</section>
 </template>
+
+<script setup lang="ts">
+const navigateToNews = () => {
+	navigateTo("#news");
+};
+</script>
 
 <style scoped>
 @keyframes fadeIn {

@@ -1,5 +1,5 @@
 <template>
-	<section class="bg-gray-50 py-16 md:py-24">
+	<section class="bg-gray-50 py-16 md:py-24" id="news">
 		<div class="container mx-auto px-4">
 			<!-- Section Title -->
 			<h2 class="mb-12 text-center font-semibold text-gray-900 text-xl md:text-3xl lg:text-4xl">Berita Terbaru</h2>

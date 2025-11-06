@@ -2,35 +2,48 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-				compatibilityDate: "2025-07-15",
-				devtools: { enabled: true },
-				modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image", "shadcn-nuxt", "@vueuse/nuxt", "nuxt-svgo"],
+	compatibilityDate: "2025-07-15",
+	devServer: { port: parseInt(process.env.NUXT_PORT || "5173") },
+	devtools: { enabled: true },
 
-				css: ["~/assets/css/tailwind.css"],
-				vite: {
-								plugins: [tailwindcss()],
-				},
+	ssr: true,
+	routeRules: {
+		"/admin/**": { ssr: false },
+	},
 
-				icon: {
-								mode: "css",
-								cssLayer: "base",
-				},
+	runtimeConfig: {
+		public: {
+			apiBase: process.env.NUXT_API_URL,
+		},
+	},
 
-				shadcn: {
-								/**
-									* Prefix for all the imported component
-									*/
-								prefix: "",
-								/**
-									* Directory that the component lives in.
-									* @default "./app/components/ui"
-									*/
-								componentDir: "./app/components/ui",
-				},
+	modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image", "shadcn-nuxt", "@vueuse/nuxt", "nuxt-svgo", "@pinia/nuxt"],
 
-				fonts: {
-								defaults: {
-												weights: [400, 500, 600, 700, 800, 900],
-								},
-				},
+	css: ["~/assets/css/tailwind.css"],
+	vite: {
+		plugins: [tailwindcss()],
+	},
+
+	icon: {
+		mode: "css",
+		cssLayer: "base",
+	},
+
+	shadcn: {
+		/**
+		 * Prefix for all the imported component
+		 */
+		prefix: "",
+		/**
+		 * Directory that the component lives in.
+		 * @default "./app/components/ui"
+		 */
+		componentDir: "./app/components/ui",
+	},
+
+	fonts: {
+		defaults: {
+			weights: [400, 500, 600, 700, 800, 900],
+		},
+	},
 });

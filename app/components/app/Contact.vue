@@ -1,5 +1,5 @@
 <template>
-	<section class="bg-white mt-10">
+	<section class="bg-gray-50 mt-10 py-20">
 		<div>
 			<!-- Left Side - Contact Info -->
 			<div class="flex justify-center gap-8 flex-wrap">
@@ -12,10 +12,9 @@
 					<div>
 						<h3 class="mb-3 text-xl xl:text-3xl font-bold text-gray-900">Alamat Kami</h3>
 						<div class="space-y-1 text-sm xl:text-base leading-relaxed text-[#363636]">
-							<p>Jl. Merdeka Raya No. 123 Kelurahan Kemayoran</p>
-							<p>Kecamatan Jakarta Pusat</p>
-							<p>DKI Jakarta 10610</p>
-							<p>Indonesia</p>
+							<p>Jl. Gatot Subroto No.44, RT.3/RW.2</p>
+							<p>Kuningan Bar., Kec. Mampang Prpt</p>
+							<p>Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12710</p>
 						</div>
 					</div>
 				</div>

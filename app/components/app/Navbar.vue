@@ -15,7 +15,7 @@
 								<ChevronDown class="h-4 w-4" />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								<NuxtLink :to="child.to || '#'" v-for="(child, j) in item.children" :key="j" class="cursor-pointer">
+								<NuxtLink :to="child.to || '#'" v-for="(child, j) in item.children" :key="j" class="cursor-pointer" :target="child.external ? '_blank' : '_self'">
 									<DropdownMenuItem class="cursor-pointer">
 										{{ child.label }}
 									</DropdownMenuItem>
@@ -23,7 +23,7 @@
 							</DropdownMenuContent>
 						</DropdownMenu>
 
-						<NuxtLink v-else :to="item.to" class="text-sm font-medium text-gray-700 transition-colors hover:text-primary">
+						<NuxtLink v-else :to="item.to" :target="item.external ? '_blank' : '_self'" class="text-sm font-medium text-gray-700 transition-colors hover:text-primary">
 							{{ item.label }}
 						</NuxtLink>
 					</template>
@@ -80,32 +80,36 @@ onUnmounted(() => {
 });
 
 const menuItems = [
-	{ label: "Home", to: "/" },
+	{ label: "Home", to: "/", external: false },
 	{
 		label: "Profil",
+		external: false,
 		children: [
-			{ label: "Sejarah", to: "/history" },
-			{ label: "Visi - Misi", to: "/vision" },
-			{ label: "Struktur Organisasi", to: "/organization" },
-			{ label: "Profil Direktur", to: "/director" },
+			{ label: "Sejarah", to: "/history", external: false },
+			{ label: "Visi - Misi", to: "/vision", external: false },
+			{ label: "Struktur Organisasi", to: "/organization", external: false },
+			{ label: "Profil Direktur", to: "/director", external: false },
 		],
 	},
 	{
 		label: "Info",
+		external: false,
 		children: [
-			{ label: "Berita", to: "/news" },
-			{ label: "Pengumuman", to: "/announcement" },
+			{ label: "Berita", to: "/news", external: false },
+			{ label: "Pengumuman", to: "/announcement", external: false },
+			{ label: "Regulasi", to: "https://jdih.kemnaker.go.id/", external: true },
 		],
 	},
 	{
 		label: "Tautan",
+		external: false,
 		children: [
-			{ label: "SKKNI", to: "https://inaskills.kemnaker.go.id/" },
-			{ label: "Proglat", to: "https://proglat.kemnaker.go.id/" },
-			{ label: "InaSkill", to: "https://skkni.kemnaker.go.id/" },
-			{ label: "E-Training", to: "https://e-training.kemnaker.go.id/" },
+			{ label: "SKKNI", to: "https://inaskills.kemnaker.go.id/", external: true },
+			{ label: "Proglat", to: "https://proglat.kemnaker.go.id/", external: true },
+			{ label: "InaSkill", to: "https://skkni.kemnaker.go.id/", external: true },
+			{ label: "E-Training", to: "https://e-training.kemnaker.go.id/", external: true },
 		],
 	},
-	{ label: "Galeri", to: "/gallery" },
+	{ label: "Galeri", to: "/gallery", external: false },
 ];
 </script>

@@ -107,8 +107,9 @@ const slides = ref([
 	{
 		title: "Rekapitulasi Program",
 		items: [
-			{ value: 103, label: "Program Latihan" },
-			{ value: 288, label: "Materi Pelatihan" },
+			{ value: 103, label: "Program Terbit" },
+			{ value: 185, label: "Program Pending" },
+			{ value: 288, label: "Program Total" },
 		],
 	},
 	{

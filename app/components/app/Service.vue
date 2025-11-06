@@ -15,10 +15,10 @@
 						{{ card.description }}
 					</p>
 
-					<a :href="card.link" target="_blank" rel="noopener noreferrer" class="group flex w-full items-center justify-center gap-2 rounded-lg bg-[#163E93] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 mt-auto">
+					<NuxtLink :href="card.link" target="_blank" rel="noopener noreferrer" class="group flex w-full items-center justify-center gap-2 rounded-lg bg-[#163E93] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 mt-auto">
 						<span>Kunjungi Website</span>
 						<ArrowRight class="h-5 w-5 transition-transform group-hover:translate-x-1" />
-					</a>
+					</NuxtLink>
 				</div>
 			</div>
 
@@ -53,7 +53,7 @@ const cards = [
 	{
 		title: "InaSkill",
 		description: "Portal sertifikasi keterampilan nasional untuk tenaga kerja Indonesia.",
-		link: "https://inaskill.kemnaker.go.id",
+		link: "https://inaskills.kemnaker.go.id",
 		icon: Award,
 	},
 	{

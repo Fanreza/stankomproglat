@@ -1,4 +1,7 @@
 <script setup>
+import { Toaster } from "@/components/ui/sonner";
+import "vue-sonner/style.css"; // vue-sonner v2 requires this import
+
 useSeoMeta({
 	title: "Stankomproglat",
 	ogTitle: "Stankomproglat",
@@ -25,6 +28,8 @@ useHead({
 
 <template>
 	<Html lang="en">
+		<Toaster />
+
 		<div>
 			<NuxtLayout>
 				<NuxtLoadingIndicator color="#0C2C71" />
