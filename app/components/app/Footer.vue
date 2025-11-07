@@ -85,8 +85,8 @@
 			<div class="mt-8 flex flex-col items-center justify-between border-t border-gray-200 pt-8 text-sm text-[#111111] md:flex-row">
 				<p class="font-semibold">Copyright @2025 Direktorat Standardisasi Kompetensi dan Program Pelatihan. Semua hak dilindungi.</p>
 				<div class="mt-4 flex gap-6 md:mt-0">
-					<a href="#" class="text-[#B4B4B4]">FAQ</a>
-					<a href="#" class="text-[#163E93] font-medium">Kontak Kami</a>
+					<a href="#faq" class="text-[#B4B4B4]">FAQ</a>
+					<a href="#contact" class="text-[#163E93] font-medium">Kontak Kami</a>
 				</div>
 			</div>
 		</div>

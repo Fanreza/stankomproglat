@@ -53,18 +53,21 @@
 			<Carousel class="mx-auto w-full" :opts="{ align: 'start', loop: true }" @init-api="(api) => (emblaApi = api)" :plugins="[autoplay]">
 				<CarouselContent>
 					<CarouselItem v-for="(slide, sIndex) in slides" :key="sIndex">
-						<h2 class="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
-							{{ slide.title }}
-						</h2>
+						<!-- 🔗 NuxtLink wrapper ke service -->
+						<NuxtLink :to="slide.url" target="_blank" class="block cursor-pointer">
+							<h2 class="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
+								{{ slide.title }}
+							</h2>
 
-						<div class="grid gap-8" :class="`md:grid-cols-${slide.items.length}`">
-							<div v-for="(item, iIndex) in slide.items" :key="iIndex" class="text-center">
-								<div class="mb-2 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-									{{ item.value }}
+							<div class="grid gap-8" :class="`md:grid-cols-${slide.items.length}`">
+								<div v-for="(item, iIndex) in slide.items" :key="iIndex" class="text-center">
+									<div class="mb-2 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+										{{ item.value }}
+									</div>
+									<div class="text-lg text-blue-100 md:text-xl">{{ item.label }}</div>
 								</div>
-								<div class="text-lg text-blue-100 md:text-xl">{{ item.label }}</div>
 							</div>
-						</div>
+						</NuxtLink>
 					</CarouselItem>
 				</CarouselContent>
 
@@ -84,6 +87,7 @@ import Autoplay from "embla-carousel-autoplay";
 const slides = ref([
 	{
 		title: "Rekapitulasi SKKNI",
+		url: "https://skkni.kemnaker.go.id",
 		items: [
 			{ value: 1212, label: "SKKNI Ditetapkan" },
 			{ value: 937, label: "SKKNI Berlaku" },
@@ -92,6 +96,7 @@ const slides = ref([
 	},
 	{
 		title: "Rekapitulasi KKNI",
+		url: "https://skkni.kemnaker.go.id",
 		items: [
 			{ value: 166, label: "KKNI Berlaku" },
 			{ value: 16, label: "KKNI Dicabut" },
@@ -99,6 +104,7 @@ const slides = ref([
 	},
 	{
 		title: "Rekapitulasi SKKK/SKKI",
+		url: "https://skkni.kemnaker.go.id",
 		items: [
 			{ value: 246, label: "SKKK Berlaku" },
 			{ value: 0, label: "SKKK Dicabut" },
@@ -106,6 +112,7 @@ const slides = ref([
 	},
 	{
 		title: "Rekapitulasi Program",
+		url: "https://proglat.kemnaker.go.id",
 		items: [
 			{ value: 103, label: "Program Terbit" },
 			{ value: 185, label: "Program Pending" },
@@ -114,6 +121,7 @@ const slides = ref([
 	},
 	{
 		title: "The 14th WordSkills Asean",
+		url: "https://inaskills.kemnaker.go.id",
 		items: [
 			{ value: 38, label: "Kompetitor" },
 			{ value: 19, label: "Bidang Kompetisi" },

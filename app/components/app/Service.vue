@@ -7,7 +7,7 @@
 			<div class="grid gap-5 xl:gap-12 md:grid-cols-3 xl:grid-cols-4 justify-items-center">
 				<div v-for="(card, i) in cards" :key="i" class="flex flex-col items-center rounded-2xl bg-white w-[80%] md:w-full py-12 px-5 xl:px-16 shadow-sm transition-shadow hover:shadow-md">
 					<div class="relative mb-6">
-						<Icon name="streamline-color:quality-education-flat" class="text-6xl" />
+						<Icon :name="card.icon" class="text-6xl" />
 					</div>
 
 					<h3 class="mb-4 text-xl xl:text-3xl font-bold text-primary text-center">{{ card.title }}</h3>
@@ -42,25 +42,25 @@ const cards = [
 		title: "SKKNI",
 		description: "Standar Kompetensi Kerja Nasional Indonesia - Portal resmi untuk standar kompetensi profesi.",
 		link: "https://skkni.kemnaker.go.id",
-		icon: BookOpen,
+		icon: "streamline-color:new-file-flat",
 	},
 	{
 		title: "Proglat",
 		description: "Program Pelatihan - Platform resmi untuk pengembangan kompetensi kerja.",
 		link: "https://proglat.kemnaker.go.id",
-		icon: GraduationCap,
+		icon: "streamline-color:clipboard-remove-flat",
 	},
 	{
 		title: "InaSkill",
 		description: "Portal sertifikasi keterampilan nasional untuk tenaga kerja Indonesia.",
 		link: "https://inaskills.kemnaker.go.id",
-		icon: Award,
+		icon: "streamline-color:trophy-flat",
 	},
 	{
 		title: "E-Training",
 		description: "Platform resmi untuk pelatihan daring tenaga kerja Indonesia.",
 		link: "https://e-training.kemnaker.go.id/",
-		icon: Award,
+		icon: "streamline-color:screensaver-monitor-wallpaper-flat",
 	},
 ];
 

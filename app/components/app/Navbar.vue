@@ -86,7 +86,7 @@ const menuItems = [
 		external: false,
 		children: [
 			{ label: "Sejarah", to: "/history", external: false },
-			{ label: "Visi - Misi", to: "/vision", external: false },
+			{ label: "Tugas - Fungsi", to: "/function", external: false },
 			{ label: "Struktur Organisasi", to: "/organization", external: false },
 			{ label: "Profil Direktur", to: "/director", external: false },
 		],

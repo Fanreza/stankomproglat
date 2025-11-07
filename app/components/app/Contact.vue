@@ -1,5 +1,5 @@
 <template>
-	<section class="bg-gray-50 mt-10 py-20">
+	<section class="bg-gray-50 mt-10 py-20" id="contact">
 		<div>
 			<!-- Left Side - Contact Info -->
 			<div class="flex justify-center gap-8 flex-wrap">

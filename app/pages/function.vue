@@ -2,7 +2,7 @@
 <template>
 	<section class="bg-white py-16 md:py-24">
 		<!-- Title -->
-		<AppUiPageHeader title="Visi Misi Stankomproglat" :breadcrumbs="['Profil', 'Visi-Misi']" />
+		<AppUiPageHeader title="Tugas & Fungsi Stankomproglat" :breadcrumbs="['Profil', 'Tugas & Fungsi']" />
 	</section>
 </template>
 
