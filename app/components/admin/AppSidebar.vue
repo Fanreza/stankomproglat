@@ -23,9 +23,20 @@ const navItems = [
 	{ label: "Pengumuman", to: "/admin/announcement", icon: Megaphone },
 	{ label: "Galeri", to: "/admin/gallery", icon: Images },
 	{ label: "FAQ", to: "/admin/faq", icon: Images },
-	{ label: "Profil", to: "/admin/profile", icon: UserRound },
-	{ label: "Tautan", to: "/admin/links", icon: Link2 },
+	{ label: "Service", to: "/admin/service", icon: Link2 },
+	{ label: "Statistik", to: "/admin/stats", icon: Link2 },
 	{ label: "Sosial Media", to: "/admin/social", icon: Share2 },
+	{ label: "Instagram Post", to: "/admin/post", icon: Share2 },
+	{
+		label: "Profil",
+		icon: UserRound,
+		children: [
+			{ label: "Tugas Fungsi", to: "/admin/news" },
+			{ label: "Sejarah", to: "/admin/news/categories" },
+			{ label: "Profil Direktur", to: "/admin/news/categories" },
+			{ label: "Struktur Organisasi", to: "/admin/news/categories" },
+		],
+	},
 ];
 </script>
 

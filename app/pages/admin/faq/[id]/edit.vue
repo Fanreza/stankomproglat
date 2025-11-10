@@ -21,6 +21,8 @@ const form = ref({
 // 🧩 Load FAQ
 onMounted(async () => {
 	try {
+		await get(Number(route.params.id));
+
 		const res = responseGet.value;
 
 		form.value.question = res?.question || "";

@@ -1,12 +1,12 @@
 import type { ApiResponse } from "~/models/response-wrapper.model";
-import type { FAQ, CreateFaqDto, UpdateFaqDto } from "~/models/faq.model";
+import type { Service, CreateServiceDto, UpdateServiceDto } from "~/models/service.model";
 
-export const useFaqService = () => {
+export const useServicesService = () => {
 	const { $apiFetch } = useNuxtApp();
 
 	// 🔄 State utama
-	const response = ref<ApiResponse<FAQ[]> | null>(null); // getAll → pakai wrapper
-	const responseGet = ref<FAQ | null>(null); // getOne → tanpa wrapper
+	const response = ref<ApiResponse<Service[]> | null>(null); // getAll → pakai wrapper
+	const responseGet = ref<Service | null>(null); // getOne → tanpa wrapper
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
@@ -14,8 +14,9 @@ export const useFaqService = () => {
 	const getAll = async (params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			const res = await $apiFetch<ApiResponse<FAQ[]>>("/faq", { params });
+			const res = await $apiFetch<ApiResponse<Service[]>>("/services", { params });
 			response.value = res;
 			return res;
 		} catch (err: any) {
@@ -30,8 +31,9 @@ export const useFaqService = () => {
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			const res = await $apiFetch<FAQ>(`/faq/${id}`);
+			const res = await $apiFetch<Service>(`/services/${id}`);
 			responseGet.value = res;
 			return res;
 		} catch (err: any) {
@@ -43,11 +45,12 @@ export const useFaqService = () => {
 	};
 
 	// 🧩 Create
-	const create = async (payload: CreateFaqDto) => {
+	const create = async (payload: CreateServiceDto) => {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			const res = await $apiFetch<FAQ>("/faq", {
+			const res = await $apiFetch<Service>("/services", {
 				method: "POST",
 				body: payload,
 			});
@@ -62,11 +65,12 @@ export const useFaqService = () => {
 	};
 
 	// 🧩 Update
-	const update = async (id: number, payload: UpdateFaqDto) => {
+	const update = async (id: number, payload: UpdateServiceDto) => {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			const res = await $apiFetch<FAQ>(`/faq/${id}`, {
+			const res = await $apiFetch<Service>(`/services/${id}`, {
 				method: "PUT",
 				body: payload,
 			});
@@ -85,8 +89,9 @@ export const useFaqService = () => {
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;
+
 		try {
-			await $apiFetch(`/faq/${id}`, { method: "DELETE" });
+			await $apiFetch(`/services/${id}`, { method: "DELETE" });
 		} catch (err: any) {
 			error.value = err;
 			throw err;
