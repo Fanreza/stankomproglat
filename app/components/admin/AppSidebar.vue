@@ -22,6 +22,7 @@ const navItems = [
 	},
 	{ label: "Pengumuman", to: "/admin/announcement", icon: Megaphone },
 	{ label: "Galeri", to: "/admin/gallery", icon: Images },
+	{ label: "FAQ", to: "/admin/faq", icon: Images },
 	{ label: "Profil", to: "/admin/profile", icon: UserRound },
 	{ label: "Tautan", to: "/admin/links", icon: Link2 },
 	{ label: "Sosial Media", to: "/admin/social", icon: Share2 },
