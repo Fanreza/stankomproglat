@@ -24,9 +24,17 @@ const navItems = [
 	{ label: "Galeri", to: "/admin/gallery", icon: Images },
 	{ label: "FAQ", to: "/admin/faq", icon: Images },
 	{ label: "Service", to: "/admin/service", icon: Link2 },
-	{ label: "Statistik", to: "/admin/stats", icon: Link2 },
+	{
+		label: "Statistik",
+		icon: Newspaper,
+		children: [
+			{ label: "List Statistik", to: "/admin/stats" },
+			{ label: "Kategori", to: "/admin/stats/categories" },
+		],
+	},
 	{ label: "Sosial Media", to: "/admin/social", icon: Share2 },
-	{ label: "Instagram Post", to: "/admin/post", icon: Share2 },
+	{ label: "Sosial Post", to: "/admin/post", icon: Share2 },
+
 	{
 		label: "Profil",
 		icon: UserRound,
