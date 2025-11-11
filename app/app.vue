@@ -5,14 +5,14 @@ import "vue-sonner/style.css"; // vue-sonner v2 requires this import
 useSeoMeta({
 	title: "Stankomproglat",
 	ogTitle: "Stankomproglat",
-	description: "Stankomproglat an unique crypto collective since '21, based in Indonesia.",
-	ogDescription: "Stankomproglat an unique crypto collective since '21, based in Indonesia.",
-	ogImage: "https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/aethereal.my.id/%C3%A6thereal/https%3A%2F%2Faethereal.my.id%2Flogo.jpg/og.png",
-	twitterCard: "summary_large_image",
-	ogimageAlt: "Stankomproglat",
-	ogImageWidth: "226",
-	ogImageHeight: "226",
-	twitterImage: "https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/aethereal.my.id/%C3%A6thereal/https%3A%2F%2Faethereal.my.id%2Flogo.jpg/og.png",
+	description: "Stankomproglat adalah lembaga dibawah naungan Kementrian Ketenagakerjaan",
+	ogDescription: "Stankomproglat adalah lembaga dibawah naungan Kementrian Ketenagakerjaan",
+	// ogImage: "https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/aethereal.my.id/%C3%A6thereal/https%3A%2F%2Faethereal.my.id%2Flogo.jpg/og.png",
+	// twitterCard: "summary_large_image",
+	// ogimageAlt: "Stankomproglat",
+	// ogImageWidth: "226",
+	// ogImageHeight: "226",
+	// twitterImage: "https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/aethereal.my.id/%C3%A6thereal/https%3A%2F%2Faethereal.my.id%2Flogo.jpg/og.png",
 });
 
 useHead({
