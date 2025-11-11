@@ -6,5 +6,5 @@ export interface Structure {
 }
 
 export interface UpdateStructureDto {
-	image?: File | null;
+	file?: File | null;
 }

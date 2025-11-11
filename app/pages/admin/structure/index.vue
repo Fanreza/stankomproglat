@@ -42,7 +42,7 @@ const handleSubmit = async () => {
 	}
 
 	try {
-		await update({ image: selectedFile.value });
+		await update({ file: selectedFile.value });
 		toast.success("Struktur organisasi berhasil diperbarui.");
 	} catch {
 		toast.error("Gagal memperbarui struktur organisasi.");

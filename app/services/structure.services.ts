@@ -28,7 +28,7 @@ export const useStructureService = () => {
 		loading.value = true;
 		try {
 			const formData = new FormData();
-			if (payload.image) formData.append("image", payload.image);
+			if (payload.file) formData.append("file", payload.file);
 
 			const res = await $apiFetch<ApiResponse<Structure>>("/structures", {
 				method: "PUT",
