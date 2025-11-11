@@ -16,7 +16,6 @@ const { get, update, responseGet, loading } = useSocialMediaPostService();
 const form = ref({
 	platform: "",
 	postLink: "",
-	image: "",
 });
 
 // 🧩 Fetch detail post
@@ -26,7 +25,6 @@ onMounted(async () => {
 		if (responseGet.value) {
 			form.value.platform = responseGet.value.platform;
 			form.value.postLink = responseGet.value.postLink;
-			form.value.image = responseGet.value.image || "";
 		}
 	} catch {
 		toast.error("Gagal memuat data postingan.");
@@ -38,9 +36,7 @@ const handleSubmit = async () => {
 		await update(Number(route.params.id), form.value);
 		toast.success("Postingan berhasil diperbarui.");
 		router.push("/admin/post");
-	} catch {
-		toast.error("Gagal memperbarui postingan.");
-	}
+	} catch {}
 };
 
 const handleCancel = () => router.back();
@@ -69,12 +65,6 @@ const handleCancel = () => router.back();
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Link Postingan</label>
 				<Input v-model="form.postLink" placeholder="https://facebook.com/post/..." />
-			</div>
-
-			<!-- Image -->
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Gambar (URL)</label>
-				<Input v-model="form.image" placeholder="https://example.com/image.jpg" />
 			</div>
 
 			<!-- Actions -->

@@ -1,6 +1,7 @@
 export interface News {
 	id: number;
 	title: string;
+	slug: string;
 	excerpt: string;
 	description: string;
 	status: "draft" | "publish";
@@ -12,6 +13,7 @@ export interface News {
 		slug: string;
 	};
 	createdAt: string;
+	image: string | null;
 	updatedAt: string;
 }
 

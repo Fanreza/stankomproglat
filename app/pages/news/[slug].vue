@@ -1,66 +1,93 @@
 <template>
 	<section class="bg-white py-16 md:py-24">
-		<!-- Title -->
 		<AppUiPageHeader title="Berita Terbaru" :breadcrumbs="['Info', 'Berita']" />
 
-		<!-- Hero / Banner -->
-		<div class="container mx-auto px-4 py-10">
+		<!-- Loading -->
+		<div v-if="loading" class="text-center py-20 text-gray-500">Memuat berita...</div>
+
+		<!-- Error -->
+		<div v-else-if="error" class="text-center py-20 text-red-600">Gagal memuat berita.</div>
+
+		<!-- Konten -->
+		<div v-else-if="responseGet" class="container mx-auto px-4 py-10">
 			<div class="rounded-2xl overflow-hidden shadow-sm">
-				<img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Peluncuran Program Sertifikasi Baru" class="w-full h-[500px] object-cover" />
+				<img :src="responseGet.image || '/images/default-news.jpg'" :alt="responseGet.title" class="w-full h-[500px] object-cover" />
 			</div>
 
 			<!-- Judul & Info -->
 			<div class="mt-8">
-				<h1 class="text-4xl font-bold text-[#163E93] mb-4">Peluncuran Program Sertifikasi Baru</h1>
+				<h1 class="text-4xl font-bold text-[#163E93] mb-4">
+					{{ responseGet.title }}
+				</h1>
+
 				<div class="flex items-center gap-3 mb-6">
-					<span class="text-sm text-gray-500">21 Juni 2025</span>
-					<Badge class="bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-medium"> SKKNI </Badge>
+					<span class="text-sm text-gray-500">
+						<!-- {{ formatDate(responseGet.createdAt) }} -->
+					</span>
+
+					<Badge v-if="responseGet.category" class="bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-medium">
+						{{ responseGet.category.title }}
+					</Badge>
 				</div>
 
 				<!-- Isi Konten -->
-				<div class="text-sm max-w-none text-gray-700 leading-relaxed">
-					<p>Sebagai bagian dari upaya meningkatkan kompetensi tenaga kerja Indonesia, program sertifikasi baru diluncurkan dengan tujuan memberikan pengakuan resmi terhadap keterampilan dan pengalaman kerja.</p>
-					<p>Acara ini dihadiri oleh pejabat kementerian dan perwakilan industri yang berkomitmen mendukung peningkatan kualitas sumber daya manusia nasional.</p>
-				</div>
+				<div class="prose prose-blue max-w-none text-gray-700 leading-relaxed" v-html="responseGet.description"></div>
 			</div>
 		</div>
 
 		<!-- Berita Lainnya -->
-		<div class="container mx-auto px-4 py-12">
+		<div v-if="relatedNews.length" class="container mx-auto px-4 py-12">
 			<h2 class="text-2xl font-bold mb-6 text-gray-900">Berita Lainnya</h2>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-				<AppUiNewsCard v-for="(item, i) in relatedNews" :key="i" :image="item.image" :title="item.title" :date="item.date" :excerpt="item.excerpt" :category="item.category" :slug="item.slug" />
+				<AppUiNewsCard v-for="item in relatedNews" :key="item.id" :image="item.thumbnail || '/images/default-news.jpg'" :title="item.title" :date="formatDate(item.createdAt)" :excerpt="item.excerpt" :category="item.category?.name" :slug="`/info/berita/${item.slug}`" />
 			</div>
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
-const relatedNews = [
-	{
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		title: "Peluncuran Program Sertifikasi Baru",
-		date: "21 Juni 2025",
-		category: "Sertifikasi",
-		excerpt: "Program sertifikasi baru ini diharapkan dapat meningkatkan daya saing tenaga kerja nasional...",
-		slug: "peluncuran-program-sertifikasi-baru",
-	},
-	{
-		image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80",
-		title: "Peluncuran Program Sertifikasi Baru",
-		date: "21 Juni 2025",
-		category: "Sertifikasi",
-		excerpt: "Program sertifikasi baru ini diharapkan dapat meningkatkan daya saing tenaga kerja nasional...",
-		slug: "peluncuran-program-sertifikasi-baru",
-	},
-	{
-		image: "https://images.unsplash.com/photo-1522199710521-72d69614c702?w=800&q=80",
-		title: "Peluncuran Program Sertifikasi Baru",
-		date: "21 Juni 2025",
-		category: "Sertifikasi",
-		excerpt: "Program sertifikasi baru ini diharapkan dapat meningkatkan daya saing tenaga kerja nasional...",
-		slug: "peluncuran-program-sertifikasi-baru",
-	},
-];
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useNewsService } from "@/services/news.services";
+
+const route = useRoute();
+const slug = route.params.slug as string;
+
+const { getBySlug, getAll, responseGet, loading, error } = useNewsService();
+
+const relatedNews = ref<any[]>([]);
+
+const formatDate = (date: string) => {
+	const options: Intl.DateTimeFormatOptions = {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	};
+	return new Date(date).toLocaleDateString("id-ID", options);
+};
+
+const fetchNewsDetail = async () => {
+	try {
+		await getBySlug(slug);
+
+		// Fetch berita lain dalam kategori yang sama
+		// if (res.category?.id) {
+		// 	const related = await getAll(true, { categoryId: res.category.id, perPage: 3 });
+		// 	relatedNews.value = related.data.filter((item) => item.slug !== slug);
+		// }
+	} catch (err) {
+		console.error("Gagal memuat detail berita:", err);
+	}
+};
+
+onMounted(() => {
+	fetchNewsDetail();
+});
 </script>
+
+<style scoped>
+.prose p {
+	margin-bottom: 1rem;
+}
+</style>

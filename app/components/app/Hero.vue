@@ -1,29 +1,46 @@
 <template>
 	<section class="relative h-screen w-full overflow-hidden">
-		<!-- Background Image with Overlay -->
+		<!-- Background -->
 		<div class="absolute inset-0">
-			<img src="/images/hero.png" alt="Building" class="h-full w-full object-cover" />
-			<!-- Blur Overlay -->
+			<!-- Kalau loading, tampilkan skeleton -->
+			<div v-if="loading" class="h-full w-full bg-gray-200 animate-pulse"></div>
+
+			<!-- Kalau sudah ada data -->
+			<img v-else :src="heroData?.banner || '/images/hero.png'" alt="Hero Banner" class="h-full w-full object-cover" />
+
+			<!-- Overlay -->
 			<div class="absolute inset-0 bg-[#171717]/60 backdrop-blur-xs"></div>
 		</div>
 
 		<!-- Content -->
-		<div class="relative z-10 flex h-full items-center justify-center px-4">
-			<div class="text-center">
-				<!-- Main Heading -->
-				<h1 class="mb-6 text-2xl xl:text-7xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
-					Direktorat Bina Standardisasi<br />
-					Kompetensi dan Program Pelatihan
+		<div class="relative z-10 flex h-full items-center justify-center px-4 text-center">
+			<div class="max-w-4xl">
+				<!-- Judul -->
+				<div v-if="loading" class="space-y-3 mb-6">
+					<Skeleton class="h-10 w-3/4 mx-auto" />
+					<Skeleton class="h-10 w-1/2 mx-auto" />
+				</div>
+
+				<h1 v-else class="mb-6 text-2xl xl:text-7xl font-bold leading-tight text-white md:text-4xl lg:text-5xl animate-fade">
+					{{ heroData?.heading || "Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan" }}
 				</h1>
 
-				<!-- Subtitle -->
-				<p class="mb-8 text-sm text-gray-100 md:text-xl lg:text-2xl">
-					Membangun pelatihan untuk masa depan yang lebih baik berarti menyiapkan<br class="hidden md:block" />
-					sumber daya manusia yang unggul dan adaptif terhadap perubahan.
+				<!-- Subjudul -->
+				<div v-if="loading" class="space-y-2 mb-8">
+					<Skeleton class="h-5 w-5/6 mx-auto" />
+					<Skeleton class="h-5 w-3/5 mx-auto" />
+				</div>
+
+				<p v-else class="mb-8 text-sm text-gray-100 md:text-xl lg:text-2xl animate-fade" style="animation-delay: 0.2s">
+					{{ heroData?.subHeading || "Membangun pelatihan untuk masa depan yang lebih baik berarti menyiapkan sumber daya manusia yang unggul dan adaptif terhadap perubahan." }}
 				</p>
 
-				<!-- CTA Button -->
-				<Button size="lg" class="group px-8 xl:px-10 py-6 xl:py-7 text-sm md:text-base" @click="navigateToNews">
+				<!-- Tombol -->
+				<div v-if="loading" class="flex justify-center">
+					<Skeleton class="h-12 w-48 rounded-md" />
+				</div>
+
+				<Button v-else size="lg" class="group px-8 xl:px-10 py-6 xl:py-7 text-sm md:text-base animate-fade" style="animation-delay: 0.4s" @click="navigateToNews">
 					<Icon name="iconamoon:send-fill" class="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
 					Telusuri yang Terbaru
 				</Button>
@@ -33,9 +50,21 @@
 </template>
 
 <script setup lang="ts">
-const navigateToNews = () => {
-	navigateTo("#news");
-};
+import { Skeleton } from "@/components/ui/skeleton";
+import { useHeroService } from "@/services/hero.services";
+
+const { get, response, loading } = useHeroService();
+const heroData = computed(() => response.value?.data || null);
+
+onMounted(async () => {
+	try {
+		await get(true);
+	} catch {
+		console.warn("Gagal memuat data hero, fallback ke default.");
+	}
+});
+
+const navigateToNews = () => navigateTo("#news");
 </script>
 
 <style scoped>
@@ -50,17 +79,7 @@ const navigateToNews = () => {
 	}
 }
 
-h1,
-p,
-button {
+.animate-fade {
 	animation: fadeIn 0.8s ease-out forwards;
-}
-
-p {
-	animation-delay: 0.2s;
-}
-
-button {
-	animation-delay: 0.4s;
 }
 </style>

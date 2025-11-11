@@ -9,13 +9,13 @@ export const useHeroService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 GET hero data
-	const get = async () => {
+	const endpoint = (isPublic = false) => (isPublic ? "/public/hero" : "/hero");
+
+	const get = async (isPublic = false) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
-			const res = await $apiFetch<ApiResponse<Hero>>("/hero");
+			const res = await $apiFetch<ApiResponse<Hero>>(endpoint(isPublic));
 			response.value = res;
 			responseGet.value = res.data;
 			return res;
@@ -27,11 +27,9 @@ export const useHeroService = () => {
 		}
 	};
 
-	// 🧩 UPDATE hero data
 	const update = async (payload: UpdateHeroDto) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
 			const res = await $apiFetch<Hero>("/hero", {
 				method: "PUT",
@@ -47,12 +45,26 @@ export const useHeroService = () => {
 		}
 	};
 
-	return {
-		response,
-		responseGet,
-		loading,
-		error,
-		get,
-		update,
+	const updateBanner = async (file: File) => {
+		loading.value = true;
+		error.value = null;
+		try {
+			const formData = new FormData();
+			formData.append("file", file);
+			const res = await $apiFetch<ApiResponse<Hero>>("/hero/banner", {
+				method: "PUT",
+				body: formData,
+			});
+			response.value = res;
+			responseGet.value = res.data;
+			return res;
+		} catch (err: any) {
+			error.value = err;
+			throw err;
+		} finally {
+			loading.value = false;
+		}
 	};
+
+	return { response, responseGet, loading, error, get, update, updateBanner };
 };

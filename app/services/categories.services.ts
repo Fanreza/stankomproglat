@@ -12,13 +12,17 @@ export const useNewsCategoriesService = () => {
 	const error = ref<Error | null>(null);
 
 	// ✅ Get all (pakai 1 object parameter)
-	const getAll = async (params?: any) => {
+
+	const endpoint = (isPublic = false) => (isPublic ? "/public/news/categories" : "/news/categories");
+
+	// ✅ Get all (with params)
+	const getAll = async (isPublic = false, params?: Record<string, any>) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<ApiResponse<Category[]>>("news/categories", {
-				params: params,
+			const res = await $apiFetch<ApiResponse<Category[]>>(endpoint(isPublic), {
+				params,
 			});
 			response.value = res;
 			return res;

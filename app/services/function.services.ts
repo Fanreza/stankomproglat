@@ -10,11 +10,13 @@ export const useRolesResponsibilitiesService = () => {
 	const error = ref<Error | null>(null);
 
 	// 🧩 GET roles & responsibilities
-	const get = async () => {
+	const endpoint = (isPublic = false) => (isPublic ? "/public/roles-responsibilities" : "/roles-responsibilities");
+
+	const get = async (isPublic = false) => {
 		loading.value = true;
 		error.value = null;
 		try {
-			const res = await $apiFetch<ApiResponse<RolesResponsibilities>>("/roles-responsibilities");
+			const res = await $apiFetch<ApiResponse<RolesResponsibilities>>(endpoint(isPublic));
 			response.value = res;
 			responseGet.value = res.data;
 			return res;

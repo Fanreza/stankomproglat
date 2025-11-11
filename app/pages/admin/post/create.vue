@@ -15,7 +15,6 @@ const { create, loading } = useSocialMediaPostService();
 const form = ref({
 	platform: "",
 	postLink: "",
-	image: "",
 	createdById: 1,
 });
 
@@ -24,9 +23,7 @@ const handleSubmit = async () => {
 		await create(form.value);
 		toast.success("Postingan berhasil dibuat.");
 		router.push("/admin/post");
-	} catch {
-		toast.error("Gagal membuat postingan.");
-	}
+	} catch {}
 };
 
 const handleCancel = () => router.back();
@@ -50,12 +47,6 @@ const handleCancel = () => router.back();
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Link Postingan</label>
 				<Input v-model="form.postLink" placeholder="https://facebook.com/post/..." />
-			</div>
-
-			<!-- Image -->
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Gambar (URL)</label>
-				<Input v-model="form.image" placeholder="https://example.com/image.jpg" />
 			</div>
 
 			<!-- Actions -->

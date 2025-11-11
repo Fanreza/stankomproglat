@@ -17,16 +17,20 @@ const showDialog = ref(false);
 const selectedId = ref<number | null>(null);
 const deleting = ref(false);
 
+const params = computed(() => ({
+	search: searchQuery.value,
+	page: currentPage.value,
+}));
+
 const fetchData = async () => {
 	try {
-		await getAll();
+		await getAll(false, params.value);
 	} catch (err: any) {
 		toast.error("Gagal memuat data kategori.");
 	}
 };
 
 onMounted(fetchData);
-watch(currentPage, fetchData);
 
 const onCreate = () => navigateTo("/admin/news/categories/create");
 
@@ -52,6 +56,12 @@ const confirmDelete = async () => {
 };
 
 const handleEdit = (id: number) => navigateTo(`/admin/news/categories/${id}/edit`);
+
+const onPageChange = (page: number) => {
+	currentPage.value = page;
+
+	fetchData();
+};
 </script>
 
 <template>
@@ -124,7 +134,7 @@ const handleEdit = (id: number) => navigateTo(`/admin/news/categories/${id}/edit
 		</div>
 
 		<!-- Pagination -->
-		<AdminAppPagination v-if="response?.meta" v-model:page="currentPage" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
+		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
 		<!-- 🗑️ Delete Dialog -->
 		<Dialog v-model:open="showDialog">

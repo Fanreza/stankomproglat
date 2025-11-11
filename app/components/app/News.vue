@@ -4,15 +4,28 @@
 			<!-- Section Title -->
 			<h2 class="mb-12 text-center font-semibold text-gray-900 text-xl md:text-3xl lg:text-4xl">Berita Terbaru</h2>
 
-			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<AppUiNewsCard v-for="news in newsItems" :key="news.id" :image="news.image" :date="news.date" :category="news.category" :title="news.title" :excerpt="news.excerpt" :slug="news.slug" />
+			<!-- Loading Skeleton -->
+			<div v-if="loading" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div v-for="i in 3" :key="i" class="animate-pulse rounded-xl bg-white p-4 shadow-sm">
+					<div class="h-40 w-full bg-gray-200 rounded-md mb-4"></div>
+					<div class="h-5 w-3/4 bg-gray-200 mb-2 rounded"></div>
+					<div class="h-4 w-2/3 bg-gray-200 mb-1 rounded"></div>
+					<div class="h-4 w-1/2 bg-gray-200 rounded"></div>
+				</div>
 			</div>
+
+			<!-- News Grid -->
+			<div v-else-if="newsItems.length > 0" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<AppUiNewsCard v-for="news in newsItems" :key="news.id" :image="news.file || '/images/placeholder.jpg'" :date="formatDate(news.createdAt)" :category="news.category?.title || '-'" :title="news.title" :excerpt="news.excerpt" :slug="`/news/${news.slug}`" />
+			</div>
+
+			<!-- Empty State -->
+			<div v-else class="text-center text-gray-500 py-12">Tidak ada berita yang tersedia saat ini.</div>
 
 			<!-- Other Button -->
 			<div class="text-center mt-10">
 				<Button variant="ghost" class="border-[#00384C] border-solid border cursor-pointer" @click="onNavigateNews">
-					<span> Lainnya </span>
-
+					<span>Lainnya</span>
 					<Icon name="ion:arrow-forward" class="text-xl" />
 				</Button>
 			</div>
@@ -21,46 +34,33 @@
 </template>
 
 <script setup lang="ts">
-import { BookOpen, GraduationCap, Award, ArrowRight } from "lucide-vue-next";
+import { useNewsService } from "@/services/news.services";
+import { toast } from "vue-sonner";
 
-interface NewsItem {
-	id: number;
-	image: string;
-	date: string;
-	category: string;
-	title: string;
-	excerpt: string;
-	slug: string;
-}
+// 🧩 Service
+const { getAll, response, loading } = useNewsService();
 
-// Categories
-const categories = ["Semua", "SKKNI", "Proglat", "InaSkill", "E-Training"];
-const selectedCategory = ref("Semua");
+// 🧠 Data state
+const newsItems = ref<any[]>([]);
 
-// Sample news data (replace with API call)
-const newsItems = ref<NewsItem[]>([
-	{
-		id: 1,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		date: "23 Apr 2025",
-		category: "SKKNI",
-		title: "Peluncuran Program Sertifikasi Baru",
-		excerpt: "Organisasi meluncurkan program sertifikasi terbaru untuk meningkatkan kompetensi profesional...",
-		slug: "peluncuran-program-sertifikasi-baru",
-	},
-	{
-		id: 2,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		date: "23 Apr 2025",
-		category: "Proglat",
-		title: "Workshop Pelatihan Nasional 2025",
-		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
-		slug: "workshop-pelatihan-nasional-2025",
-	},
-	// Add more news items...
-]);
+// Fetch public news
+onMounted(async () => {
+	try {
+		await getAll(true);
+		newsItems.value = response.value?.data || [];
+	} catch {
+		toast.error("Gagal memuat berita terbaru.");
+	}
+});
 
-const onNavigateNews = () => {
-	navigateTo("/news");
-};
+// Navigate ke halaman berita
+const onNavigateNews = () => navigateTo("/news");
+
+// Format tanggal tampil cantik
+const formatDate = (date: string) =>
+	new Date(date).toLocaleDateString("id-ID", {
+		day: "2-digit",
+		month: "short",
+		year: "numeric",
+	});
 </script>

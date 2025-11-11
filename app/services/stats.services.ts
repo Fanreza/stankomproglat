@@ -10,12 +10,14 @@ export const useStatisticService = () => {
 	const error = ref<Error | null>(null);
 
 	// 🧩 Get All
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	const endpoint = (isPublic = false) => (isPublic ? "/public/statistics" : "/statistics");
+
+	// 🧩 Get All (wrapper)
+	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
-			const res = await $apiFetch<ApiResponse<Statistic[]>>("/statistics", { params });
+			const res = await $apiFetch<ApiResponse<Statistic[]>>(endpoint(isPublic), { params });
 			response.value = res;
 			return res;
 		} catch (err: any) {

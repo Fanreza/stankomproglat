@@ -10,6 +10,6 @@ export interface Hero {
 export interface UpdateHeroDto {
 	heading?: string;
 	subHeading?: string;
+	banner?: File | null;
 	pathVideo?: string | null;
-	banner?: string | null;
 }

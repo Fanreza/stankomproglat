@@ -6,6 +6,11 @@ export interface Statistic {
 	categoryId: number;
 	createdAt: string;
 	updatedAt: string;
+	statistics: {
+		id: number;
+		number: number;
+		name: string;
+	}[];
 }
 
 export interface CreateStatisticDto {

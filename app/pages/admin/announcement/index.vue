@@ -14,9 +14,14 @@ const { getAll, remove, response, loading } = useAnnouncementsService();
 const searchQuery = ref("");
 const currentPage = ref(1);
 
-const fetchData = async (params?: any) => {
+const params = computed(() => ({
+	search: searchQuery.value,
+	page: currentPage.value,
+}));
+
+const fetchData = async () => {
 	try {
-		await getAll(params);
+		await getAll(params.value);
 	} catch (err) {
 		toast.error("Gagal memuat data pengumuman");
 	}
@@ -52,9 +57,7 @@ const onCreate = () => navigateTo("/admin/announcement/create");
 const onPageChange = (page: number) => {
 	currentPage.value = page;
 
-	fetchData({
-		page: page,
-	});
+	fetchData();
 };
 </script>
 

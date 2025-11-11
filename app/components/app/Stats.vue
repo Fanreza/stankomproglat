@@ -1,5 +1,48 @@
+<script setup lang="ts">
+import { ref, onMounted, watch, computed } from "vue";
+import { useStatisticService } from "@/services/stats.services";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const { getAll, response, loading } = useStatisticService();
+const emblaApi = ref<CarouselApi>();
+const current = ref(0);
+
+const autoplay = Autoplay({
+	delay: 5000,
+	stopOnInteraction: true,
+	stopOnMouseEnter: true,
+});
+
+const slides = computed(() => response.value?.data || []);
+
+watch(emblaApi, (api) => {
+	if (!api) return;
+	api.on("select", () => {
+		current.value = api.selectedScrollSnap();
+	});
+	const autoplayPlugin = api.plugins().autoplay;
+	if (autoplayPlugin) autoplayPlugin.play();
+});
+
+const scrollTo = (index: number) => {
+	emblaApi.value?.scrollTo(index);
+};
+
+onMounted(async () => {
+	try {
+		await getAll(true);
+		if (emblaApi.value) current.value = emblaApi.value.selectedScrollSnap();
+	} catch {
+		console.warn("Gagal memuat statistik publik.");
+	}
+});
+</script>
+
 <template>
 	<section class="relative overflow-hidden bg-primary py-16 md:py-20">
+		<!-- SVG Backgrounds (sama seperti versi kamu sebelumnya) -->
 		<!-- Decorative SVG Background -->
 		<!-- Left Side -->
 		<div class="absolute left-0 bottom-[50%] h-full">
@@ -48,111 +91,49 @@
 			</svg>
 		</div>
 
-		<!-- Carousel -->
 		<div class="container relative z-10 mx-auto px-4">
-			<Carousel class="mx-auto w-full" :opts="{ align: 'start', loop: true }" @init-api="(api) => (emblaApi = api)" :plugins="[autoplay]">
+			<!-- Loading Skeleton -->
+			<div v-if="loading" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
+				<div v-for="i in 4" :key="i" class="text-center">
+					<Skeleton class="h-10 w-3/4 mx-auto mb-2 rounded-lg" />
+					<Skeleton class="h-6 w-1/2 mx-auto" />
+				</div>
+			</div>
+
+			<!-- Carousel -->
+			<Carousel v-if="!loading && slides.length > 0" class="mx-auto w-full" :opts="{ align: 'start', loop: true }" @init-api="(api) => (emblaApi = api)" :plugins="[autoplay]">
 				<CarouselContent>
-					<CarouselItem v-for="(slide, sIndex) in slides" :key="sIndex">
-						<!-- 🔗 NuxtLink wrapper ke service -->
-						<NuxtLink :to="slide.url" target="_blank" class="block cursor-pointer">
+					<CarouselItem v-for="(category, sIndex) in slides" :key="sIndex">
+						<!-- 🔗 Hanya tampilkan kategori yang punya data statistik -->
+						<NuxtLink v-if="category?.statistics?.length" :to="category.link || '#'" target="_blank" class="block cursor-pointer">
 							<h2 class="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
-								{{ slide.title }}
+								{{ category.name }}
 							</h2>
 
-							<div class="grid gap-8" :class="`md:grid-cols-${slide.items.length}`">
-								<div v-for="(item, iIndex) in slide.items" :key="iIndex" class="text-center">
+							<div class="grid gap-8 md:grid-cols-3 justify-items-center">
+								<div v-for="stat in category.statistics" :key="stat.id" class="text-center">
 									<div class="mb-2 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-										{{ item.value }}
+										{{ stat.number }}
 									</div>
-									<div class="text-lg text-blue-100 md:text-xl">{{ item.label }}</div>
+									<div class="text-lg text-blue-100 md:text-xl">
+										{{ stat.name }}
+									</div>
 								</div>
 							</div>
 						</NuxtLink>
 					</CarouselItem>
 				</CarouselContent>
 
-				<div class="mt-8 flex items-center justify-center gap-4">
+				<!-- Indicator -->
+				<div v-if="slides.length > 1" class="mt-8 flex items-center justify-center gap-4">
 					<button v-for="(_, index) in slides.length" :key="index" @click="scrollTo(index)" class="h-2 rounded-full transition-all duration-300" :class="current === index ? 'w-36 scale-110 bg-white' : 'w-2 scale-100 bg-white/40 hover:bg-white/60'" :aria-label="`Slide ${index + 1}`"></button>
 				</div>
 			</Carousel>
+
+			<!-- 🔸 Kondisi ketika data kosong -->
+			<div v-else-if="!loading" class="text-center text-blue-100 py-16">
+				<p>Tidak ada data statistik yang tersedia saat ini.</p>
+			</div>
 		</div>
 	</section>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-
-const slides = ref([
-	{
-		title: "Rekapitulasi SKKNI",
-		url: "https://skkni.kemnaker.go.id",
-		items: [
-			{ value: 1212, label: "SKKNI Ditetapkan" },
-			{ value: 937, label: "SKKNI Berlaku" },
-			{ value: 275, label: "SKKNI Dicabut" },
-		],
-	},
-	{
-		title: "Rekapitulasi KKNI",
-		url: "https://skkni.kemnaker.go.id",
-		items: [
-			{ value: 166, label: "KKNI Berlaku" },
-			{ value: 16, label: "KKNI Dicabut" },
-		],
-	},
-	{
-		title: "Rekapitulasi SKKK/SKKI",
-		url: "https://skkni.kemnaker.go.id",
-		items: [
-			{ value: 246, label: "SKKK Berlaku" },
-			{ value: 0, label: "SKKK Dicabut" },
-		],
-	},
-	{
-		title: "Rekapitulasi Program",
-		url: "https://proglat.kemnaker.go.id",
-		items: [
-			{ value: 103, label: "Program Terbit" },
-			{ value: 185, label: "Program Pending" },
-			{ value: 288, label: "Program Total" },
-		],
-	},
-	{
-		title: "The 14th WordSkills Asean",
-		url: "https://inaskills.kemnaker.go.id",
-		items: [
-			{ value: 38, label: "Kompetitor" },
-			{ value: 19, label: "Bidang Kompetisi" },
-			{ value: 28, label: "Medali" },
-		],
-	},
-]);
-
-const emblaApi = ref<CarouselApi>();
-const current = ref(0);
-
-const autoplay = Autoplay({
-	delay: 5000,
-	stopOnInteraction: true,
-	stopOnMouseEnter: true,
-});
-
-watch(emblaApi, (api) => {
-	if (!api) return;
-	api.on("select", () => {
-		current.value = api.selectedScrollSnap();
-	});
-	const autoplayPlugin = api.plugins().autoplay;
-	if (autoplayPlugin) autoplayPlugin.play();
-});
-
-const scrollTo = (index: number) => {
-	emblaApi.value?.scrollTo(index);
-};
-
-onMounted(() => {
-	if (emblaApi.value) current.value = emblaApi.value.selectedScrollSnap();
-});
-</script>

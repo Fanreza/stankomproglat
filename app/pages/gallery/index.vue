@@ -2,82 +2,66 @@
 <template>
 	<section class="bg-white py-16 md:py-24">
 		<!-- Title -->
-		<AppUiPageHeader title="Galeri" :breadcrumbs="['Galeri']" />
+		<AppUiPageHeader title="Berita" :breadcrumbs="['Informasi', 'Berita']" />
 
 		<div class="mx-auto w-[80%]">
+			<!-- Loading State -->
+			<div v-if="loading" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div v-for="i in 6" :key="i" class="animate-pulse bg-gray-100 rounded-xl h-[320px]"></div>
+			</div>
+
 			<!-- Grid -->
-			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<AppUiGalleryCard v-for="news in newsItems" :key="news.id" :image="news.image" :title="news.title" :excerpt="news.excerpt" :slug="news.slug" />
+			<div v-else-if="newsItems.length > 0" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<AppUiGalleryCard v-for="news in newsItems" :key="news.id" :image="news.file || '/images/placeholder.jpg'" :title="news.title" :excerpt="news.description" :slug="`/news/${news.slug}`" />
 			</div>
 
 			<!-- Empty State -->
-			<div v-if="newsItems.length === 0" class="py-12 text-center">
-				<p class="text-gray-500">Tidak ada Galeri</p>
+			<div v-else class="py-12 text-center">
+				<p class="text-gray-500">Tidak ada berita ditemukan.</p>
 			</div>
 
 			<!-- Pagination -->
-			<AppUiPagination v-if="totalPages > 1" :current-page="currentPage" :total-pages="totalPages" @update:current-page="currentPage = $event" />
+			<AppUiPagination v-if="totalPages > 1" :current-page="currentPage" :total-pages="totalPages" @update:current-page="handlePageChange" class="mt-10" />
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { useGalleryService } from "@/services/gallery.services";
+import { toast } from "vue-sonner";
+import { ref, computed, onMounted } from "vue";
 
-interface NewsItem {
-	id: number;
-	image: string;
-	title: string;
-	excerpt: string;
-	slug: string;
-}
+// 🧩 Services
+const { getAll, response, loading } = useGalleryService();
 
-// Pagination
+// State
+const newsItems = ref<any[]>([]);
 const currentPage = ref(1);
-const itemsPerPage = 3;
 
-// Sample news data (replace with API call)
-const newsItems = ref<NewsItem[]>([
-	{
-		id: 1,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+// Fetch News
+const params = computed(() => ({
+	page: currentPage.value,
+}));
 
-		title: "Peluncuran Program Sertifikasi Baru",
-		excerpt: "Organisasi meluncurkan program sertifikasi terbaru untuk meningkatkan kompetensi profesional...",
-		slug: "peluncuran-program-sertifikasi-baru",
-	},
-	{
-		id: 3,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		title: "Workshop Pelatihan Nasional 2025",
-		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
-		slug: "workshop-pelatihan-nasional-2025",
-	},
-	{
-		id: 4,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		title: "Workshop Pelatihan Nasional 2025",
-		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
-		slug: "workshop-pelatihan-nasional-2025",
-	},
-	{
-		id: 5,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		title: "Workshop Pelatihan Nasional 2025",
-		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
-		slug: "workshop-pelatihan-nasional-2025",
-	},
-	{
-		id: 6,
-		image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-		title: "Workshop Pelatihan Nasional 2025",
-		excerpt: "Workshop pelatihan nasional akan diadakan di berbagai kota besar Indonesia...",
-		slug: "workshop-pelatihan-nasional-2025",
-	},
-]);
+const fetchNews = async () => {
+	try {
+		await getAll(params.value, true); // pakai endpoint public
+		newsItems.value = response.value?.data || [];
+	} catch {
+		toast.error("Gagal memuat data berita.");
+	}
+};
 
-// Total pages
+onMounted(fetchNews);
+
+// Pagination handler
+const handlePageChange = async (page: number) => {
+	currentPage.value = page;
+	await fetchNews();
+};
+
+// Hitung total halaman dari API meta
 const totalPages = computed(() => {
-	return Math.ceil(newsItems.value.length / itemsPerPage);
+	return response.value?.meta?.totalPages || 1;
 });
 </script>

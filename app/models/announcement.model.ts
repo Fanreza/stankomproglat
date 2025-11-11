@@ -3,6 +3,7 @@ export interface Announcement {
 	title: string;
 	description: string;
 	file?: string | null;
+	attachment?: string | null;
 	createdAt: string;
 	updatedAt: string;
 }

@@ -11,20 +11,32 @@
 				<div class="flex flex-col justify-center">
 					<h2 class="mb-8 text-center text-4xl font-bold text-gray-900 md:text-5xl">FAQ</h2>
 
-					<Accordion type="single" collapsible class="space-y-4">
-						<AccordionItem v-for="(faq, index) in faqs" :key="index" :value="`item-${index + 1}`" :class="['border-b border-gray-200', index === faqs.length - 1 ? 'border-b-0' : '']" class="rounded-lg border px-6 data-[state=open]:border-[#0C2C71] data-[state=open]:text-primary">
-							<AccordionTrigger class="text-left text-base font-medium hover:no-underline text-gray-900 data-[state=open]:text-primary data-[state=open]:border-[#EDF2FF] data-[state=open]:border-b rounded-none">
+					<!-- Loading Skeleton -->
+					<div v-if="loading" class="space-y-4">
+						<div v-for="i in 4" :key="i" class="animate-pulse">
+							<div class="h-5 w-3/4 bg-gray-200 rounded mb-2"></div>
+							<div class="h-4 w-2/3 bg-gray-200 rounded"></div>
+						</div>
+					</div>
+
+					<!-- Accordion -->
+					<Accordion v-else-if="faqs.length > 0" type="single" collapsible class="space-y-4">
+						<AccordionItem v-for="(faq, index) in faqs" :key="faq.id" :value="`item-${index + 1}`" class="rounded-lg border px-6 data-[state=open]:border-[#0C2C71] data-[state=open]:text-primary">
+							<AccordionTrigger class="text-left text-base font-medium hover:no-underline text-gray-900 data-[state=open]:text-primary">
 								<div class="flex items-start gap-3">
 									<span class="text-gray-500">{{ index + 1 }}.</span>
 									<span>{{ faq.question }}</span>
 								</div>
 							</AccordionTrigger>
 
-							<AccordionContent class="pl-7 pt-2 text-sm leading-relaxed text-gray-600 data-[state=open]:text-white">
+							<AccordionContent class="pl-7 pt-2 text-sm leading-relaxed text-gray-600">
 								{{ faq.answer }}
 							</AccordionContent>
 						</AccordionItem>
 					</Accordion>
+
+					<!-- Empty State -->
+					<p v-else class="text-center text-gray-500">Belum ada pertanyaan yang tersedia.</p>
 				</div>
 			</div>
 		</div>
@@ -32,22 +44,19 @@
 </template>
 
 <script setup lang="ts">
-const faqs = [
-	{
-		question: "Non consectetur a erat nam at lectus urna duis?",
-		answer: "Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.",
-	},
-	{
-		question: "Feugiat scelerisque varius morbi enim nunc faucibus?",
-		answer: "Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium.",
-	},
-	{
-		question: "Dolor sit amet consectetur adipiscing elit pellentesque?",
-		answer: "Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit.",
-	},
-	{
-		question: "Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?",
-		answer: "Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices tincidunt arcu non sodales neque.",
-	},
-];
+import { useFaqService } from "@/services/faq.services";
+import { toast } from "vue-sonner";
+
+const { getAll, response, loading } = useFaqService();
+
+const faqs = ref<any[]>([]);
+
+onMounted(async () => {
+	try {
+		await getAll({}, true); // ambil dari /public/faq
+		faqs.value = response.value?.data || [];
+	} catch {
+		toast.error("Gagal memuat FAQ publik.");
+	}
+});
 </script>

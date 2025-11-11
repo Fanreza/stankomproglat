@@ -10,12 +10,14 @@ export const useHistoryService = () => {
 	const error = ref<Error | null>(null);
 
 	// 🧩 Get All
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	const endpoint = (isPublic = false) => (isPublic ? "/public/histories" : "/histories");
+
+	// 🧩 Get All
+	const getAll = async (isPublic = false) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
-			const res = await $apiFetch<ApiResponse<History[]>>("/histories", { params });
+			const res = await $apiFetch<ApiResponse<History[]>>(endpoint(isPublic));
 			response.value = res;
 			return res;
 		} catch (err: any) {

@@ -10,13 +10,16 @@ export const useServicesService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All (pakai wrapper)
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	// Helper prefix (public / admin)
+	const endpoint = (isPublic = false) => (isPublic ? "/public/services" : "/services");
+
+	// ✅ Get All
+	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<ApiResponse<Service[]>>("/services", { params });
+			const res = await $apiFetch<ApiResponse<Service[]>>(endpoint(isPublic), { params });
 			response.value = res;
 			return res;
 		} catch (err: any) {

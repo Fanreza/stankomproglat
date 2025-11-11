@@ -19,9 +19,13 @@ const selectedCategory = ref("all");
 const currentPage = ref(1);
 
 // 🧩 Fetch data dari API
+const params = computed(() => ({
+	page: currentPage.value,
+}));
+
 const fetchNews = async () => {
 	try {
-		await getAll();
+		await getAll(false, params.value);
 	} catch (err) {
 		toast.error("Gagal memuat data berita");
 	}
@@ -32,8 +36,6 @@ onMounted(async () => {
 	await getCategories();
 	await fetchNews();
 });
-
-watch([search, selectedCategory, currentPage], fetchNews);
 
 // 🧩 Delete news dengan dialog konfirmasi
 const selectedToDelete = ref<number | null>(null);
@@ -61,6 +63,12 @@ const handleDelete = async () => {
 // 🧩 Navigasi
 const onCreate = () => navigateTo("/admin/news/create");
 const onEdit = (id: number) => navigateTo(`/admin/news/${id}/edit`);
+
+const onPageChange = (page: number) => {
+	currentPage.value = page;
+
+	fetchNews();
+};
 </script>
 
 <template>
@@ -108,14 +116,7 @@ const onEdit = (id: number) => navigateTo(`/admin/news/${id}/edit`);
 			<div v-for="news in response.data" :key="news.id" class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition">
 				<!-- Image -->
 				<div class="relative">
-					<div v-if="news.file" class="relative">
-						<img :src="news.file" alt="News Banner" class="h-40 w-full object-cover" @error="news.file = ''" />
-					</div>
-
-					<!-- 🧩 Fallback kalau gambar kosong -->
-					<div v-else class="flex items-center justify-center h-40 w-full bg-gray-100 text-gray-400">
-						<Image class="h-10 w-10" />
-					</div>
+					<ImagePreview :src="news.file" alt="Preview Banner" />
 
 					<!-- Kategori & status -->
 					<span class="absolute left-3 top-3 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
@@ -158,9 +159,7 @@ const onEdit = (id: number) => navigateTo(`/admin/news/${id}/edit`);
 		<div v-else class="py-20 text-center text-gray-500">Belum ada berita.</div>
 
 		<!-- Pagination -->
-		<div v-if="response?.meta" class="flex items-center justify-between border-t border-gray-100 pt-6">
-			<AdminAppPagination v-model:page="currentPage" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
-		</div>
+		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
 		<!-- 🧩 Delete Dialog -->
 		<Dialog v-model:open="showDeleteDialog">

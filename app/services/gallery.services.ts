@@ -11,12 +11,17 @@ export const useGalleryService = () => {
 	const error = ref<Error | null>(null);
 
 	// 🧩 Get All (wrapped response)
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	// Helper untuk endpoint public/admin
+	const endpoint = (isPublic = false) => (isPublic ? "/public/galleries" : "/gallery");
+
+	// 🧩 Get All
+	const getAll = async (params?: { page?: number; perPage?: number }, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
-			const res = await $apiFetch<ApiResponse<Gallery[]>>("/gallery", { params });
+			const res = await $apiFetch<ApiResponse<Gallery[]>>(endpoint(isPublic), {
+				params,
+			});
 			response.value = res;
 			return res;
 		} catch (err: any) {
@@ -27,13 +32,12 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🧩 Get One (non-wrapped response)
-	const get = async (id: number) => {
+	// 🧩 Get One
+	const get = async (id: number, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
-
 		try {
-			const res = await $apiFetch<Gallery>(`/gallery/${id}`);
+			const res = await $apiFetch<Gallery>(`${endpoint(isPublic)}/${id}`);
 			responseGet.value = res;
 			return res;
 		} catch (err: any) {

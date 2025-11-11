@@ -41,7 +41,7 @@ const navItems = [
 		children: [
 			{ label: "Tugas Fungsi", to: "/admin/function" },
 			{ label: "Sejarah", to: "/admin/history" },
-			{ label: "Profil Direktur", to: "/admin/profile" },
+			{ label: "Profil Direktur", to: "/admin/director" },
 			{ label: "Struktur Organisasi", to: "/admin/structure" },
 		],
 	},

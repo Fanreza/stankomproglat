@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { UploadCloud } from "lucide-vue-next";
+import { Search, Edit, Trash2, Image as ImageIcon } from "lucide-vue-next";
 import { toast } from "vue-sonner";
 import { useHeroService } from "@/services/hero.services";
 
@@ -9,13 +10,13 @@ definePageMeta({
 	title: "Hero Section",
 });
 
-const { get, update, responseGet, loading } = useHeroService();
+const { get, update, updateBanner, responseGet, loading } = useHeroService();
 
 const form = ref({
 	heading: "",
 	subHeading: "",
 	pathVideo: "",
-	banner: "",
+	banner: null as File | null,
 });
 
 const previewUrl = ref<string | null>(null);
@@ -24,45 +25,43 @@ onMounted(async () => {
 	try {
 		await get();
 		if (responseGet.value) {
-			form.value.heading = responseGet.value.heading;
-			form.value.subHeading = responseGet.value.subHeading;
-			form.value.pathVideo = responseGet.value.pathVideo ?? "";
-			form.value.banner = responseGet.value.banner ?? "";
-			previewUrl.value = responseGet.value.banner ?? null;
+			form.value.heading = responseGet.value.heading || "";
+			form.value.subHeading = responseGet.value.subHeading || "";
+			form.value.pathVideo = responseGet.value.pathVideo || "";
+			previewUrl.value = responseGet.value.banner || null;
 		}
 	} catch {
 		toast.error("Gagal memuat data hero section.");
 	}
 });
 
-// 🧩 Update handler
+const handleFileChange = (e: Event) => {
+	const target = e.target as HTMLInputElement;
+	if (!target.files?.length) return;
+	const file = target.files[0];
+	form.value.banner = file!;
+	previewUrl.value = URL.createObjectURL(file!);
+};
+
 const handleSubmit = async () => {
 	try {
 		await update({
 			heading: form.value.heading,
 			subHeading: form.value.subHeading,
 			pathVideo: form.value.pathVideo || null,
-			banner: form.value.banner || null,
 		});
+		if (form.value.banner) {
+			await updateBanner(form.value.banner);
+		}
 		toast.success("Hero section berhasil diperbarui.");
-	} catch {
-		toast.error("Gagal memperbarui hero section.");
-	}
+	} catch {}
 };
 
-// 🧩 Image preview update
-const handleFileChange = async (e: Event) => {
-	const target = e.target as HTMLInputElement;
-	if (!target.files?.length) return;
-	const file = target.files[0];
-	form.value.banner = URL.createObjectURL(file!);
-	previewUrl.value = form.value.banner;
-};
+const imageError = ref(false);
 </script>
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-semibold text-gray-900">Hero Section</h1>
 			<Button @click="handleSubmit" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6" :disabled="loading">
@@ -70,33 +69,27 @@ const handleFileChange = async (e: Event) => {
 			</Button>
 		</div>
 
-		<!-- Loading -->
 		<div v-if="loading && !responseGet" class="flex justify-center py-20 text-gray-500">
 			<span class="animate-spin h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full mr-2"></span>
 			Memuat hero section...
 		</div>
 
-		<!-- Form -->
 		<div v-else class="space-y-10">
-			<!-- Heading -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Heading</label>
 				<Input v-model="form.heading" placeholder="Masukkan heading utama" />
 			</div>
 
-			<!-- Sub Heading -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Sub Heading</label>
 				<Input v-model="form.subHeading" placeholder="Masukkan sub heading" />
 			</div>
 
-			<!-- Path Video -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Path Video (Opsional)</label>
 				<Input v-model="form.pathVideo" placeholder="https://cdn.example.com/video.mp4" />
 			</div>
 
-			<!-- Banner -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Banner</label>
 
@@ -104,18 +97,18 @@ const handleFileChange = async (e: Event) => {
 					<UploadCloud class="h-8 w-8 mb-2 text-gray-400" />
 					<span class="text-sm font-medium">Klik untuk upload atau drag & drop</span>
 					<span class="text-xs text-gray-400">PNG, JPG, WEBP (max. 2MB)</span>
-					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="handleFileChange" />
+					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" @change="handleFileChange" />
 				</div>
 
-				<!-- Preview -->
 				<div v-else class="relative w-full max-w-lg h-56 border rounded-lg overflow-hidden group">
-					<img :src="previewUrl" class="object-cover w-full h-full" />
+					<ImagePreview :src="previewUrl" alt="Preview Banner" />
+
 					<button
 						type="button"
 						class="absolute top-2 right-2 bg-white/80 text-red-600 rounded-full p-1 opacity-0 group-hover:opacity-100 transition"
 						@click="
 							previewUrl = null;
-							form.banner = '';
+							form.banner = null;
 						"
 					>
 						✕

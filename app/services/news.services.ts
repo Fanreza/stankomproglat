@@ -11,12 +11,14 @@ export const useNewsService = () => {
 	const error = ref<Error | null>(null);
 
 	// ✅ Get All
-	const getAll = async (params: { page?: number; perPage?: number } = {}) => {
+	const endpoint = (isPublic = false) => (isPublic ? "/public/news" : "/news");
+
+	const getAll = async (isPublic = false, params: { page?: number; perPage?: number } = {}) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<ApiResponse<News[]>>("news", {
+			const res = await $apiFetch<ApiResponse<News[]>>(endpoint(isPublic), {
 				params,
 			});
 			response.value = res;
@@ -37,6 +39,23 @@ export const useNewsService = () => {
 		try {
 			const res = await $apiFetch<News>(`news/${id}`);
 			responseGet.value = res;
+			return res;
+		} catch (err: any) {
+			error.value = err;
+			throw err;
+		} finally {
+			loading.value = false;
+		}
+	};
+
+	const getBySlug = async (slug: string) => {
+		loading.value = true;
+		error.value = null;
+
+		try {
+			const res = await $apiFetch<News>(`public/news/slug/${slug}`);
+			// @ts-ignore
+			responseGet.value = res.data!;
 			return res;
 		} catch (err: any) {
 			error.value = err;
@@ -134,5 +153,5 @@ export const useNewsService = () => {
 		}
 	};
 
-	return { response, responseGet, loading, error, getAll, get, create, update, remove };
+	return { response, responseGet, loading, error, getAll, get, create, update, remove, getBySlug };
 };
