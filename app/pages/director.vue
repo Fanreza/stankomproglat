@@ -76,8 +76,11 @@ onMounted(async () => {
 const defaultAchievements = ["Meningkatkan anggota organisasi 300%", "Meluncurkan program sertifikasi digital", "Membangun kemitraan internasional"];
 
 const directors = computed(() => response.value?.data || []);
-const currentDirector = computed(() => directors.value.find((d) => !d.endYear) || directors.value.sort((a, b) => b.beginYear - a.beginYear)[0]);
-const pastDirectors = computed(() => directors.value.filter((d) => d.endYear).sort((a, b) => b.beginYear - a.beginYear));
+// current director = yang order-nya paling kecil (biasanya 1)
+const currentDirector = computed(() => directors.value.find((d) => d.order === 1));
+
+// past directors = sisanya, urutkan berdasarkan order naik
+const pastDirectors = computed(() => directors.value.filter((d) => d.order !== 1).sort((a, b) => a.order - b.order));
 </script>
 
 <style scoped>

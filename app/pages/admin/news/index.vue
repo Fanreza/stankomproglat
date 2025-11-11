@@ -119,7 +119,7 @@ watch(selectedCategory, () => {
 			<div v-for="news in response.data" :key="news.id" class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition">
 				<!-- Image -->
 				<div class="relative">
-					<ImagePreview :src="news.file" alt="Preview Banner" />
+					<ImagePreview :src="news.image" alt="Preview Banner" />
 
 					<!-- Kategori & status -->
 					<span class="absolute left-3 top-3 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">

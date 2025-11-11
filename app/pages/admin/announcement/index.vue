@@ -83,7 +83,7 @@ const onPageChange = (page: number) => {
 					<TableRow>
 						<TableHead class="w-[50px] text-gray-700 text-sm font-medium">No</TableHead>
 						<TableHead class="text-gray-700 text-sm font-medium">Judul Pengumuman</TableHead>
-						<TableHead class="text-gray-700 text-sm font-medium w-[350px]">Deskripsi</TableHead>
+						<TableHead class="text-gray-700 text-sm font-medium w-[350px]">Dibuat Oleh</TableHead>
 						<TableHead class="text-gray-700 text-sm font-medium text-center w-[200px]">Lampiran</TableHead>
 						<TableHead class="text-center text-gray-700 text-sm font-medium w-[120px]">Aksi</TableHead>
 					</TableRow>
@@ -107,13 +107,15 @@ const onPageChange = (page: number) => {
 						</TableCell>
 
 						<TableCell class="font-medium text-gray-900">{{ item.title }}</TableCell>
-						<TableCell class="text-gray-700 truncate max-w-[350px]">{{ item.description }}</TableCell>
+						<TableCell class="text-gray-700 truncate max-w-[350px]">{{ item.createdBy.name }}</TableCell>
 
 						<TableCell class="text-center">
-							<div v-if="item.file" class="flex flex-col items-center gap-1">
-								<a :href="item.file" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline text-sm">
-									<FileText class="h-4 w-4" />
-									{{ item.file.split("/").pop() }}
+							<div v-if="item.attachment" class="flex flex-col items-center gap-1">
+								<a :href="item.attachment" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline text-sm max-w-[180px] truncate" :title="item.attachment.split('/').pop()">
+									<FileText class="h-4 w-4 shrink-0" />
+									<span class="block truncate">
+										{{ item.attachment.split("/").pop() }}
+									</span>
 								</a>
 							</div>
 							<span v-else class="text-gray-400 text-sm">Tidak ada file</span>

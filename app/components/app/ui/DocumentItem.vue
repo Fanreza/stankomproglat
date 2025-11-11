@@ -15,7 +15,7 @@
 
 			<p v-html="description"></p>
 
-			<a :href="attachment" download class="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#163E93] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+			<a :href="attachment" target="_blank" download class="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#163E93] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
 				<Download class="h-4 w-4" />
 				Download Attachment
 			</a>

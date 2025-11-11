@@ -6,6 +6,9 @@ export interface Announcement {
 	attachment?: string | null;
 	createdAt: string;
 	updatedAt: string;
+	createdBy: {
+		name: string;
+	};
 }
 
 export interface CreateAnnouncementDto {

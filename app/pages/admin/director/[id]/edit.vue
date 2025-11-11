@@ -40,7 +40,7 @@ onMounted(async () => {
 			detail: res.detail,
 			file: null,
 		};
-		if (res.file) previewUrl.value = res.file;
+		if (res.picture) previewUrl.value = res.picture;
 	} catch {
 		toast.error("Gagal memuat data direktur.");
 	}

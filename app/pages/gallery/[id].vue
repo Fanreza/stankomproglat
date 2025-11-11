@@ -37,9 +37,9 @@ onMounted(async () => {
 			<!-- Data -->
 			<div v-else-if="responseGet" class="fade-in">
 				<!-- Hero -->
-				<!-- <div class="rounded-2xl overflow-hidden shadow-sm">
+				<div class="rounded-2xl overflow-hidden shadow-sm">
 					<img :src="responseGet.images?.[0]?.image || 'https://placehold.co/800x400?text=No+Image'" :alt="responseGet.title" class="w-full h-[500px] object-cover" />
-				</div> -->
+				</div>
 
 				<!-- Judul & Deskripsi -->
 				<div class="mt-8">

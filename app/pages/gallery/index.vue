@@ -12,7 +12,7 @@
 
 			<!-- Grid -->
 			<div v-else-if="newsItems.length > 0" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<AppUiGalleryCard v-for="news in newsItems" :key="news.id" :image="news.file || '/images/placeholder.jpg'" :title="news.title" :excerpt="news.description" :slug="news.id" />
+				<AppUiGalleryCard v-for="news in newsItems" :key="news.id" :image="news.images[0].image || '/images/placeholder.jpg'" :title="news.title" :excerpt="news.description" :slug="news.id" />
 			</div>
 
 			<!-- Empty State -->
