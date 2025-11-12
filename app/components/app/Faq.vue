@@ -21,7 +21,7 @@
 
 					<!-- Accordion -->
 					<Accordion v-else-if="faqs.length > 0" type="single" collapsible class="space-y-4">
-						<AccordionItem v-for="(faq, index) in faqs" :key="faq.id" :value="`item-${index + 1}`" class="rounded-lg border px-6 data-[state=open]:border-[#0C2C71] data-[state=open]:text-primary">
+						<AccordionItem v-for="(faq, index) in faqs" :key="faq.id" :value="`item-${index + 1}`" class="!border-b rounded-lg border px-6 data-[state=open]:border-[#0C2C71] data-[state=open]:text-primary">
 							<AccordionTrigger class="text-left text-base font-medium hover:no-underline text-gray-900 data-[state=open]:text-primary">
 								<div class="flex items-start gap-3">
 									<span class="text-gray-500">{{ index + 1 }}.</span>

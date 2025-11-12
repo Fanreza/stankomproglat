@@ -24,8 +24,10 @@ onMounted(async () => {
 		await get(Number(route.params.id));
 
 		if (responseGet.value) {
-			form.value.name = responseGet.value.name;
-			form.value.link = responseGet.value.link;
+			// @ts-ignore
+			form.value.name = responseGet.value.data.name;
+			// @ts-ignore
+			form.value.link = responseGet.value.data.link;
 		}
 	} catch {
 		toast.error("Gagal memuat data kategori.");

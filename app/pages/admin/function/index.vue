@@ -63,14 +63,14 @@ const handleSubmit = async () => {
 		<div v-else class="space-y-10 bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
 			<!-- Roles -->
 			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Peran (Roles)</label>
-				<Textarea v-model="form.roles" placeholder="Tuliskan peran (roles) organisasi di sini..." rows="5" />
+				<label class="block text-sm font-medium text-gray-800">Tugas</label>
+				<AdminAppEditor v-model="form.roles" placeholder="Tuliskan tugas organisasi di sini..." rows="5" />
 			</div>
 
 			<!-- Responsibilities -->
 			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Tanggung Jawab (Responsibilities)</label>
-				<Textarea v-model="form.responsibilities" placeholder="Tuliskan tanggung jawab (responsibilities) di sini..." rows="8" />
+				<label class="block text-sm font-medium text-gray-800">Fungsi</label>
+				<AdminAppEditor v-model="form.responsibilities" placeholder="Tuliskan Fungsi di sini..." rows="8" />
 			</div>
 		</div>
 	</div>

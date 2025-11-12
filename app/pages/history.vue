@@ -3,9 +3,9 @@
 		<!-- Title -->
 		<AppUiPageHeader title="Sejarah Stankomproglat" :breadcrumbs="['Profil', 'Sejarah']" />
 
-		<div class="mx-auto w-[85%] gap-10 mt-1 grid grid-cols-2 items-center justify-center">
+		<div class="mx-auto w-[85%] gap-10 mt-1 grid grid-cols-1 md:grid-cols-2 items-center justify-center">
 			<!-- Timeline -->
-			<div>
+			<div class="order-last md:order-first">
 				<!-- Loading Skeleton -->
 				<div v-if="loading" class="space-y-10">
 					<div v-for="i in 4" :key="i" class="flex gap-4 animate-pulse">
@@ -50,7 +50,7 @@
 			</div>
 
 			<!-- Illustration -->
-			<div class="hidden lg:block w-[80%]">
+			<div class="w-[50%] md:w-[80%] mx-auto order-first md:order-last">
 				<NuxtImg src="/images/history.png" alt="History illustration" class="w-full" />
 			</div>
 		</div>

@@ -128,11 +128,18 @@ const menuItems = computed(() => [
 	},
 	{
 		label: "Tautan",
-		children: services.value.map((s: any) => ({
-			label: s.title,
-			to: s.link || "#",
-			external: true,
-		})),
+		children: [
+			...services.value.map((s: any) => ({
+				label: s.title,
+				to: s.link || "#",
+				external: true,
+			})),
+			{
+				label: "Semua",
+				to: "/service",
+				external: false,
+			},
+		],
 	},
 	{ label: "Galeri", to: "/gallery" },
 ]);

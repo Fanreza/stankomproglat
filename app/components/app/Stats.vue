@@ -110,7 +110,14 @@ onMounted(async () => {
 								{{ category.name }}
 							</h2>
 
-							<div class="grid gap-8 md:grid-cols-3 justify-items-center">
+							<div
+								class="grid gap-8 justify-items-center"
+								:class="{
+									'md:grid-cols-3': category.statistics.length >= 3,
+									'md:grid-cols-2 justify-center': category.statistics.length === 2,
+									'md:grid-cols-1 justify-center': category.statistics.length === 1,
+								}"
+							>
 								<div v-for="stat in category.statistics" :key="stat.id" class="text-center">
 									<div class="mb-2 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
 										{{ stat.number }}

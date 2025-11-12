@@ -6,7 +6,7 @@ import { useHistoryService } from "@/services/history.services";
 definePageMeta({
 	layout: "admin",
 	middleware: "admin",
-	title: "Sejarah Perusahaan",
+	title: "Sejarah",
 });
 
 const { getAll, remove, response, loading } = useHistoryService();

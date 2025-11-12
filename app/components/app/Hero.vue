@@ -1,5 +1,5 @@
 <template>
-	<section class="relative h-screen w-full overflow-hidden">
+	<section class="relative h-screen w-full overflow-hidden xl:pt-10">
 		<!-- Background -->
 		<div class="absolute inset-0">
 			<!-- Kalau loading, tampilkan skeleton -->
@@ -21,7 +21,7 @@
 					<Skeleton class="h-10 w-1/2 mx-auto" />
 				</div>
 
-				<h1 v-else class="mb-6 text-2xl xl:text-7xl font-bold leading-tight text-white md:text-4xl lg:text-5xl animate-fade">
+				<h1 v-else class="mb-6 text-2xl xl:text-6xl font-bold leading-tight text-white md:text-4xl lg:text-5xl animate-fade">
 					{{ heroData?.heading || "Direktorat Bina Standardisasi Kompetensi dan Program Pelatihan" }}
 				</h1>
 

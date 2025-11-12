@@ -23,7 +23,7 @@ onMounted(async () => {
 		<!-- Content -->
 		<div class="mx-auto mt-12 max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 			<!-- Left Text -->
-			<div>
+			<div class="order-last md:order-first">
 				<!-- Visi -->
 				<h2 class="text-2xl font-bold text-gray-900 mb-4">Tugas</h2>
 
@@ -31,9 +31,7 @@ onMounted(async () => {
 				<div v-else-if="error" class="rounded-xl border border-red-100 bg-red-50 p-4 mb-8 text-red-700">Terjadi kesalahan saat memuat data.</div>
 
 				<div v-else class="rounded-xl border border-slate-50 bg-white p-4 mb-8 shadow-sm">
-					<p class="text-gray-700 leading-relaxed">
-						{{ responseGet?.roles || "Data Tugas belum tersedia." }}
-					</p>
+					<p v-html="responseGet?.roles"></p>
 				</div>
 
 				<!-- Misi -->
@@ -42,14 +40,12 @@ onMounted(async () => {
 				<div v-if="!responseGet?.responsibilities" class="text-gray-500 italic">Data fungsi belum tersedia.</div>
 
 				<div v-else class="rounded-xl border border-slate-50 bg-white p-4 mb-8 shadow-sm">
-					<p class="text-gray-700 leading-relaxed">
-						{{ responseGet?.responsibilities || "Data Fungsi belum tersedia." }}
-					</p>
+					<p v-html="responseGet.responsibilities"></p>
 				</div>
 			</div>
 
 			<!-- Right Illustration -->
-			<div class="flex justify-center">
+			<div class="flex justify-center order-first md:order-last w-[50%] lg:w-[80%] mx-auto">
 				<img src="/images/role.png" alt="Illustration" class="w-full max-w-md" />
 			</div>
 		</div>

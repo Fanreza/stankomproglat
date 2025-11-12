@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { BarChart3, Newspaper, Megaphone, Images, UserRound, Link2, Share2, ChevronDown, ChevronRight, List, Tag, Layers } from "lucide-vue-next";
+import { BarChart3, Newspaper, Megaphone, Images, Link2, Share2, ChevronRight, MessageCircleQuestionMark, ChartArea, CircleUserRound, Info, ClipboardClock, Building2 } from "lucide-vue-next";
 
 const route = useRoute();
 const openDropdown = ref<string | null>(null);
@@ -10,7 +10,21 @@ const toggleDropdown = (label: string) => {
 };
 
 const navItems = [
-	{ label: "Informasi Umum", to: "/admin", icon: BarChart3 },
+	{ label: "Informasi Umum", to: "/admin", icon: Info },
+	{ label: "Sejarah", to: "/admin/history", icon: ClipboardClock },
+	{ label: "Tugas Fungsi", to: "/admin/function", icon: Building2 },
+	{ label: "Struktur Organisasi", to: "/admin/structure", icon: ChartArea },
+	{ label: "Profil Direktur", to: "/admin/director", icon: CircleUserRound },
+	{ label: "Layanan", to: "/admin/service", icon: Link2 },
+	{ label: "Sosial Media", to: "/admin/post", icon: Share2 },
+	{
+		label: "Statistik / Rekapitulasi",
+		icon: ChartArea,
+		children: [
+			{ label: "List Rekapitulasi", to: "/admin/stats" },
+			{ label: "Kategori", to: "/admin/stats/categories" },
+		],
+	},
 	{
 		label: "Berita",
 		icon: Newspaper,
@@ -22,29 +36,8 @@ const navItems = [
 	},
 	{ label: "Pengumuman", to: "/admin/announcement", icon: Megaphone },
 	{ label: "Galeri", to: "/admin/gallery", icon: Images },
-	{ label: "FAQ", to: "/admin/faq", icon: Images },
-	{ label: "Service", to: "/admin/service", icon: Link2 },
-	{
-		label: "Statistik",
-		icon: Newspaper,
-		children: [
-			{ label: "List Statistik", to: "/admin/stats" },
-			{ label: "Kategori", to: "/admin/stats/categories" },
-		],
-	},
-	{ label: "Sosial Media", to: "/admin/social", icon: Share2 },
-	{ label: "Sosial Post", to: "/admin/post", icon: Share2 },
-
-	{
-		label: "Profil",
-		icon: UserRound,
-		children: [
-			{ label: "Tugas Fungsi", to: "/admin/function" },
-			{ label: "Sejarah", to: "/admin/history" },
-			{ label: "Profil Direktur", to: "/admin/director" },
-			{ label: "Struktur Organisasi", to: "/admin/structure" },
-		],
-	},
+	{ label: "FAQ", to: "/admin/faq", icon: MessageCircleQuestionMark },
+	// { label: "Sosial Media", to: "/admin/social", icon: Share2 },
 ];
 </script>
 

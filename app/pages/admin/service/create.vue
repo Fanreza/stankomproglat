@@ -81,7 +81,7 @@ const handleCancel = () => router.back();
 				<p class="text-xs text-gray-500">
 					Masukkan class icon, misal: <code>lucide-home</code> atau <code>fa-solid fa-book</code>.
 
-					<span class="text-primary underline">List Icon: <a href="https://icones.js.org/collection/" target="_blank">icones.js.org</a></span>
+					<span class="text-primary underline"><a href="https://icones.js.org/" target="_blank"> List Icon: icones.js.org</a></span>
 				</p>
 			</div>
 

@@ -7,7 +7,7 @@ import { useHeroService } from "@/services/hero.services";
 definePageMeta({
 	layout: "admin",
 	middleware: "admin",
-	title: "Hero Section",
+	title: "Bagian Hero",
 });
 
 const { get, update, updateBanner, responseGet, loading } = useHeroService();
@@ -15,7 +15,6 @@ const { get, update, updateBanner, responseGet, loading } = useHeroService();
 const form = ref({
 	heading: "",
 	subHeading: "",
-	pathVideo: "",
 	banner: null as File | null,
 });
 
@@ -27,11 +26,10 @@ onMounted(async () => {
 		if (responseGet.value) {
 			form.value.heading = responseGet.value.heading || "";
 			form.value.subHeading = responseGet.value.subHeading || "";
-			form.value.pathVideo = responseGet.value.pathVideo || "";
 			previewUrl.value = responseGet.value.banner || null;
 		}
 	} catch {
-		toast.error("Gagal memuat data hero section.");
+		toast.error("Gagal memuat data Bagian Hero.");
 	}
 });
 
@@ -48,22 +46,19 @@ const handleSubmit = async () => {
 		await update({
 			heading: form.value.heading,
 			subHeading: form.value.subHeading,
-			pathVideo: form.value.pathVideo || null,
 		});
 		if (form.value.banner) {
 			await updateBanner(form.value.banner);
 		}
-		toast.success("Hero section berhasil diperbarui.");
+		toast.success("Bagian Hero berhasil diperbarui.");
 	} catch {}
 };
-
-const imageError = ref(false);
 </script>
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
 		<div class="flex items-center justify-between">
-			<h1 class="text-2xl font-semibold text-gray-900">Hero Section</h1>
+			<h1 class="text-2xl font-semibold text-gray-900">Bagian Hero</h1>
 			<Button @click="handleSubmit" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6" :disabled="loading">
 				{{ loading ? "Menyimpan..." : "Simpan Perubahan" }}
 			</Button>
@@ -71,7 +66,7 @@ const imageError = ref(false);
 
 		<div v-if="loading && !responseGet" class="flex justify-center py-20 text-gray-500">
 			<span class="animate-spin h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full mr-2"></span>
-			Memuat hero section...
+			Memuat Bagian Hero...
 		</div>
 
 		<div v-else class="space-y-10">
@@ -83,11 +78,6 @@ const imageError = ref(false);
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Sub Heading</label>
 				<Input v-model="form.subHeading" placeholder="Masukkan sub heading" />
-			</div>
-
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Path Video (Opsional)</label>
-				<Input v-model="form.pathVideo" placeholder="https://cdn.example.com/video.mp4" />
 			</div>
 
 			<div class="space-y-2">

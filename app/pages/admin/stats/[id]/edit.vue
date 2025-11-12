@@ -39,7 +39,7 @@ onMounted(async () => {
 });
 
 const handleSubmit = async () => {
-	if (!form.value.name || !form.value.number || !form.value.categoryId) {
+	if (!form.value.name || form.value.number === null || !form.value.categoryId) {
 		toast.error("Nama, angka, dan kategori wajib diisi.");
 		return;
 	}
