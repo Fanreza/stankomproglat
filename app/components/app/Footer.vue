@@ -17,7 +17,7 @@
 					</div>
 
 					<!-- Social Media Links -->
-					<div class="flex gap-3">
+					<!-- <div class="flex gap-3">
 						<a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="flex h-8 w-8 items-center justify-center rounded bg-[#163E93] text-white transition-colors hover:bg-blue-700">
 							<Icon name="ion:social-facebook" />
 						</a>
@@ -33,7 +33,7 @@
 						<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="flex h-8 w-8 items-center justify-center rounded bg-[#EEF4FB] text-[#163E93] transition-colors hover:bg-red-700">
 							<Icon name="ion:logo-youtube" />
 						</a>
-					</div>
+					</div> -->
 				</div>
 
 				<!-- Navigation Columns -->

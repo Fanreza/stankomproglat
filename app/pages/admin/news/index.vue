@@ -135,7 +135,7 @@ watch(selectedCategory, () => {
 					<div>
 						<h3 class="font-semibold text-gray-900 leading-snug line-clamp-2">
 							{{ news.title }}
-							<a :href="`/berita/${news.id}`" target="_blank" class="inline-block ml-1">
+							<a :href="`/news/${news.slug}`" target="_blank" class="inline-block ml-1">
 								<ExternalLink class="h-3 w-3 text-gray-400" />
 							</a>
 						</h3>
