@@ -87,6 +87,7 @@ const handleSubmit = async () => {
 					<UploadCloud class="h-8 w-8 mb-2 text-gray-400" />
 					<span class="text-sm font-medium">Klik untuk upload atau drag & drop</span>
 					<span class="text-xs text-gray-400">PNG, JPG, WEBP (max. 2MB)</span>
+					<span class="text-xs text-gray-400">Rasio 16:9</span>
 					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" @change="handleFileChange" />
 				</div>
 

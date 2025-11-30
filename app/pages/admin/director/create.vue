@@ -81,14 +81,33 @@ const handleSubmit = async () => {
 			<!-- Upload -->
 			<div>
 				<label class="block text-sm font-medium">Foto</label>
-				<div class="relative flex flex-col items-center justify-center w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-gray-500 hover:border-blue-400 transition">
+				<p class="text-xs text-gray-500 mb-1">Disarankan rasio foto <b>4:3</b></p>
+
+				<!-- Upload box (jika belum ada preview) -->
+				<div v-if="!previewUrl" class="relative flex flex-col items-center justify-center w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-gray-500 hover:border-blue-400 transition">
 					<UploadCloud class="h-8 w-8 mb-2 text-gray-400" />
 					<span class="text-sm font-medium">Klik untuk upload atau drag & drop</span>
-					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="handleFileChange" />
+					<span class="text-xs text-gray-400">PNG, JPG, JPEG (max. 2MB)</span>
+					<span class="text-xs text-gray-400">Rasio 4:3</span>
+
+					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" @change="handleFileChange" />
 				</div>
 
-				<div v-if="previewUrl" class="mt-4">
-					<img :src="previewUrl" class="max-h-56 rounded-lg border" />
+				<!-- Preview -->
+				<div v-else class="relative mt-4 w-full max-w-xs rounded-lg overflow-hidden border group">
+					<img :src="previewUrl" class="w-full h-auto object-cover" />
+
+					<!-- Tombol hapus -->
+					<button
+						type="button"
+						class="absolute top-2 right-2 bg-white/80 text-red-600 rounded-full p-1 opacity-0 group-hover:opacity-100 transition shadow"
+						@click="
+							previewUrl = null;
+							form.file = null;
+						"
+					>
+						✕
+					</button>
 				</div>
 			</div>
 

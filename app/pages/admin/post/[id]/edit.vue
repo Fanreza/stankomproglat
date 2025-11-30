@@ -14,7 +14,7 @@ const router = useRouter();
 const { get, update, responseGet, loading } = useSocialMediaPostService();
 
 const form = ref({
-	platform: "",
+	platform: "INSTAGRAM",
 	postLink: "",
 });
 
@@ -55,16 +55,10 @@ const handleCancel = () => router.back();
 		</div>
 
 		<div v-else class="space-y-10">
-			<!-- Platform -->
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Platform</label>
-				<Input v-model="form.platform" placeholder="Contoh: Facebook" />
-			</div>
-
 			<!-- Post Link -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Link Postingan</label>
-				<Input v-model="form.postLink" placeholder="https://facebook.com/post/..." />
+				<Input v-model="form.postLink" placeholder="https://www.instagram.com/p/DRoEQEnkrvz/" />
 			</div>
 
 			<!-- Actions -->

@@ -105,12 +105,15 @@ const onPageChange = (page: number) => {
 						<TableCell class="text-gray-700">
 							{{ (currentPage - 1) * (response?.meta?.perPage || 10) + index + 1 }}
 						</TableCell>
-						<TableCell class="font-medium text-gray-900">
+
+						<TableCell class="font-medium text-gray-900 whitespace-normal break-words">
 							{{ faq.question }}
 						</TableCell>
-						<TableCell class="text-gray-700">
+
+						<TableCell class="text-gray-700 whitespace-normal break-words align-top">
 							{{ faq.answer }}
 						</TableCell>
+
 						<TableCell class="text-center">
 							<div class="flex items-center justify-center gap-2">
 								<Button variant="ghost" size="icon" @click="onEdit(faq.id)">

@@ -145,6 +145,7 @@ const handleCancel = () => router.back();
 					<UploadCloud class="h-8 w-8 mb-2 text-gray-400" />
 					<span class="text-sm font-medium">Klik untuk upload atau drag & drop</span>
 					<span class="text-xs text-gray-400">SVG, PNG, JPG, GIF (max. 2MB)</span>
+					<span class="text-xs text-gray-400">Rasio 16:9</span>
 					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="handleFileChange" />
 				</div>
 
