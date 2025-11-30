@@ -92,19 +92,6 @@ watch(selectedCategory, () => {
 		<div class="flex items-center justify-between gap-4">
 			<!-- Search -->
 			<CommonDebouncedSearch v-model="search" placeholder="Cari berita..." @search="fetchNews" />
-
-			<!-- Category Filter -->
-			<Select v-model="selectedCategory">
-				<SelectTrigger class="w-[200px]">
-					<SelectValue placeholder="Semua Kategori" />
-				</SelectTrigger>
-				<SelectContent>
-					<SelectItem value="all">Semua Kategori</SelectItem>
-					<SelectItem v-for="cat in categoryResponse?.data" :key="cat.id" :value="cat.slug">
-						{{ cat.title }}
-					</SelectItem>
-				</SelectContent>
-			</Select>
 		</div>
 
 		<!-- News Grid -->

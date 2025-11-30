@@ -26,7 +26,7 @@ onMounted(async () => {
 });
 
 const handleSubmit = async () => {
-	if (!form.value.name || !form.value.number || !form.value.categoryId) {
+	if (!form.value.name || form.value.number === null || !form.value.categoryId) {
 		toast.error("Nama, angka, dan kategori wajib diisi.");
 		return;
 	}
@@ -68,12 +68,6 @@ const handleCancel = () => router.back();
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Angka</label>
 				<Input v-model="form.number" type="number" placeholder="Masukkan nilai statistik" />
-			</div>
-
-			<!-- Link -->
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Link</label>
-				<Input v-model="form.link" placeholder="https://example.com/data" />
 			</div>
 
 			<!-- Kategori -->

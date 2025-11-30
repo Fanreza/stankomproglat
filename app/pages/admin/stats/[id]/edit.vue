@@ -84,12 +84,6 @@ const handleCancel = () => router.back();
 				<Input v-model.number="form.number" type="number" placeholder="Masukkan nilai statistik" />
 			</div>
 
-			<!-- Link -->
-			<div class="space-y-2">
-				<label class="block text-sm font-medium text-gray-800">Link</label>
-				<Input v-model="form.link" placeholder="https://example.com/data" />
-			</div>
-
 			<!-- Kategori -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Kategori</label>
