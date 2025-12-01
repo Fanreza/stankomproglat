@@ -27,13 +27,13 @@ import { ref, onMounted } from "vue";
 import { useStructureService } from "@/services/structure.services"; // sesuaikan path bila beda
 
 // 🧩 Service
-const { get, responseGet, loading, error } = useStructureService();
+const { getPublic, responseGet, loading, error } = useStructureService();
 
 const structure = ref(responseGet.value?.data || null);
 
 onMounted(async () => {
 	try {
-		const res = await get();
+		const res = await getPublic();
 		structure.value = res.data;
 	} catch (err) {
 		console.error(err);

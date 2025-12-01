@@ -23,6 +23,20 @@ export const useStructureService = () => {
 		}
 	};
 
+	const getPublic = async () => {
+		loading.value = true;
+		try {
+			const res = await $apiFetch<ApiResponse<Structure>>("/public/structure");
+			responseGet.value = res;
+			return res;
+		} catch (err: any) {
+			error.value = err;
+			throw err;
+		} finally {
+			loading.value = false;
+		}
+	};
+
 	// 🧩 Update
 	const update = async (payload: UpdateStructureDto) => {
 		loading.value = true;
@@ -45,5 +59,5 @@ export const useStructureService = () => {
 		}
 	};
 
-	return { responseGet, loading, error, get, update };
+	return { responseGet, loading, error, get, update, getPublic };
 };
