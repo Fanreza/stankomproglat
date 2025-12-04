@@ -23,7 +23,7 @@ const form = ref({
 
 onMounted(async () => {
 	await getCategories(false, {
-		limit: 9999,
+		limit: 100,
 	});
 });
 

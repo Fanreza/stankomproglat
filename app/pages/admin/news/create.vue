@@ -31,7 +31,7 @@ const previewUrl = ref<string | null>(null);
 // Fetch kategori
 onMounted(async () => {
 	await getCategories(false, {
-		limit: 9999,
+		limit: 100,
 	});
 });
 

@@ -12,7 +12,7 @@ export const useStatisticCategoryService = () => {
 	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/statistics/categories" : "/statistics/categories");
 
-	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
+	const getAll = async (isPublic = false, params?: Record<string, any>) => {
 		loading.value = true;
 		error.value = null;
 
