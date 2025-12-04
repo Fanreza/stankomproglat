@@ -21,7 +21,7 @@ const params = computed(() => ({
 
 const fetchData = async () => {
 	try {
-		await getAll(params.value);
+		await getAll(false, params.value);
 	} catch (err) {
 		toast.error("Gagal memuat data pengumuman");
 	}

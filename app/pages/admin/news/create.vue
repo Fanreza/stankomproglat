@@ -30,7 +30,9 @@ const previewUrl = ref<string | null>(null);
 
 // Fetch kategori
 onMounted(async () => {
-	await getCategories();
+	await getCategories(false, {
+		limit: 9999,
+	});
 });
 
 // Handle file upload preview

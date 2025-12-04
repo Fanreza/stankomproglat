@@ -27,7 +27,7 @@ const formatDate = (date: string) => {
 
 const fetchAnnouncements = async () => {
 	try {
-		await getAll(params.value);
+		await getAll(true, params.value);
 	} catch (err) {}
 };
 

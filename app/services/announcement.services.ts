@@ -10,13 +10,16 @@ export const useAnnouncementsService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
+	// 🧩 Get All
+	const endpoint = (isPublic = false) => (isPublic ? "/public/announcements" : "/announcements");
+
 	// ✅ GET ALL
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<ApiResponse<Announcement[]>>("/announcements", {
+			const res = await $apiFetch<ApiResponse<Announcement[]>>(endpoint(isPublic), {
 				params,
 			});
 			response.value = res;

@@ -22,7 +22,9 @@ const form = ref({
 });
 
 onMounted(async () => {
-	await getCategories();
+	await getCategories(false, {
+		limit: 9999,
+	});
 });
 
 const handleSubmit = async () => {
