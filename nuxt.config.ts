@@ -55,15 +55,41 @@ export default defineNuxtConfig({
 
 		headers: {
 			contentSecurityPolicy: {
-				"img-src": ["'self'", "data:", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net"],
+				// --------------------------
+				//  FIX API KAMU DIBLOK
+				// --------------------------
+				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://platform.twitter.com"],
 
-				"script-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com"],
+				// --------------------------
+				//  FIX GAMBAR API + IG
+				// --------------------------
+				"img-src": ["'self'", "data:", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net"],
 
+				// --------------------------
+				//  FIX INSTAGRAM + TWITTER SCRIPTS
+				// --------------------------
+				"script-src": [
+					"'self'",
+					"'unsafe-inline'",
+					"https://www.instagram.com",
+					"https://static.cdninstagram.com",
+					"https://platform.twitter.com", // <--- FIX TWITTER
+				],
+
+				// --------------------------
+				//  FIX CSS INSTAGRAM
+				// --------------------------
 				"style-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com"],
 
-				"frame-src": ["'self'", "https://www.instagram.com"],
-
-				"connect-src": ["'self'", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com"],
+				// --------------------------
+				//  FIX iframe Instagram + Google
+				// --------------------------
+				"frame-src": [
+					"'self'",
+					"https://www.instagram.com",
+					"https://www.google.com", // <--- FIX GOOGLE MAPS / SEARCH RESULT
+					"https://platform.twitter.com", // <--- Twitter embed iframe
+				],
 			},
 		},
 	},
