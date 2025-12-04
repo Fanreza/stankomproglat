@@ -55,15 +55,29 @@ export default defineNuxtConfig({
 
 		headers: {
 			contentSecurityPolicy: {
-				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://platform.twitter.com"],
+				// API & fetch
+				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://platform.twitter.com", "https://maps.googleapis.com"],
 
-				"img-src": ["'self'", "data:", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net"],
+				// Gambar (API, GCS, Instagram, Google Maps tiles)
+				"img-src": ["'self'", "data:", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net", "https://maps.gstatic.com", "https://lh3.googleusercontent.com"],
 
-				"script-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com", "https://platform.twitter.com"],
+				// Script eksternal (Nuxt + IG + Twitter + Maps)
+				"script-src": [
+					"'self'",
+					"'unsafe-inline'", // biar nggak rewel dulu
+					"https://www.instagram.com",
+					"https://static.cdninstagram.com",
+					"https://platform.twitter.com",
+					"https://www.google.com",
+					"https://maps.googleapis.com",
+					"https://maps.gstatic.com",
+				],
 
+				// CSS eksternal
 				"style-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com"],
 
-				"frame-src": ["'self'", "https://www.instagram.com", "https://www.google.com", "https://platform.twitter.com"],
+				// Iframe (Instagram embed + Twitter + Google Maps)
+				"frame-src": ["'self'", "https://www.instagram.com", "https://platform.twitter.com", "https://www.google.com"],
 			},
 		},
 	},
