@@ -49,47 +49,37 @@ export default defineNuxtConfig({
 
 	security: {
 		sri: false,
-		ssg: {
-			hashScripts: false,
-		},
+		ssg: { hashScripts: false },
+
+		nonce: true,
 
 		headers: {
 			contentSecurityPolicy: {
-				// --------------------------
-				//  FIX API KAMU DIBLOK
-				// --------------------------
+				"base-uri": ["'none'"],
+				"object-src": ["'none'"],
+				"frame-ancestors": ["'self'"],
+
+				// 🔥 NO unsafe-inline | NO wildcard | NO https:
+				// Nuxt akan inject nonce otomatis
+				"script-src": ["'self'", "'nonce-{{nonce}}'", "https://www.instagram.com", "https://static.cdninstagram.com", "https://platform.twitter.com"],
+
+				"script-src-attr": ["'none'"],
+
+				// STYLE – aman, inline allowed
+				"style-src": ["'self'", "'nonce-{{nonce}}'", "https://www.instagram.com", "https://static.cdninstagram.com"],
+
+				// IMG — tanpa wildcard https:
+				"img-src": ["'self'", "data:", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net"],
+
+				// IFRAME
+				"frame-src": ["'self'", "https://www.instagram.com", "https://platform.twitter.com", "https://www.google.com"],
+
+				// API CALLS
 				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://platform.twitter.com"],
 
-				// --------------------------
-				//  FIX GAMBAR API + IG
-				// --------------------------
-				"img-src": ["'self'", "data:", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net"],
+				"font-src": ["'self'", "data:", "https://static.cdninstagram.com"],
 
-				// --------------------------
-				//  FIX INSTAGRAM + TWITTER SCRIPTS
-				// --------------------------
-				"script-src": [
-					"'self'",
-					"'unsafe-inline'",
-					"https://www.instagram.com",
-					"https://static.cdninstagram.com",
-					"https://platform.twitter.com", // <--- FIX TWITTER
-				],
-
-				// --------------------------
-				//  FIX CSS INSTAGRAM
-				// --------------------------
-				"style-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com"],
-
-				// --------------------------
-				//  FIX iframe Instagram + Google
-				// --------------------------
-				"frame-src": [
-					"'self'",
-					"https://www.instagram.com",
-					"https://www.google.com", // <--- FIX GOOGLE MAPS / SEARCH RESULT
-					"https://platform.twitter.com", // <--- Twitter embed iframe
-				],
+				"upgrade-insecure-requests": true,
 			},
 		},
 	},
