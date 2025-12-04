@@ -55,13 +55,36 @@ export default defineNuxtConfig({
 
 		headers: {
 			contentSecurityPolicy: {
-				// API & fetch
+				"default-src": ["'self'"],
+				"worker-src": ["'self'", "blob:"],
+				"child-src": ["'self'", "blob:"],
 
-				// Script eksternal (Nuxt + IG + Twitter + Maps)
+				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://i.instagram.com", "https://graph.instagram.com", "https://platform.twitter.com", "https://maps.googleapis.com"],
 
-				// CSS eksternal
+				"img-src": ["'self'", "data:", "blob:", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net", "https://maps.gstatic.com", "https://lh3.googleusercontent.com"],
+
+				"script-src": [
+					"'self'",
+					"'unsafe-inline'",
+					"'unsafe-eval'", // Instagram embed butuh eval
+					"https://www.instagram.com",
+					"https://static.cdninstagram.com",
+					"https://platform.instagram.com",
+					"https://platform.twitter.com",
+					"https://www.google.com",
+					"https://maps.googleapis.com",
+					"https://maps.gstatic.com",
+				],
+
 				"style-src": ["'self'", "'unsafe-inline'", "https://www.instagram.com", "https://static.cdninstagram.com"],
+
+				"frame-src": ["'self'", "https://www.instagram.com", "https://instagram.com", "https://platform.twitter.com", "https://www.google.com", "https://maps.googleapis.com", "https://maps.gstatic.com", "https://www.youtube.com", "https://*.instagram.com"],
 			},
+
+			// PENTING: Ubah ini
+			crossOriginEmbedderPolicy: "unsafe-none", // atau "unsafe-none"
+			crossOriginResourcePolicy: "cross-origin", // atau "cross-origin"
+			crossOriginOpenerPolicy: "unsafe-none", // atau "unsafe-none"
 		},
 	},
 });
