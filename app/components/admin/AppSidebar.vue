@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { BarChart3, Newspaper, Megaphone, Images, Link2, Share2, ChevronRight, MessageCircleQuestionMark, ChartArea, CircleUserRound, Info, ClipboardClock, Building2 } from "lucide-vue-next";
+import { BarChart3, Newspaper, Megaphone, Images, Link2, Share2, ChevronRight, MessageCircleQuestionMark, ChartArea, CircleUserRound, Info, ClipboardClock, Building2, Users } from "lucide-vue-next";
 
 const route = useRoute();
 const openDropdown = ref<string | null>(null);
@@ -37,6 +37,7 @@ const navItems = [
 	{ label: "Pengumuman", to: "/admin/announcement", icon: Megaphone },
 	{ label: "Galeri", to: "/admin/gallery", icon: Images },
 	{ label: "FAQ", to: "/admin/faq", icon: MessageCircleQuestionMark },
+	{ label: "User", to: "/admin/user", icon: Users },
 	// { label: "Sosial Media", to: "/admin/social", icon: Share2 },
 ];
 </script>

@@ -4,7 +4,7 @@
 			<div class="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
 				<!-- Left Side - Illustration -->
 				<div class="flex items-center justify-center lg:sticky lg:top-32">
-					<NuxtImg src="/images/faq.png" alt="FAQ Illustration" width="500" height="500" class="max-w-[50%] lg:max-w-[80%] xl:max-w-full h-auto" />
+					<NuxtImg src="/images/faq.png" alt="FAQ Illustration" width="500" class="max-w-[50%] lg:max-w-[80%] xl:max-w-full h-auto" />
 				</div>
 
 				<!-- Right Side - FAQ -->
