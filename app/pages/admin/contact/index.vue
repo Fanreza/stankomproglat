@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-semibold text-gray-900">Contact Information</h1>
+        <h1 class="text-2xl font-semibold text-gray-900">Informasi Kontak</h1>
       </div>
     </div>
 
@@ -14,7 +14,7 @@
           <TableRow>
             <TableHead class="w-[50px] text-gray-700 text-sm font-medium">No</TableHead>
             <TableHead class="text-gray-700 text-sm font-medium">Field</TableHead>
-            <TableHead class="text-gray-700 text-sm font-medium">Value</TableHead>
+            <TableHead class="text-gray-700 text-sm font-medium">Isi</TableHead>
             <TableHead class="text-center text-gray-700 text-sm font-medium w-[120px]">Aksi</TableHead>
           </TableRow>
         </TableHeader>
@@ -52,7 +52,7 @@
 
           <!-- Empty -->
           <TableRow v-if="!loading && contacts.length === 0">
-            <TableCell colspan="4" class="text-center py-8 text-gray-500">Belum ada data contact.</TableCell>
+            <TableCell colspan="4" class="text-center py-8 text-gray-500">Belum ada data kontak.</TableCell>
           </TableRow>
         </TableBody>
       </Table>

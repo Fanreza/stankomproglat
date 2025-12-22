@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-2xl font-bold">Edit {{ formatKey(contact?.key || '') }}</h1>
-        <p class="text-muted-foreground">Update contact information</p>
+        <p class="text-muted-foreground">Perbarui informasi kontak</p>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
         </div>
 
         <div class="space-y-2">
-          <Label for="value">Value</Label>
+          <Label for="value">Isi</Label>
           <Textarea
             id="value"
             v-model="formData.value"
@@ -46,14 +46,14 @@
             type="submit"
             :loading="loading"
           >
-            Save Changes
+            Simpan Perubahan
           </AppLoadingButton>
           <Button
             type="button"
             variant="outline"
             @click="navigateTo('/admin/contact')"
           >
-            Cancel
+            Batal
           </Button>
         </div>
       </form>
@@ -111,24 +111,24 @@ const formatKey = (key: string) => {
 };
 
 const getPlaceholder = (key: string) => {
-  if (key === 'map_url') return 'Enter Google Maps embed URL...';
-  if (key === 'address') return 'Enter address...';
-  if (key === 'contact') return 'Enter contact information...';
-  return 'Enter value...';
+  if (key === 'map_url') return 'Masukkan URL Google Maps embed...';
+  if (key === 'address') return 'Masukkan alamat...';
+  if (key === 'contact') return 'Masukkan informasi kontak...';
+  return 'Masukkan isi...';
 };
 
 const handleSubmit = async () => {
   try {
     await update(id.value, formData);
     
-    toast.success('Success', {
-      description: 'Contact information updated successfully'
+    toast.success('Berhasil', {
+      description: 'Informasi kontak berhasil diperbarui'
     });
     
     navigateTo('/admin/contact');
   } catch (err) {
-    toast.error('Error', {
-      description: 'Failed to update contact information'
+    toast.error('Gagal', {
+      description: 'Gagal memperbarui informasi kontak'
     });
   }
 };
