@@ -9,11 +9,13 @@
 
 		<div class="grow">
 			<div class="mb-2 flex items-start justify-between gap-4">
-				<h3 class="text-2xl font-bold text-[#163E93]">{{ title }}</h3>
+				<NuxtLink :to="`/announcement/${id}`" class="text-2xl font-bold text-[#163E93] hover:text-blue-700 transition-colors">
+					{{ title }}
+				</NuxtLink>
 				<span class="shrink-0 text-sm text-gray-500">{{ date }}</span>
 			</div>
 
-			<p v-html="description"></p>
+			<p v-html="description" class="line-clamp-3"></p>
 
 			<a :href="attachment" target="_blank" download class="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#163E93] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
 				<Download class="h-4 w-4" />
@@ -27,6 +29,7 @@
 import { FileText, Download } from "lucide-vue-next";
 
 defineProps<{
+	id: number;
 	title: string;
 	description: string;
 	date: string;

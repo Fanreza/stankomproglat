@@ -5,7 +5,7 @@
 			<div v-if="loading" class="py-12 text-center text-gray-500">Memuat pengumuman...</div>
 			<div v-else-if="error" class="py-12 text-center text-red-600">Gagal memuat pengumuman.</div>
 			<div v-else class="space-y-10">
-				<AppUiDocumentItem v-for="document in documents" :key="document.id" :title="document.title" :description="document.description" :date="formatDate(document.createdAt)" :attachment="document.attachment!" />
+				<AppUiDocumentItem v-for="document in documents" :key="document.id" :id="document.id" :title="document.title" :description="document.description" :date="formatDate(document.createdAt)" :attachment="document.attachment!" />
 			</div>
 			<div v-if="!documents.length && !loading" class="text-center text-gray-500 py-12">Tidak ada pengumuman untuk saat ini.</div>
 			<AppUiPagination v-if="totalPages > 1" :current-page="params.page" :total-pages="totalPages" @update:current-page="handlePageChange" class="mt-8" />
