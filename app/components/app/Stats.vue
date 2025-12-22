@@ -30,6 +30,15 @@ const scrollTo = (index: number) => {
 	emblaApi.value?.scrollTo(index);
 };
 
+const formatDate = (date: string) => {
+	const options: Intl.DateTimeFormatOptions = {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	};
+	return new Date(date).toLocaleDateString("id-ID", options);
+};
+
 onMounted(async () => {
 	try {
 		await getAll(true);
@@ -126,6 +135,11 @@ onMounted(async () => {
 										{{ stat.name }}
 									</div>
 								</div>
+							</div>
+
+							<!-- Updated Date -->
+							<div v-if="category.updatedAt" class="mt-6 text-center text-sm text-blue-100">
+								diupdate pada: {{ formatDate(category.updatedAt) }}
 							</div>
 						</NuxtLink>
 					</CarouselItem>

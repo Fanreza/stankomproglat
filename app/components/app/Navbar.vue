@@ -112,18 +112,18 @@ const menuItems = computed(() => [
 	{
 		label: "Profil",
 		children: [
-			{ label: "Sejarah", to: "/history" },
-			{ label: "Tugas - Fungsi", to: "/function" },
-			{ label: "Struktur Organisasi", to: "/organization" },
-			{ label: "Profil Direktur", to: "/director" },
+			{ label: "Sejarah", to: "/history", external: false },
+			{ label: "Tugas - Fungsi", to: "/function", external: false },
+			{ label: "Struktur Organisasi", to: "/organization", external: false },
+			{ label: "Profil Direktur", to: "/director", external: false },
 		],
 	},
 	{
 		label: "Info",
 		children: [
-			{ label: "Berita", to: "/news" },
-			{ label: "Pengumuman", to: "/announcement" },
-			{ label: "Regulasi", to: "https://jdih.kemnaker.go.id/", external: true },
+			{ label: "Berita", to: "/news", external: false },
+			{ label: "Pengumuman", to: "/announcement", external: false },
+			{ label: "Regulasi", to: "/regulasi", external: false },
 		],
 	},
 	{
@@ -141,6 +141,6 @@ const menuItems = computed(() => [
 			},
 		],
 	},
-	{ label: "Galeri", to: "/gallery" },
+	{ label: "Galeri", to: "/gallery", external: false },
 ]);
 </script>

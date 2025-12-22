@@ -9,7 +9,7 @@
 
 		<div class="grow">
 			<div class="mb-2 flex items-start justify-between gap-4">
-				<NuxtLink :to="`/announcement/${id}`" class="text-2xl font-bold text-[#163E93] hover:text-blue-700 transition-colors">
+				<NuxtLink :to="`${baseRoute}/${id}`" class="text-2xl font-bold text-[#163E93] hover:text-blue-700 transition-colors">
 					{{ title }}
 				</NuxtLink>
 				<span class="shrink-0 text-sm text-gray-500">{{ date }}</span>
@@ -28,11 +28,14 @@
 <script setup lang="ts">
 import { FileText, Download } from "lucide-vue-next";
 
-defineProps<{
+const props = defineProps<{
 	id: number;
 	title: string;
 	description: string;
 	date: string;
 	attachment: string;
+	baseRoute?: string;
 }>();
+
+const baseRoute = computed(() => props.baseRoute || "/info/pengumuman");
 </script>
