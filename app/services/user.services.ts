@@ -4,13 +4,11 @@ import type { User, CreateUserDto, UpdateUserDto } from "~/models/user.model";
 export const useUserService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🧩 Reactive states
 	const response = ref<ApiResponse<User[]> | null>(null);
 	const responseGet = ref<User | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// ✅ GET ALL
 	const getAll = async (params?: { page?: number; perPage?: number; search?: string }) => {
 		loading.value = true;
 		error.value = null;
@@ -29,7 +27,6 @@ export const useUserService = () => {
 		}
 	};
 
-	// ✅ GET ONE
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -46,7 +43,6 @@ export const useUserService = () => {
 		}
 	};
 
-	// ✅ CREATE
 	const create = async (payload: CreateUserDto) => {
 		loading.value = true;
 		error.value = null;
@@ -70,7 +66,6 @@ export const useUserService = () => {
 		}
 	};
 
-	// ✅ UPDATE
 	const update = async (id: number, payload: UpdateUserDto) => {
 		loading.value = true;
 		error.value = null;
@@ -96,7 +91,6 @@ export const useUserService = () => {
 		}
 	};
 
-	// ✅ DELETE
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

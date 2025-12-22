@@ -4,16 +4,13 @@ import type { Regulation, CreateRegulationDto, UpdateRegulationDto } from "~/mod
 export const useRegulationsService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🧩 Reactive states
 	const response = ref<ApiResponse<Regulation[]> | null>(null);
 	const responseGet = ref<Regulation | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/regulations" : "/regulations");
 
-	// ✅ GET ALL
 	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
@@ -32,7 +29,6 @@ export const useRegulationsService = () => {
 		}
 	};
 
-	// ✅ GET ONE
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -49,7 +45,6 @@ export const useRegulationsService = () => {
 		}
 	};
 
-	// ✅ CREATE
 	const create = async (payload: CreateRegulationDto) => {
 		loading.value = true;
 		error.value = null;
@@ -78,7 +73,6 @@ export const useRegulationsService = () => {
 		}
 	};
 
-	// ✅ UPDATE
 	const update = async (id: number, payload: UpdateRegulationDto) => {
 		loading.value = true;
 		error.value = null;
@@ -109,7 +103,6 @@ export const useRegulationsService = () => {
 		}
 	};
 
-	// ✅ DELETE
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

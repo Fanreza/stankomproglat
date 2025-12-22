@@ -50,25 +50,19 @@ const handleCancel = () => navigateTo("/admin/user");
 			<form @submit.prevent="handleSubmit" class="space-y-6">
 				<!-- Nama -->
 				<div class="space-y-2">
-					<Label for="name" class="text-sm font-medium text-gray-700">
-						Nama <span class="text-red-500">*</span>
-					</Label>
+					<Label for="name" class="text-sm font-medium text-gray-700"> Nama <span class="text-red-500">*</span> </Label>
 					<Input id="name" v-model="form.name" type="text" placeholder="Masukkan nama lengkap" required class="w-full" />
 				</div>
 
 				<!-- Email -->
 				<div class="space-y-2">
-					<Label for="email" class="text-sm font-medium text-gray-700">
-						Email <span class="text-red-500">*</span>
-					</Label>
+					<Label for="email" class="text-sm font-medium text-gray-700"> Email <span class="text-red-500">*</span> </Label>
 					<Input id="email" v-model="form.email" type="email" placeholder="contoh@email.com" required class="w-full" />
 				</div>
 
 				<!-- Password -->
 				<div class="space-y-2">
-					<Label for="password" class="text-sm font-medium text-gray-700">
-						Password <span class="text-red-500">*</span>
-					</Label>
+					<Label for="password" class="text-sm font-medium text-gray-700"> Password <span class="text-red-500">*</span> </Label>
 					<Input id="password" v-model="form.password" type="password" placeholder="Masukkan password" required class="w-full" />
 					<p class="text-xs text-gray-500">Password minimal 8 karakter</p>
 				</div>
