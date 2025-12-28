@@ -9,12 +9,15 @@ export const useContactService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	const getAll = async (params?: { page?: number; perPage?: number }) => {
+	// Helper endpoint
+	const endpoint = (isPublic = false) => (isPublic ? "/public/contacts" : "/contacts");
+
+	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<ApiResponse<Contact[]>>("/contacts", {
+			const res = await $apiFetch<ApiResponse<Contact[]>>(endpoint(isPublic), {
 				params,
 			});
 			response.value = res;
@@ -27,12 +30,12 @@ export const useContactService = () => {
 		}
 	};
 
-	const get = async (id: number) => {
+	const get = async (id: number, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
 
 		try {
-			const res = await $apiFetch<Contact>(`/contacts/${id}`);
+			const res = await $apiFetch<Contact>(`${endpoint(isPublic)}/${id}`);
 			responseGet.value = res;
 			return res;
 		} catch (err: any) {

@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { useContactService } from '~/services/contact.services';
-import type { Contact } from '~/models/contact.model';
+import { useContactService } from "~/services/contact.services";
+import type { Contact } from "~/models/contact.model";
 
 const { getAll } = useContactService();
 
@@ -51,12 +51,12 @@ const addressData = ref<Contact | null>(null);
 const contactData = ref<Contact | null>(null);
 
 onMounted(async () => {
-	const res = await getAll();
+	const res = await getAll(true);
 	if (res?.data) {
 		for (const item of res.data) {
-			if (item.key === 'map_url') mapData.value = item;
-			else if (item.key === 'address') addressData.value = item;
-			else if (item.key === 'contact') contactData.value = item;
+			if (item.key === "map_url") mapData.value = item;
+			else if (item.key === "address") addressData.value = item;
+			else if (item.key === "contact") contactData.value = item;
 		}
 	}
 });
