@@ -54,7 +54,7 @@ export const useContactService = () => {
 			const res = await $apiFetch<Contact>(`/contacts/${id}`, {
 				method: "PUT",
 				body: {
-					value: payload.value
+					value: payload.value,
 				},
 			});
 

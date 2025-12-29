@@ -37,5 +37,5 @@ const props = defineProps<{
 	baseRoute?: string;
 }>();
 
-const baseRoute = computed(() => props.baseRoute || "/info/pengumuman");
+const baseRoute = computed(() => props.baseRoute || "/announcement");
 </script>
