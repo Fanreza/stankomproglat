@@ -36,13 +36,13 @@
 		</div>
 
 		<!-- Berita Lainnya -->
-		<div v-if="relatedNews.length" class="container mx-auto px-4 py-12">
+		<!-- <div v-if="relatedNews.length" class="container mx-auto px-4 py-12">
 			<h2 class="text-2xl font-bold mb-6 text-gray-900">Berita Lainnya</h2>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				<AppUiNewsCard v-for="item in relatedNews" :key="item.id" :image="item.thumbnail || '/images/default-news.jpg'" :title="item.title" :date="formatDate(item.createdAt)" :excerpt="item.excerpt" :category="item.category?.name" :slug="`/info/berita/${item.slug}`" />
 			</div>
-		</div>
+		</div> -->
 	</section>
 </template>
 
