@@ -2,6 +2,7 @@
 import { toast } from "vue-sonner";
 import { useUserService } from "@/services/user.services";
 import type { CreateUserDto } from "@/models/user.model";
+import { Eye, EyeOff } from "lucide-vue-next";
 
 definePageMeta({
 	layout: "admin",
@@ -16,6 +17,8 @@ const form = ref<CreateUserDto>({
 	email: "",
 	password: "",
 });
+
+const showPassword = ref(false);
 
 const handleSubmit = async () => {
 	if (!form.value.name || !form.value.email || !form.value.password) {
@@ -63,7 +66,13 @@ const handleCancel = () => navigateTo("/admin/user");
 				<!-- Password -->
 				<div class="space-y-2">
 					<Label for="password" class="text-sm font-medium text-gray-700"> Password <span class="text-red-500">*</span> </Label>
-					<Input id="password" v-model="form.password" type="password" placeholder="Masukkan password" required class="w-full" />
+					<div class="relative">
+						<Input id="password" v-model="form.password" :type="showPassword ? 'text' : 'password'" placeholder="Masukkan password" required class="w-full pr-10" />
+						<button type="button" @click="showPassword = !showPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+							<Eye v-if="!showPassword" class="h-5 w-5" />
+							<EyeOff v-else class="h-5 w-5" />
+						</button>
+					</div>
 					<p class="text-xs text-gray-500">Password minimal 8 karakter</p>
 				</div>
 
