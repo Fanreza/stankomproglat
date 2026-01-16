@@ -1,4 +1,3 @@
-<!-- components/DocumentItem.vue -->
 <template>
 	<div class="group flex gap-4 rounded-lg border-l-4 border-[#163E93] bg-gray-50 p-6 transition-shadow hover:shadow-md">
 		<div class="shrink-0">
@@ -26,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { FileText, Download } from "lucide-vue-next";
+import { Download } from "lucide-vue-next";
 
 const props = defineProps<{
 	id: number;

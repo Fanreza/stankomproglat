@@ -12,7 +12,6 @@ definePageMeta({
 const router = useRouter();
 const { create, loading } = useServicesService();
 
-// 🧩 Form reactive
 const form = ref({
 	title: "",
 	description: "",
@@ -20,7 +19,6 @@ const form = ref({
 	icon: "",
 });
 
-// 🧩 Submit
 const handleSubmit = async () => {
 	try {
 		if (!form.value.title.trim()) {
@@ -42,39 +40,32 @@ const handleSubmit = async () => {
 	}
 };
 
-// 🧩 Cancel
 const handleCancel = () => router.back();
 </script>
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-semibold text-gray-900">Tambah Layanan</h1>
 			<Button class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6" @click="handleCancel">Kembali</Button>
 		</div>
 
-		<!-- Form -->
 		<div class="space-y-10">
-			<!-- Judul -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Judul Layanan</label>
 				<Input v-model="form.title" placeholder="Masukkan judul layanan" />
 			</div>
 
-			<!-- Deskripsi -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Deskripsi</label>
 				<Textarea v-model="form.description" placeholder="Masukkan deskripsi layanan" />
 			</div>
 
-			<!-- Link -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Link (opsional)</label>
 				<Input v-model="form.link" placeholder="https://example.com" />
 			</div>
 
-			<!-- Icon -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Icon (opsional)</label>
 				<Input v-model="form.icon" placeholder="fa-solid fa-user" />
@@ -85,7 +76,6 @@ const handleCancel = () => router.back();
 				</p>
 			</div>
 
-			<!-- Actions -->
 			<div class="flex justify-end gap-3 pt-4 border-t">
 				<Button variant="outline" @click="handleCancel">Batal</Button>
 				<AdminAppLoadingButton :loading="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium" @click="handleSubmit"> Simpan </AdminAppLoadingButton>

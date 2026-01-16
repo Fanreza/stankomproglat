@@ -20,7 +20,6 @@ const params = computed(() => ({
 	page: currentPage.value,
 }));
 
-// 🧩 Fetch Data
 const fetchData = async () => {
 	try {
 		await getAll(params.value);
@@ -31,7 +30,6 @@ const fetchData = async () => {
 
 onMounted(fetchData);
 
-// 🧩 Delete
 const confirmDelete = (id: number) => {
 	selectedToDelete.value = id;
 	showDeleteDialog.value = true;
@@ -51,7 +49,6 @@ const handleDelete = async () => {
 	}
 };
 
-// 🧭 Navigation
 const onCreate = () => navigateTo("/admin/social/create");
 const onEdit = (id: number) => navigateTo(`/admin/social/${id}/edit`);
 
@@ -64,19 +61,16 @@ const onPageChange = (page: number) => {
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-semibold text-gray-900">Daftar Media Sosial</h1>
 			<Button @click="onCreate" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6"> Tambah </Button>
 		</div>
 
-		<!-- Search -->
 		<div class="relative w-full sm:w-1/3">
 			<Search class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
 			<Input v-model="searchQuery" placeholder="Cari media sosial..." class="pl-9" />
 		</div>
 
-		<!-- Table -->
 		<div class="relative overflow-x-auto rounded-lg border border-gray-200 bg-white">
 			<Table>
 				<TableHeader class="bg-gray-50">
@@ -89,7 +83,6 @@ const onPageChange = (page: number) => {
 				</TableHeader>
 
 				<TableBody>
-					<!-- Loading -->
 					<TableRow v-if="loading">
 						<TableCell colspan="4" class="py-8 text-center text-gray-500">
 							<div class="flex justify-center items-center gap-2">
@@ -99,7 +92,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Data -->
 					<TableRow v-for="(sm, index) in response?.data" :key="sm.id" class="hover:bg-gray-50">
 						<TableCell>{{ index + 1 }}</TableCell>
 						<TableCell class="font-medium text-gray-900">{{ sm.name }}</TableCell>
@@ -120,7 +112,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Kosong -->
 					<TableRow v-if="!loading && (!response?.data || response.data.length === 0)">
 						<TableCell colspan="4" class="text-center py-8 text-gray-500">Belum ada data media sosial.</TableCell>
 					</TableRow>
@@ -128,10 +119,8 @@ const onPageChange = (page: number) => {
 			</Table>
 		</div>
 
-		<!-- Pagination -->
 		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
-		<!-- Dialog Delete -->
 		<Dialog v-model:open="showDeleteDialog">
 			<DialogContent class="sm:max-w-md">
 				<DialogHeader>

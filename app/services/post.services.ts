@@ -4,17 +4,14 @@ import type { SocialMediaPost, CreateSocialMediaPostDto, UpdateSocialMediaPostDt
 export const useSocialMediaPostService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🧩 Reactive state
-	const response = ref<ApiResponse<SocialMediaPost[]> | null>(null); // getAll pakai wrapper
-	const responseGet = ref<SocialMediaPost | null>(null); // getOne tanpa wrapper
+	const response = ref<ApiResponse<SocialMediaPost[]> | null>(null);
+	const responseGet = ref<SocialMediaPost | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/social-media-posts" : "/social-media-posts");
 
-	// 🧩 Get All
-	const getAll = async (params?: { page?: number; perPage?: number }, isPublic = false) => {
+	const getAll = async (params?: { page?: number; perPage?: number; sortBy?: string }, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
 		try {
@@ -29,7 +26,6 @@ export const useSocialMediaPostService = () => {
 		}
 	};
 
-	// 🧩 Get One (tanpa wrapper)
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -45,7 +41,6 @@ export const useSocialMediaPostService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateSocialMediaPostDto) => {
 		loading.value = true;
 		error.value = null;
@@ -63,7 +58,6 @@ export const useSocialMediaPostService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateSocialMediaPostDto) => {
 		loading.value = true;
 		error.value = null;
@@ -82,7 +76,6 @@ export const useSocialMediaPostService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

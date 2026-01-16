@@ -9,10 +9,8 @@ export const useHistoryService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/histories" : "/histories");
 
-	// 🧩 Get All
 	const getAll = async (isPublic = false, params?: any) => {
 		loading.value = true;
 		error.value = null;
@@ -28,7 +26,6 @@ export const useHistoryService = () => {
 		}
 	};
 
-	// 🧩 Get One
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -45,7 +42,6 @@ export const useHistoryService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateHistoryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -64,7 +60,6 @@ export const useHistoryService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateHistoryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -84,7 +79,6 @@ export const useHistoryService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

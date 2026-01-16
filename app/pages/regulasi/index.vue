@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
 import { useRegulationsService } from "@/services/regulation.services";
 
 const { getAll, response, loading, error } = useRegulationsService();

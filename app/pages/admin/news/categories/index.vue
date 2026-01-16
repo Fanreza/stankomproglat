@@ -93,7 +93,6 @@ const onPageChange = (page: number) => {
 				</TableHeader>
 
 				<TableBody>
-					<!-- 🌀 Loading -->
 					<TableRow v-if="loading">
 						<TableCell colspan="4" class="py-8 text-center text-gray-500">
 							<div class="flex items-center justify-center gap-2">
@@ -103,7 +102,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- 🧩 Data -->
 					<TableRow v-for="(cat, index) in response?.data" :key="cat.id" class="hover:bg-gray-50 transition-colors">
 						<TableCell class="text-gray-700">
 							{{ (currentPage - 1) * (response?.meta?.perPage || 10) + index + 1 }}
@@ -122,7 +120,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- 🚫 Kosong -->
 					<TableRow v-if="!loading && (!response?.data || response.data.length === 0)">
 						<TableCell colspan="4" class="text-center py-8 text-gray-500"> Belum ada kategori. </TableCell>
 					</TableRow>
@@ -133,7 +130,6 @@ const onPageChange = (page: number) => {
 		<!-- Pagination -->
 		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
-		<!-- 🗑️ Delete Dialog -->
 		<Dialog v-model:open="showDialog">
 			<DialogContent class="sm:max-w-md">
 				<DialogHeader>

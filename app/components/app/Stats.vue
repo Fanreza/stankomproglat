@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
 import { useStatisticCategoryService } from "@/services/stats-scategory.services";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const { getAll, response, loading } = useStatisticCategoryService();
 const emblaApi = ref<CarouselApi>();
@@ -51,8 +49,6 @@ onMounted(async () => {
 
 <template>
 	<section class="relative overflow-hidden bg-primary py-16 md:py-20">
-		<!-- SVG Backgrounds (sama seperti versi kamu sebelumnya) -->
-		<!-- Decorative SVG Background -->
 		<!-- Left Side -->
 		<div class="absolute left-0 bottom-[50%] h-full">
 			<svg width="175" height="357" viewBox="0 0 175 357" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,22 +108,14 @@ onMounted(async () => {
 			<!-- Carousel -->
 			<Carousel v-if="!loading && slides.length > 0" class="mx-auto w-full" :opts="{ align: 'start', loop: true }" @init-api="(api) => (emblaApi = api)" :plugins="[autoplay]">
 				<CarouselContent>
-					<CarouselItem v-for="(category, sIndex) in slides" :key="sIndex">
-						<!-- 🔗 Hanya tampilkan kategori yang punya data statistik -->
-						<NuxtLink v-if="category?.statistics?.length" :to="category.link || '#'" target="_blank" class="block cursor-pointer">
+					<CarouselItem v-for="(category, sIndex) in slides" :key="sIndex" class="flex items-center min-h-[300px]">
+						<NuxtLink v-if="category?.statistics?.length" :to="category.link || '#'" target="_blank" class="block cursor-pointer w-full">
 							<h2 class="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
 								{{ category.name }}
 							</h2>
 
-							<div
-								class="grid gap-8 justify-items-center"
-								:class="{
-									'md:grid-cols-3': category.statistics.length >= 3,
-									'md:grid-cols-2 justify-center': category.statistics.length === 2,
-									'md:grid-cols-1 justify-center': category.statistics.length === 1,
-								}"
-							>
-								<div v-for="stat in category.statistics" :key="stat.id" class="text-center">
+							<div class="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16">
+								<div v-for="stat in category.statistics" :key="stat.id" class="text-center min-w-[200px]">
 									<div class="mb-2 text-5xl font-bold text-white md:text-6xl lg:text-7xl">
 										{{ stat.number }}
 									</div>
@@ -142,14 +130,12 @@ onMounted(async () => {
 						</NuxtLink>
 					</CarouselItem>
 				</CarouselContent>
-
 				<!-- Indicator -->
 				<div v-if="slides.length > 1" class="mt-8 flex items-center justify-center gap-4">
 					<button v-for="(_, index) in slides.length" :key="index" @click="scrollTo(index)" class="h-2 rounded-full transition-all duration-300" :class="current === index ? 'w-36 scale-110 bg-white' : 'w-2 scale-100 bg-white/40 hover:bg-white/60'" :aria-label="`Slide ${index + 1}`"></button>
 				</div>
 			</Carousel>
 
-			<!-- 🔸 Kondisi ketika data kosong -->
 			<div v-else-if="!loading" class="text-center text-blue-100 py-16">
 				<p>Tidak ada data statistik yang tersedia saat ini.</p>
 			</div>

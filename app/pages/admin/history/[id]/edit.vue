@@ -21,7 +21,6 @@ const form = ref({
 	detail: "",
 });
 
-// 🧩 Fetch data
 onMounted(async () => {
 	try {
 		await get(id);
@@ -35,7 +34,6 @@ onMounted(async () => {
 	}
 });
 
-// 🧩 Update data
 const handleSubmit = async () => {
 	if (!form.value.year || !form.value.description) {
 		toast.error("Tahun dan deskripsi wajib diisi.");

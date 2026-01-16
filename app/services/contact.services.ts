@@ -9,7 +9,6 @@ export const useContactService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// Helper endpoint
 	const endpoint = (isPublic = false) => (isPublic ? "/public/contacts" : "/contacts");
 
 	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {

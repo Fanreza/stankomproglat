@@ -10,13 +10,11 @@ definePageMeta({
 
 const { get, update, responseGet, loading } = useRolesResponsibilitiesService();
 
-// 🧩 Reactive form
 const form = ref({
 	roles: "",
 	responsibilities: "",
 });
 
-// 🧩 Ambil data awal
 onMounted(async () => {
 	try {
 		await get();
@@ -30,7 +28,6 @@ onMounted(async () => {
 	}
 });
 
-// 🧩 Simpan perubahan
 const handleSubmit = async () => {
 	try {
 		await update({

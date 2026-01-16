@@ -12,12 +12,10 @@ const router = useRouter();
 
 const { loading, error, create } = useNewsTagsService();
 
-// Reactive form
 const form = ref({
 	name: "",
 });
 
-// Submit form
 const handleSubmit = async () => {
 	if (!form.value.name.trim()) {
 		toast.error("Nama tag wajib diisi!");
@@ -31,7 +29,6 @@ const handleSubmit = async () => {
 	await router.push("/admin/news/tags");
 };
 
-// Cancel & go back
 const handleCancel = () => router.back();
 </script>
 

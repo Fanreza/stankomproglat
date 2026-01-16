@@ -40,18 +40,15 @@ const navItems = [
 	{ label: "FAQ", to: "/admin/faq", icon: MessageCircleQuestionMark },
 	{ label: "User", to: "/admin/user", icon: Users },
 	{ label: "Contact", to: "/admin/contact", icon: Phone },
-	// { label: "Sosial Media", to: "/admin/social", icon: Share2 },
 ];
 </script>
 
 <template>
 	<Sidebar collapsible="icon" class="border-r border-gray-200 bg-[#FBFCFE]">
-		<!-- Header -->
 		<SidebarHeader class="flex items-center justify-center border-b border-gray-200 py-6 bg-[#FBFCFE]">
 			<img src="/images/logo.png" alt="Kemnaker" class="w-40" />
 		</SidebarHeader>
 
-		<!-- Content -->
 		<SidebarContent class="bg-[#FBFCFE]">
 			<SidebarGroup>
 				<SidebarMenu>

@@ -7,7 +7,7 @@ const cards = computed(() => response.value?.data || []);
 
 onMounted(async () => {
 	try {
-		await getAll(true); // ✅ public endpoint
+		await getAll(true);
 	} catch {
 		console.warn("Gagal memuat layanan, fallback ke default.");
 	}
@@ -23,8 +23,8 @@ const onNavigateService = () => navigateTo("/service");
 			<h2 class="mb-12 text-center font-semibold text-gray-900 text-xl md:text-3xl lg:text-4xl">Layanan Tersedia</h2>
 
 			<!-- Loading Skeleton -->
-			<div v-if="loading" class="grid gap-5 md:grid-cols-3 xl:grid-cols-4 justify-items-center">
-				<div v-for="i in 4" :key="i" class="w-[80%] md:w-full py-12 px-5 bg-white rounded-2xl shadow-sm">
+			<div v-if="loading" class="flex flex-wrap justify-center gap-5 xl:gap-12">
+				<div v-for="i in 4" :key="i" class="w-[80%] md:w-[340px] xl:w-[380px] py-12 px-5 bg-white rounded-2xl shadow-sm">
 					<Skeleton class="h-16 w-16 mx-auto mb-4 rounded-full" />
 					<Skeleton class="h-6 w-3/4 mx-auto mb-2" />
 					<Skeleton class="h-4 w-5/6 mx-auto mb-4" />
@@ -33,8 +33,8 @@ const onNavigateService = () => navigateTo("/service");
 			</div>
 
 			<!-- Service Cards -->
-			<div v-else class="grid gap-5 xl:gap-12 md:grid-cols-3 xl:grid-cols-4 justify-items-center">
-				<div v-for="(card, i) in cards" :key="card.id || i" class="flex flex-col items-center rounded-2xl bg-white w-[80%] md:w-full py-12 px-5 xl:px-16 shadow-sm transition-shadow hover:shadow-md">
+			<div v-else class="flex flex-wrap justify-center gap-5 xl:gap-12">
+				<div v-for="(card, i) in cards" :key="card.id || i" class="flex flex-col items-center rounded-2xl bg-white w-[80%] md:w-[340px] xl:w-[380px] py-12 px-5 xl:px-16 shadow-sm transition-shadow hover:shadow-md">
 					<div class="relative mb-6">
 						<Icon :name="card.icon || 'streamline:interface-folder-archive-solid'" class="text-6xl" />
 					</div>

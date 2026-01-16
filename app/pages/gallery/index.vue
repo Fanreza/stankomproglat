@@ -1,4 +1,3 @@
-<!-- pages/info/berita.vue -->
 <template>
 	<section class="bg-white py-16 md:py-24">
 		<!-- Title -->
@@ -31,21 +30,18 @@ import { useGalleryService } from "@/services/gallery.services";
 import { toast } from "vue-sonner";
 import { ref, computed, onMounted } from "vue";
 
-// 🧩 Services
 const { getAll, response, loading } = useGalleryService();
 
-// State
 const newsItems = ref<any[]>([]);
 const currentPage = ref(1);
 
-// Fetch News
 const params = computed(() => ({
 	page: currentPage.value,
 }));
 
 const fetchNews = async () => {
 	try {
-		await getAll(params.value, true); // pakai endpoint public
+		await getAll(params.value, true);
 		newsItems.value = response.value?.data || [];
 	} catch {
 		toast.error("Gagal memuat data berita.");
@@ -54,13 +50,11 @@ const fetchNews = async () => {
 
 onMounted(fetchNews);
 
-// Pagination handler
 const handlePageChange = async (page: number) => {
 	currentPage.value = page;
 	await fetchNews();
 };
 
-// Hitung total halaman dari API meta
 const totalPages = computed(() => {
 	return response.value?.meta?.totalPages || 1;
 });

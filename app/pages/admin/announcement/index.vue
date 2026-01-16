@@ -63,7 +63,6 @@ const onPageChange = (page: number) => {
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-2xl font-semibold text-gray-900">Daftar Pengumuman</h1>
@@ -71,12 +70,10 @@ const onPageChange = (page: number) => {
 			<Button @click="onCreate" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6"> Tambah </Button>
 		</div>
 
-		<!-- Search -->
 		<div class="flex items-center justify-between">
 			<CommonDebouncedSearch v-model="searchQuery" placeholder="Cari pengumuman..." @search="fetchData" />
 		</div>
 
-		<!-- Table -->
 		<div class="relative overflow-x-auto rounded-lg border border-gray-200 bg-white">
 			<Table>
 				<TableHeader class="bg-gray-50">
@@ -90,7 +87,6 @@ const onPageChange = (page: number) => {
 				</TableHeader>
 
 				<TableBody>
-					<!-- Loading -->
 					<TableRow v-if="loading">
 						<TableCell colspan="5" class="py-8 text-center text-gray-500">
 							<div class="flex items-center justify-center gap-2">
@@ -100,7 +96,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Data -->
 					<TableRow v-for="(item, index) in response?.data" :key="item.id" class="hover:bg-gray-50 transition-colors">
 						<TableCell class="text-gray-700">
 							{{ (currentPage - 1) * (response?.meta?.perPage || 10) + index + 1 }}
@@ -133,7 +128,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Empty -->
 					<TableRow v-if="!loading && (!response?.data || response.data.length === 0)">
 						<TableCell colspan="5" class="text-center py-8 text-gray-500">Belum ada pengumuman.</TableCell>
 					</TableRow>
@@ -141,10 +135,8 @@ const onPageChange = (page: number) => {
 			</Table>
 		</div>
 
-		<!-- Pagination -->
 		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
-		<!-- Delete Dialog -->
 		<Dialog v-model:open="showDeleteDialog">
 			<DialogContent class="sm:max-w-md">
 				<DialogHeader>

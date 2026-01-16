@@ -40,7 +40,6 @@ const handleCancel = () => navigateTo("/admin/user");
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-2xl font-semibold text-gray-900">Tambah User</h1>
@@ -48,22 +47,18 @@ const handleCancel = () => navigateTo("/admin/user");
 			</div>
 		</div>
 
-		<!-- Form -->
 		<div class="rounded-lg border border-gray-200 bg-white p-6">
 			<form @submit.prevent="handleSubmit" class="space-y-6">
-				<!-- Nama -->
 				<div class="space-y-2">
 					<Label for="name" class="text-sm font-medium text-gray-700"> Nama <span class="text-red-500">*</span> </Label>
 					<Input id="name" v-model="form.name" type="text" placeholder="Masukkan nama lengkap" required class="w-full" />
 				</div>
 
-				<!-- Email -->
 				<div class="space-y-2">
 					<Label for="email" class="text-sm font-medium text-gray-700"> Email <span class="text-red-500">*</span> </Label>
 					<Input id="email" v-model="form.email" type="email" placeholder="contoh@email.com" required class="w-full" />
 				</div>
 
-				<!-- Password -->
 				<div class="space-y-2">
 					<Label for="password" class="text-sm font-medium text-gray-700"> Password <span class="text-red-500">*</span> </Label>
 					<div class="relative">
@@ -76,7 +71,6 @@ const handleCancel = () => navigateTo("/admin/user");
 					<p class="text-xs text-gray-500">Password minimal 8 karakter</p>
 				</div>
 
-				<!-- Actions -->
 				<div class="flex items-center gap-3 pt-4">
 					<Button type="submit" :disabled="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6">
 						<span v-if="loading">Menyimpan...</span>

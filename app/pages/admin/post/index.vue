@@ -15,7 +15,6 @@ const currentPage = ref(1);
 const selectedToDelete = ref<number | null>(null);
 const showDeleteDialog = ref(false);
 
-// 🧩 Fetch data
 const params = computed(() => ({
 	page: currentPage.value,
 }));
@@ -30,7 +29,6 @@ const fetchPosts = async () => {
 
 onMounted(fetchPosts);
 
-// 🧩 Delete
 const confirmDelete = (id: number) => {
 	selectedToDelete.value = id;
 	showDeleteDialog.value = true;
@@ -50,7 +48,6 @@ const handleDelete = async () => {
 	}
 };
 
-// 🧭 Navigation
 const onCreate = () => navigateTo("/admin/post/create");
 const onEdit = (id: number) => navigateTo(`/admin/post/${id}/edit`);
 
@@ -63,13 +60,11 @@ const onPageChange = (page: number) => {
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-semibold text-gray-900">Daftar Postingan Media Sosial</h1>
 			<Button @click="onCreate" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6"> Tambah </Button>
 		</div>
 
-		<!-- Table -->
 		<div class="relative overflow-x-auto rounded-lg border border-gray-200 bg-white">
 			<Table>
 				<TableHeader class="bg-gray-50">
@@ -84,7 +79,6 @@ const onPageChange = (page: number) => {
 				</TableHeader>
 
 				<TableBody>
-					<!-- Loading -->
 					<TableRow v-if="loading">
 						<TableCell colspan="6" class="py-8 text-center text-gray-500">
 							<div class="flex justify-center items-center gap-2">
@@ -94,7 +88,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Data -->
 					<TableRow v-for="(post, index) in response?.data" :key="post.id" class="hover:bg-gray-50 transition">
 						<TableCell>{{ (currentPage - 1) * 10 + index + 1 }}</TableCell>
 						<TableCell class="font-medium text-gray-900 uppercase">{{ post.platform }}</TableCell>
@@ -103,7 +96,7 @@ const onPageChange = (page: number) => {
 								{{ post.postLink }}
 							</a>
 						</TableCell>
-						<TableCell>{{ post.createdById }}</TableCell>
+						<TableCell>{{ post.createdBy.name }}</TableCell>
 						<TableCell>{{ new Date(post.createdAt).toLocaleDateString() }}</TableCell>
 						<TableCell class="text-center">
 							<div class="flex items-center justify-center gap-2">
@@ -117,7 +110,6 @@ const onPageChange = (page: number) => {
 						</TableCell>
 					</TableRow>
 
-					<!-- Empty -->
 					<TableRow v-if="!loading && (!response?.data || response.data.length === 0)">
 						<TableCell colspan="6" class="text-center py-8 text-gray-500"> Belum ada postingan media sosial. </TableCell>
 					</TableRow>
@@ -125,10 +117,8 @@ const onPageChange = (page: number) => {
 			</Table>
 		</div>
 
-		<!-- Pagination -->
 		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
-		<!-- Delete Dialog -->
 		<Dialog v-model:open="showDeleteDialog">
 			<DialogContent class="sm:max-w-md">
 				<DialogHeader>

@@ -47,7 +47,6 @@ const handleCancel = () => router.back();
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-2xl font-semibold text-gray-900">Edit Kategori</h1>
@@ -58,15 +57,12 @@ const handleCancel = () => router.back();
 			</div>
 		</div>
 
-		<!-- Form -->
 		<div class="space-y-10">
-			<!-- Judul -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Judul</label>
 				<Input v-model="form.title" placeholder="Masukkan Judul Kategori" />
 			</div>
 
-			<!-- Actions -->
 			<div class="flex justify-end gap-3 pt-4 border-t">
 				<Button variant="outline" @click="handleCancel">Batal</Button>
 				<AdminAppLoadingButton :loading="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium" @click="handleSubmit"> Simpan Perubahan </AdminAppLoadingButton>

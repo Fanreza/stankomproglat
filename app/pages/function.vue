@@ -2,13 +2,11 @@
 import { onMounted } from "vue";
 import { useRolesResponsibilitiesService } from "@/services/function.services";
 
-// 🔹 Inisialisasi service
 const { get, responseGet, loading, error } = useRolesResponsibilitiesService();
 
-// 🔹 Lifecycle
 onMounted(async () => {
 	try {
-		await get(true); // ambil endpoint publik
+		await get(true);
 	} catch (err) {
 		console.error("Failed to fetch roles & responsibilities:", err);
 	}

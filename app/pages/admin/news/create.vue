@@ -16,7 +16,6 @@ const router = useRouter();
 const { create, loading } = useNewsService();
 const { getAll: getCategories, response: categories } = useNewsCategoriesService();
 
-// 🧩 Form reactive
 const form = ref({
 	title: "",
 	excerpt: "",
@@ -28,14 +27,12 @@ const form = ref({
 
 const previewUrl = ref<string | null>(null);
 
-// Fetch kategori
 onMounted(async () => {
 	await getCategories(false, {
 		limit: 100,
 	});
 });
 
-// Handle file upload preview
 const handleFileChange = (event: Event) => {
 	const target = event.target as HTMLInputElement;
 	if (!target.files?.length) return;
@@ -44,10 +41,8 @@ const handleFileChange = (event: Event) => {
 	previewUrl.value = URL.createObjectURL(form.value.file!);
 };
 
-// Handle submit
 const handleSubmit = async () => {
 	try {
-		// Validate required fields: CreateNewsDto expects categoryId to be a number
 		if (form.value.categoryId == null) {
 			toast.error("Pilih kategori berita.");
 			return;
@@ -70,13 +65,11 @@ const handleSubmit = async () => {
 	}
 };
 
-// Cancel
 const handleCancel = () => router.back();
 </script>
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-2xl font-semibold text-gray-900">Buat Berita Baru</h1>
@@ -84,27 +77,22 @@ const handleCancel = () => router.back();
 			<Button class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6" @click="handleCancel"> Kembali </Button>
 		</div>
 
-		<!-- Form -->
 		<div class="space-y-10">
-			<!-- Judul -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Judul Berita</label>
 				<Input v-model="form.title" placeholder="Masukkan Judul Berita" />
 			</div>
 
-			<!-- Excerpt -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Excerpt</label>
 				<Input v-model="form.excerpt" placeholder="Masukkan ringkasan berita" />
 			</div>
 
-			<!-- Deskripsi -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Deskripsi</label>
 				<AdminAppEditor v-model="form.description" />
 			</div>
 
-			<!-- Upload Gambar -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Gambar</label>
 
@@ -116,7 +104,6 @@ const handleCancel = () => router.back();
 					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="handleFileChange" />
 				</div>
 
-				<!-- Preview -->
 				<div v-else class="relative w-64 h-40 border rounded-lg overflow-hidden group">
 					<img :src="previewUrl" class="object-cover w-full h-full" />
 					<button
@@ -132,7 +119,6 @@ const handleCancel = () => router.back();
 				</div>
 			</div>
 
-			<!-- Kategori -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Kategori</label>
 				<Select v-model="form.categoryId" placeholder="Pilih kategori">
@@ -147,7 +133,6 @@ const handleCancel = () => router.back();
 				</Select>
 			</div>
 
-			<!-- Status -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Status</label>
 				<Select v-model="form.status">
@@ -162,7 +147,6 @@ const handleCancel = () => router.back();
 				</Select>
 			</div>
 
-			<!-- Actions -->
 			<div class="flex justify-end gap-3 pt-4 border-t">
 				<Button variant="outline" @click="handleCancel">Batal</Button>
 				<AdminAppLoadingButton :loading="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium" @click="handleSubmit"> Simpan </AdminAppLoadingButton>

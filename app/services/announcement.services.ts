@@ -4,16 +4,13 @@ import type { Announcement, CreateAnnouncementDto, UpdateAnnouncementDto } from 
 export const useAnnouncementsService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🧩 Reactive states
 	const response = ref<ApiResponse<Announcement[]> | null>(null);
 	const responseGet = ref<Announcement | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/announcements" : "/announcements");
 
-	// ✅ GET ALL
 	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
@@ -32,7 +29,6 @@ export const useAnnouncementsService = () => {
 		}
 	};
 
-	// ✅ GET ONE
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -49,7 +45,6 @@ export const useAnnouncementsService = () => {
 		}
 	};
 
-	// ✅ CREATE
 	const create = async (payload: CreateAnnouncementDto) => {
 		loading.value = true;
 		error.value = null;
@@ -78,7 +73,6 @@ export const useAnnouncementsService = () => {
 		}
 	};
 
-	// ✅ UPDATE
 	const update = async (id: number, payload: UpdateAnnouncementDto) => {
 		loading.value = true;
 		error.value = null;
@@ -109,7 +103,6 @@ export const useAnnouncementsService = () => {
 		}
 	};
 
-	// ✅ DELETE
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

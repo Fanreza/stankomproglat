@@ -12,4 +12,4 @@ docker run -d \
   --restart always \
   $APP
 
-echo "✅ Deployed: http://localhost:$PORT"
+echo "Deployed: http://localhost:$PORT"

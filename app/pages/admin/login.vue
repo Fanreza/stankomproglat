@@ -56,7 +56,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-vue-next";
 import { useAuthStore } from "~/stores/auth";
 
 definePageMeta({
-	layout: false, // tidak pakai layout sidebar
+	layout: false,
 	middleware: "guest",
 });
 
@@ -70,7 +70,6 @@ const form = ref({
 const showPassword = ref(false);
 const errorMessage = ref("");
 
-// Handle login submit
 const onSubmit = async () => {
 	errorMessage.value = "";
 	try {
@@ -78,7 +77,7 @@ const onSubmit = async () => {
 			email: form.value.email,
 			password: form.value.password,
 		});
-		await navigateTo("/admin"); // redirect ke dashboard
+		await navigateTo("/admin");
 	} catch (err: any) {
 		errorMessage.value = "Email atau password salah.";
 		console.error("Login failed:", err);

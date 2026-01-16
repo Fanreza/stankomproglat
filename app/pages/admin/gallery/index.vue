@@ -21,7 +21,6 @@ const params = computed(() => ({
 	search: search.value || undefined,
 }));
 
-// 🧩 Fetch data
 const fetchGallery = async () => {
 	try {
 		await getAll(params.value);
@@ -32,7 +31,6 @@ const fetchGallery = async () => {
 
 onMounted(fetchGallery);
 
-// 🧩 Delete dialog
 const confirmDelete = (id: number) => {
 	selectedToDelete.value = id;
 	showDeleteDialog.value = true;
@@ -52,7 +50,6 @@ const handleDelete = async () => {
 	}
 };
 
-// 🧭 Navigation
 const onCreate = () => navigateTo("/admin/gallery/create");
 const onEdit = (id: number) => navigateTo(`/admin/gallery/${id}/edit`);
 
@@ -65,18 +62,15 @@ const onPageChange = (page: number) => {
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-semibold text-gray-900">Daftar Galeri</h1>
 			<Button @click="onCreate" class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6">Tambah</Button>
 		</div>
 
-		<!-- Search -->
 		<div class="relative w-full sm:w-1/3">
 			<CommonDebouncedSearch v-model="search" placeholder="Cari galeri..." @search="fetchGallery" />
 		</div>
 
-		<!-- Loading -->
 		<div v-if="loading" class="flex justify-center py-20 text-gray-500">
 			<div class="flex items-center gap-2">
 				<span class="animate-spin h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full"></span>
@@ -84,12 +78,10 @@ const onPageChange = (page: number) => {
 			</div>
 		</div>
 
-		<!-- Data -->
 		<div v-else-if="response?.data?.length" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			<div v-for="gallery in response.data" :key="gallery.id" class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition">
-				<ImagePreview :src="gallery?.images[0]?.image!" alt="Preview Banner" />
+				<CommonImagePreview :src="gallery?.images[0]?.image!" alt="Preview Banner" />
 
-				<!-- Konten -->
 				<div class="flex flex-col justify-between p-4">
 					<div>
 						<h3 class="font-semibold text-gray-900 leading-snug line-clamp-2">{{ gallery.title }}</h3>
@@ -111,13 +103,10 @@ const onPageChange = (page: number) => {
 			</div>
 		</div>
 
-		<!-- Kosong -->
 		<div v-else class="py-20 text-center text-gray-500">Belum ada galeri.</div>
 
-		<!-- Pagination -->
 		<AdminAppPagination v-if="response?.meta" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
 
-		<!-- Dialog Delete -->
 		<Dialog v-model:open="showDeleteDialog">
 			<DialogContent class="sm:max-w-md">
 				<DialogHeader>

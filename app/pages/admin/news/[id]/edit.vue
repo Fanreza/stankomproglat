@@ -29,7 +29,6 @@ const form = ref({
 const previewUrl = ref<string | null>(null);
 const existingImage = ref<string | null>(null);
 
-// 🔹 Fetch existing news by ID
 onMounted(async () => {
 	try {
 		await getCategories();
@@ -52,7 +51,6 @@ onMounted(async () => {
 	}
 });
 
-// 🔹 File upload preview
 const handleFileChange = (event: Event) => {
 	const target = event.target as HTMLInputElement;
 	if (!target.files?.length) return;
@@ -61,7 +59,6 @@ const handleFileChange = (event: Event) => {
 	previewUrl.value = URL.createObjectURL(form.value.file!);
 };
 
-// 🔹 Submit (Update)
 const handleSubmit = async () => {
 	try {
 		const id = Number(route.params.id);
@@ -93,7 +90,6 @@ const handleCancel = () => router.back();
 
 <template>
 	<div class="flex-1 space-y-6 p-6">
-		<!-- Header -->
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-2xl font-semibold text-gray-900">Edit Berita</h1>
@@ -101,31 +97,25 @@ const handleCancel = () => router.back();
 			<Button class="bg-blue-900 hover:bg-blue-800 text-white font-medium px-6" @click="handleCancel"> Kembali </Button>
 		</div>
 
-		<!-- Form -->
 		<div v-if="responseGet || !loading" class="space-y-10">
-			<!-- Judul -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Judul Berita</label>
 				<Input v-model="form.title" placeholder="Masukkan Judul Berita" />
 			</div>
 
-			<!-- Excerpt -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Excerpt</label>
 				<Input v-model="form.excerpt" placeholder="Masukkan ringkasan berita" />
 			</div>
 
-			<!-- Deskripsi -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Deskripsi</label>
 				<AppEditor v-model="form.description" />
 			</div>
 
-			<!-- Upload Gambar -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Gambar</label>
 
-				<!-- Default state (no new upload yet) -->
 				<div v-if="!previewUrl && existingImage" class="relative w-64 h-40 border rounded-lg overflow-hidden group">
 					<img :src="existingImage" class="object-cover w-full h-full" />
 					<button
@@ -140,7 +130,6 @@ const handleCancel = () => router.back();
 					</button>
 				</div>
 
-				<!-- Upload dropzone -->
 				<div v-else-if="!previewUrl && !existingImage" class="relative flex flex-col items-center justify-center w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-gray-500 hover:border-blue-400 transition">
 					<UploadCloud class="h-8 w-8 mb-2 text-gray-400" />
 					<span class="text-sm font-medium">Klik untuk upload atau drag & drop</span>
@@ -149,7 +138,6 @@ const handleCancel = () => router.back();
 					<input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="handleFileChange" />
 				</div>
 
-				<!-- New Preview -->
 				<div v-else class="relative w-64 h-40 border rounded-lg overflow-hidden group">
 					<img :src="previewUrl!" class="object-cover w-full h-full" />
 					<button
@@ -165,7 +153,6 @@ const handleCancel = () => router.back();
 				</div>
 			</div>
 
-			<!-- Kategori -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Kategori</label>
 				<Select v-model="form.categoryId">
@@ -180,7 +167,6 @@ const handleCancel = () => router.back();
 				</Select>
 			</div>
 
-			<!-- Status -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Status</label>
 				<Select v-model="form.status">
@@ -195,14 +181,12 @@ const handleCancel = () => router.back();
 				</Select>
 			</div>
 
-			<!-- Actions -->
 			<div class="flex justify-end gap-3 pt-4 border-t">
 				<Button variant="outline" @click="handleCancel">Batal</Button>
 				<AdminAppLoadingButton :loading="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium" @click="handleSubmit"> Perbarui </AdminAppLoadingButton>
 			</div>
 		</div>
 
-		<!-- Loading state -->
 		<div v-else class="py-20 text-center text-gray-500">
 			<div class="flex items-center justify-center gap-2">
 				<span class="animate-spin h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full"></span>

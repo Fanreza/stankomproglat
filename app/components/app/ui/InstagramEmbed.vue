@@ -16,7 +16,6 @@ interface Props {
 
 const props = defineProps<Props>();
 
-// Extract kode post dari URL (misal: https://www.instagram.com/p/DQT0bBBEl3i/?hl=en → DQT0bBBEl3i)
 const embedUrl = computed(() => {
 	try {
 		const match = props.url.match(/instagram\.com\/p\/([^/]+)/);

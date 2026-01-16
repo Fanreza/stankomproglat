@@ -4,15 +4,13 @@ import type { Statistic, CreateStatisticDto, UpdateStatisticDto } from "~/models
 export const useStatisticService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	const response = ref<ApiResponse<Statistic[]> | null>(null); // wrapper utk list
-	const responseGet = ref<Statistic | null>(null); // non-wrapper utk detail
+	const response = ref<ApiResponse<Statistic[]> | null>(null);
+	const responseGet = ref<Statistic | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/statistics" : "/statistics");
 
-	// 🧩 Get All (wrapper)
 	const getAll = async (isPublic = false, params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
@@ -28,7 +26,6 @@ export const useStatisticService = () => {
 		}
 	};
 
-	// 🧩 Get One
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -44,7 +41,6 @@ export const useStatisticService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateStatisticDto) => {
 		loading.value = true;
 		error.value = null;
@@ -62,7 +58,6 @@ export const useStatisticService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateStatisticDto) => {
 		loading.value = true;
 		error.value = null;
@@ -81,7 +76,6 @@ export const useStatisticService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

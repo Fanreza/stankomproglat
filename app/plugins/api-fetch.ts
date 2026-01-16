@@ -3,11 +3,9 @@ import { toast } from "vue-sonner";
 export default defineNuxtPlugin((nuxtApp) => {
 	const config = useRuntimeConfig();
 
-	// Handle base URL secara aman
 	const rawApiBase = (config.public as Record<string, unknown>)?.apiBase;
 	const apiBase = typeof rawApiBase === "string" ? rawApiBase : String(rawApiBase ?? "http://localhost:3000/v1/");
 
-	// Buat instance global
 	const apiFetch = $fetch.create({
 		baseURL: apiBase,
 		credentials: "include",
@@ -16,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 			const status = response.status;
 			const message = (response._data as any)?.message || response.statusText || "Terjadi kesalahan pada server";
 
-			// 401 Unauthorized → redirect ke login
+			// 401 Unauthorized → redirect login
 			if (status === 401) {
 				toast.error(message);
 				await navigateTo("/admin/login");

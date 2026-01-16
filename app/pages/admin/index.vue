@@ -92,7 +92,7 @@ const handleSubmit = async () => {
 				</div>
 
 				<div v-else class="relative w-full max-w-lg h-56 border rounded-lg overflow-hidden group">
-					<ImagePreview :src="previewUrl" alt="Preview Banner" />
+					<CommonImagePreview :src="previewUrl" alt="Preview Banner" />
 
 					<button
 						type="button"

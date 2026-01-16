@@ -29,7 +29,6 @@ const fetchHistories = async () => {
 
 onMounted(fetchHistories);
 
-// Delete
 const confirmDelete = (id: number) => {
 	selectedToDelete.value = id;
 	showDeleteDialog.value = true;

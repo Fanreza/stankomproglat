@@ -53,7 +53,7 @@ const faqs = ref<any[]>([]);
 
 onMounted(async () => {
 	try {
-		await getAll({}, true); // ambil dari /public/faq
+		await getAll({}, true);
 		faqs.value = response.value?.data || [];
 	} catch {
 		toast.error("Gagal memuat FAQ publik.");

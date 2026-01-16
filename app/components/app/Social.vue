@@ -40,19 +40,19 @@ import { toast } from "vue-sonner";
 const { getAll, response, loading } = useSocialMediaPostService();
 
 const embeds = ref<string[]>([]);
-const carouselRef = ref();
+
 const emblaApi = ref<CarouselApi>();
 const current = ref(0);
-
-const autoplay = Autoplay({
-	delay: 5000,
-	stopOnInteraction: false,
-});
 
 // Fetch public posts
 onMounted(async () => {
 	try {
-		await getAll({}, true);
+		await getAll(
+			{
+				sortBy: "id:desc",
+			},
+			true
+		);
 		const posts = response.value?.data || [];
 		embeds.value = posts.map((p) => p.postLink).filter(Boolean);
 	} catch {

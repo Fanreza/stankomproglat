@@ -1,19 +1,15 @@
 <script setup lang="ts">
 import { Loader2 } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import { computed } from "vue";
 
 const props = defineProps<{
 	loading?: boolean;
 	disabled?: boolean;
 }>();
 
-// emit click agar tetap bisa digunakan seperti <Button>
 const emit = defineEmits<{
 	(e: "click", event: MouseEvent): void;
 }>();
 
-// disable button kalau sedang loading
 const isDisabled = computed(() => props.loading || props.disabled);
 </script>
 

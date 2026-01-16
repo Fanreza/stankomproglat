@@ -4,12 +4,11 @@ import type { StatisticCategory, CreateStatisticCategoryDto, UpdateStatisticCate
 export const useStatisticCategoryService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	const response = ref<ApiResponse<StatisticCategory[]> | null>(null); // wrapper untuk list
-	const responseGet = ref<StatisticCategory | null>(null); // non-wrapper untuk detail
+	const response = ref<ApiResponse<StatisticCategory[]> | null>(null);
+	const responseGet = ref<StatisticCategory | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/statistics/categories" : "/statistics/categories");
 
 	const getAll = async (isPublic = false, params?: Record<string, any>) => {
@@ -30,7 +29,6 @@ export const useStatisticCategoryService = () => {
 		}
 	};
 
-	// 🧩 Get One (tanpa wrapper)
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -46,7 +44,6 @@ export const useStatisticCategoryService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateStatisticCategoryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -65,7 +62,6 @@ export const useStatisticCategoryService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateStatisticCategoryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -85,7 +81,6 @@ export const useStatisticCategoryService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

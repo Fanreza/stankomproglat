@@ -4,16 +4,13 @@ import type { FAQ, CreateFaqDto, UpdateFaqDto } from "~/models/faq.model";
 export const useFaqService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🔄 State utama
-	const response = ref<ApiResponse<FAQ[]> | null>(null); // getAll → pakai wrapper
-	const responseGet = ref<FAQ | null>(null); // getOne → tanpa wrapper
+	const response = ref<ApiResponse<FAQ[]> | null>(null);
+	const responseGet = ref<FAQ | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All (pakai wrapper)
 	const endpoint = (isPublic = false) => (isPublic ? "/public/faq" : "/faq");
 
-	// 🧩 Get All
 	const getAll = async (params?: { page?: number; perPage?: number }, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
@@ -28,7 +25,7 @@ export const useFaqService = () => {
 			loading.value = false;
 		}
 	};
-	// 🧩 Get One (tanpa wrapper)
+
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -44,7 +41,6 @@ export const useFaqService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateFaqDto) => {
 		loading.value = true;
 		error.value = null;
@@ -63,7 +59,6 @@ export const useFaqService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateFaqDto) => {
 		loading.value = true;
 		error.value = null;
@@ -83,7 +78,6 @@ export const useFaqService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

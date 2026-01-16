@@ -37,13 +37,10 @@
 import { useNewsService } from "@/services/news.services";
 import { toast } from "vue-sonner";
 
-// 🧩 Service
 const { getAll, response, loading } = useNewsService();
 
-// 🧠 Data state
 const newsItems = ref<any[]>([]);
 
-// Fetch public news
 onMounted(async () => {
 	try {
 		await getAll(true);
@@ -53,10 +50,8 @@ onMounted(async () => {
 	}
 });
 
-// Navigate ke halaman berita
 const onNavigateNews = () => navigateTo("/news");
 
-// Format tanggal tampil cantik
 const formatDate = (date: string) =>
 	new Date(date).toLocaleDateString("id-ID", {
 		day: "2-digit",

@@ -4,16 +4,13 @@ import type { Gallery, CreateGalleryDto, UpdateGalleryDto } from "~/models/galle
 export const useGalleryService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🔄 State utama
 	const response = ref<ApiResponse<Gallery[]> | null>(null);
 	const responseGet = ref<Gallery | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🔹 Helper endpoint
 	const endpoint = (isPublic = false) => (isPublic ? "/public/galleries" : "/gallery");
 
-	// 🧩 Get All
 	const getAll = async (params?: { page?: number; search?: string }, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
@@ -29,7 +26,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🧩 Get One
 	const get = async (id: number, isPublic = false) => {
 		loading.value = true;
 		error.value = null;
@@ -46,7 +42,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateGalleryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -70,7 +65,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateGalleryDto) => {
 		loading.value = true;
 		error.value = null;
@@ -96,7 +90,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🧩 Delete Gallery
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -110,7 +103,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🆕 Add Images to Gallery (POST /gallery/:id/images)
 	const addImages = async (galleryId: number, files: File[]) => {
 		loading.value = true;
 		error.value = null;
@@ -132,7 +124,6 @@ export const useGalleryService = () => {
 		}
 	};
 
-	// 🆕 Delete Image from Gallery (DELETE /gallery/:galleryId/images/:imageId)
 	const deleteImage = async (galleryId: number, imageId: number) => {
 		loading.value = true;
 		error.value = null;

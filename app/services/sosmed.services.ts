@@ -4,13 +4,11 @@ import type { SocialMedia, CreateSocialMediaDto, UpdateSocialMediaDto } from "~/
 export const useSocialMediaService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// 🧩 State utama
-	const response = ref<ApiResponse<SocialMedia[]> | null>(null); // getAll → pakai wrapper
-	const responseGet = ref<SocialMedia | null>(null); // getOne → tanpa wrapper
+	const response = ref<ApiResponse<SocialMedia[]> | null>(null);
+	const responseGet = ref<SocialMedia | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get All (pakai wrapper)
 	const getAll = async (params?: { page?: number; perPage?: number }) => {
 		loading.value = true;
 		error.value = null;
@@ -28,7 +26,6 @@ export const useSocialMediaService = () => {
 		}
 	};
 
-	// 🧩 Get One (tanpa wrapper)
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -44,7 +41,6 @@ export const useSocialMediaService = () => {
 		}
 	};
 
-	// 🧩 Create
 	const create = async (payload: CreateSocialMediaDto) => {
 		loading.value = true;
 		error.value = null;
@@ -62,7 +58,6 @@ export const useSocialMediaService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (id: number, payload: UpdateSocialMediaDto) => {
 		loading.value = true;
 		error.value = null;
@@ -81,7 +76,6 @@ export const useSocialMediaService = () => {
 		}
 	};
 
-	// 🧩 Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

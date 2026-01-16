@@ -9,7 +9,6 @@ export const useRolesResponsibilitiesService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 GET roles & responsibilities
 	const endpoint = (isPublic = false) => (isPublic ? "/public/roles-responsibilities" : "/roles-responsibilities");
 
 	const get = async (isPublic = false) => {
@@ -28,7 +27,6 @@ export const useRolesResponsibilitiesService = () => {
 		}
 	};
 
-	// 🧩 UPDATE roles & responsibilities
 	const update = async (payload: UpdateRolesResponsibilitiesDto) => {
 		loading.value = true;
 		error.value = null;

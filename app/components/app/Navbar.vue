@@ -79,7 +79,6 @@ import { onMounted, ref } from "vue";
 const isScrolled = ref(false);
 const mobileMenuOpen = ref(false);
 
-// 🔹 Scroll effect
 const handleScroll = () => {
 	isScrolled.value = window.scrollY > 50;
 };
@@ -93,7 +92,6 @@ onUnmounted(() => {
 	window.removeEventListener("scroll", handleScroll);
 });
 
-// 🔹 Ambil data services (untuk bagian "Tautan")
 const { getAll, response, loading, error } = useServicesService();
 const services = ref<any[]>([]);
 
@@ -106,7 +104,6 @@ const fetchServices = async () => {
 	}
 };
 
-// 🔹 Menu utama
 const menuItems = computed(() => [
 	{ label: "Home", to: "/", external: false },
 	{

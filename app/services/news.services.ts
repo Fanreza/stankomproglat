@@ -4,13 +4,11 @@ import type { News, CreateNewsDto, UpdateNewsDto } from "~/models/news.model";
 export const useNewsService = () => {
 	const { $apiFetch } = useNuxtApp();
 
-	// ✅ Global state
 	const response = ref<ApiResponse<News[]> | null>(null);
 	const responseGet = ref<News | null>(null);
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// ✅ Get All
 	const endpoint = (isPublic = false) => (isPublic ? "/public/news" : "/news");
 
 	const getAll = async (isPublic = false, params: { page?: number; search?: string } = {}) => {
@@ -31,7 +29,6 @@ export const useNewsService = () => {
 		}
 	};
 
-	// ✅ Get One
 	const get = async (id: number) => {
 		loading.value = true;
 		error.value = null;
@@ -65,7 +62,6 @@ export const useNewsService = () => {
 		}
 	};
 
-	// ✅ Create
 	const create = async (payload: CreateNewsDto) => {
 		loading.value = true;
 		error.value = null;
@@ -98,7 +94,6 @@ export const useNewsService = () => {
 		}
 	};
 
-	// ✅ Update
 	const update = async (id: number, payload: UpdateNewsDto) => {
 		loading.value = true;
 		error.value = null;
@@ -132,7 +127,6 @@ export const useNewsService = () => {
 		}
 	};
 
-	// ✅ Delete
 	const remove = async (id: number) => {
 		loading.value = true;
 		error.value = null;

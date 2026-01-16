@@ -22,7 +22,6 @@ const logout = async () => {
 	<header class="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6">
 		<!-- Title -->
 		<div class="flex items-center gap-3">
-			<!-- Slot kiri (misal: trigger + title) -->
 			<slot />
 		</div>
 
@@ -31,7 +30,6 @@ const logout = async () => {
 			<!-- User Info -->
 			<div class="flex items-center gap-3">
 				<Avatar class="h-8 w-8">
-					<!-- <AvatarImage :src="auth.user?.avatar || '/images/avatar.jpg'" alt="Admin" /> -->
 					<AvatarFallback>A</AvatarFallback>
 				</Avatar>
 

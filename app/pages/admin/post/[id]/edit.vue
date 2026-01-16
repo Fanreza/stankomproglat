@@ -18,7 +18,6 @@ const form = ref({
 	postLink: "",
 });
 
-// 🧩 Fetch detail post
 onMounted(async () => {
 	try {
 		await get(Number(route.params.id));
@@ -55,13 +54,11 @@ const handleCancel = () => router.back();
 		</div>
 
 		<div v-else class="space-y-10">
-			<!-- Post Link -->
 			<div class="space-y-2">
 				<label class="block text-sm font-medium text-gray-800">Link Postingan</label>
 				<Input v-model="form.postLink" placeholder="https://www.instagram.com/p/DRoEQEnkrvz/" />
 			</div>
 
-			<!-- Actions -->
 			<div class="flex justify-end gap-3 pt-4 border-t">
 				<Button variant="outline" @click="handleCancel">Batal</Button>
 				<AdminAppLoadingButton :loading="loading" class="bg-blue-900 hover:bg-blue-800 text-white font-medium" @click="handleSubmit"> Perbarui </AdminAppLoadingButton>

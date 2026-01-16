@@ -1,9 +1,13 @@
 export interface SocialMediaPost {
 	id: number;
-	platform: string; // ex: FACEBOOK, INSTAGRAM
+	platform: string;
 	postLink: string;
-	image?: string; // URL atau path file
+	image?: string;
 	createdById: number;
+	createdBy: {
+		id: number;
+		name: string;
+	};
 	createdAt: string;
 	updatedAt: string;
 }

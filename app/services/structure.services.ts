@@ -8,7 +8,6 @@ export const useStructureService = () => {
 	const loading = ref(false);
 	const error = ref<Error | null>(null);
 
-	// 🧩 Get
 	const get = async () => {
 		loading.value = true;
 		try {
@@ -37,7 +36,6 @@ export const useStructureService = () => {
 		}
 	};
 
-	// 🧩 Update
 	const update = async (payload: UpdateStructureDto) => {
 		loading.value = true;
 		try {

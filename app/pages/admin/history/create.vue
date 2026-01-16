@@ -12,7 +12,6 @@ definePageMeta({
 const router = useRouter();
 const { create, loading } = useHistoryService();
 
-// 🧩 Form
 const form = ref({
 	year: undefined,
 	description: "",
