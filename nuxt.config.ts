@@ -9,11 +9,18 @@ export default defineNuxtConfig({
 	ssr: true,
 	routeRules: {
 		"/admin/**": { ssr: false },
+		"/api/v1/**": {
+			proxy: "http://192.168.223.21:4002/api/v1/**",
+		},
+
+		"/uploads/**": {
+			proxy: "http://192.168.223.21:4002/uploads/**",
+		},
 	},
 
 	runtimeConfig: {
 		public: {
-			apiBase: process.env.NUXT_API_URL,
+			apiBase: process.env.NUXT_PUBLIC_API_BASE,
 		},
 	},
 
@@ -59,9 +66,9 @@ export default defineNuxtConfig({
 				"worker-src": ["'self'", "blob:"],
 				"child-src": ["'self'", "blob:"],
 
-				"connect-src": ["'self'", "https://stankom.fanreza.my.id", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://www.instagram.com", "https://i.instagram.com", "https://graph.instagram.com", "https://platform.twitter.com", "https://maps.googleapis.com", "http://192.168.223.21:4002", "http://192.168.223.21:4003"],
+				"connect-src": ["'self'", "https://192.168.223.21:4002", "http://192.168.223.21:4002", "https://www.instagram.com", "https://i.instagram.com", "https://graph.instagram.com", "https://platform.twitter.com", "https://maps.googleapis.com"],
 
-				"img-src": ["'self'", "data:", "blob:", "https://apistankom.kemnaker.go.id", "https://apisiapvokasi.kemnaker.go.id", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net", "https://maps.gstatic.com", "https://lh3.googleusercontent.com", "https://stankom.fanreza.my.id", "https://api.iconify.design", "http://192.168.223.21:4002", "http://192.168.223.21:4003"],
+				"img-src": ["'self'", "data:", "blob:", "https://192.168.223.21:4002", "http://192.168.223.21:4002", "https://storage.googleapis.com", "https://scontent.cdninstagram.com", "https://*.cdninstagram.com", "https://*.fbcdn.net", "https://maps.gstatic.com", "https://lh3.googleusercontent.com", "https://api.iconify.design"],
 
 				"script-src": [
 					"'self'",
