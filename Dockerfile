@@ -4,5 +4,5 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
-EXPOSE 5173
+EXPOSE 4000
 CMD ["node", ".output/server/index.mjs"]

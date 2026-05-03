@@ -32,7 +32,7 @@
 			<div v-if="pastDirectors.length" class="mt-16">
 				<h2 class="text-xl font-bold text-gray-900 mb-6">Direktur Sebelumnya</h2>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div v-for="(director, index) in pastDirectors" :key="index" class="rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition">
+					<div v-for="(director, index) in paginatedPastDirectors" :key="index" class="rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition">
 						<img :src="director.picture" alt="Foto Direktur" class="w-full h-56 object-cover rounded-t-xl" />
 						<div class="p-4">
 							<p class="text-sm text-blue-600 font-semibold">{{ director.beginYear }} – {{ director.endYear }}</p>
@@ -46,7 +46,13 @@
 					</div>
 				</div>
 
-				<AdminAppPagination v-if="response?.meta && response.meta.totalPages > 1" @update:page="onPageChange" :total="response.meta.totalItems" :per-page="response.meta.perPage" />
+				<AppUiPagination
+					v-if="totalPages > 1"
+					:current-page="currentPage"
+					:total-pages="totalPages"
+					class="mt-8"
+					@update:current-page="onPageChange"
+				/>
 			</div>
 		</div>
 	</section>
@@ -59,23 +65,13 @@ import { useDirectorProfileService } from "@/services/director.services";
 const { getAll, response, loading } = useDirectorProfileService();
 
 const currentPage = ref(1);
+const itemsPerPage = 6;
 const currentDirectorData = ref<any>(null);
-
-const params = computed(() => ({
-	page: currentPage.value,
-	limit: 10,
-}));
-
-const fetchDirectors = async () => {
-	await getAll(true, params.value);
-};
 
 onMounted(async () => {
 	await getAll(true);
 	const directors = response.value?.data || [];
 	currentDirectorData.value = directors.find((d) => d.order === 1);
-
-	await fetchDirectors();
 });
 
 const currentDirector = computed(() => currentDirectorData.value);
@@ -85,9 +81,15 @@ const pastDirectors = computed(() => {
 	return directors.filter((d) => d.order !== 1).sort((a, b) => a.order - b.order);
 });
 
+const totalPages = computed(() => Math.ceil(pastDirectors.value.length / itemsPerPage));
+
+const paginatedPastDirectors = computed(() => {
+	const start = (currentPage.value - 1) * itemsPerPage;
+	return pastDirectors.value.slice(start, start + itemsPerPage);
+});
+
 const onPageChange = (page: number) => {
 	currentPage.value = page;
-	fetchDirectors();
 };
 </script>
 

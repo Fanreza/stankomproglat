@@ -1,6 +1,6 @@
 #!/bin/bash
 APP=stankom-web
-PORT=5173
+PORT=4000
 
 docker build -t $APP .
 docker stop $APP 2>/dev/null || true
