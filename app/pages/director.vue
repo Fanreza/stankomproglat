@@ -32,7 +32,7 @@
 			<div v-if="pastDirectors.length" class="mt-16">
 				<h2 class="text-xl font-bold text-gray-900 mb-6">Direktur Sebelumnya</h2>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div v-for="(director, index) in paginatedPastDirectors" :key="index" class="rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition">
+					<div v-for="(director, index) in pastDirectors" :key="index" class="rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition">
 						<img :src="director.picture" alt="Foto Direktur" class="w-full h-56 object-cover rounded-t-xl" />
 						<div class="p-4">
 							<p class="text-sm text-blue-600 font-semibold">{{ director.beginYear }} – {{ director.endYear }}</p>
@@ -62,34 +62,27 @@
 import { onMounted, computed, ref } from "vue";
 import { useDirectorProfileService } from "@/services/director.services";
 
-const { getAll, response, loading } = useDirectorProfileService();
+const { getAll: fetchCurrent, response: currentResponse, loading: currentLoading } = useDirectorProfileService();
+const { getAll: fetchPast, response: pastResponse, loading: pastLoading } = useDirectorProfileService();
 
+const PAST_LIMIT = 6;
 const currentPage = ref(1);
-const itemsPerPage = 6;
-const currentDirectorData = ref<any>(null);
+const currentDirector = ref<any>(null);
+
+const loading = computed(() => currentLoading.value || pastLoading.value);
+const pastDirectors = computed(() => (pastResponse.value?.data ?? []).filter((d) => d.order !== 1));
+const totalPages = computed(() => pastResponse.value?.meta?.totalPages ?? 1);
 
 onMounted(async () => {
-	await getAll(true);
-	const directors = response.value?.data || [];
-	currentDirectorData.value = directors.find((d) => d.order === 1);
+	const res = await fetchCurrent(true, { page: 1, limit: 1 });
+	currentDirector.value = res?.data?.[0] ?? null;
+	await fetchPast(true, { page: 1, limit: PAST_LIMIT });
 });
 
-const currentDirector = computed(() => currentDirectorData.value);
-
-const pastDirectors = computed(() => {
-	const directors = response.value?.data || [];
-	return directors.filter((d) => d.order !== 1).sort((a, b) => a.order - b.order);
-});
-
-const totalPages = computed(() => Math.ceil(pastDirectors.value.length / itemsPerPage));
-
-const paginatedPastDirectors = computed(() => {
-	const start = (currentPage.value - 1) * itemsPerPage;
-	return pastDirectors.value.slice(start, start + itemsPerPage);
-});
-
-const onPageChange = (page: number) => {
+const onPageChange = async (page: number) => {
 	currentPage.value = page;
+	await fetchPast(true, { page, limit: PAST_LIMIT });
+	window.scrollTo({ top: 0, behavior: "smooth" });
 };
 </script>
 
